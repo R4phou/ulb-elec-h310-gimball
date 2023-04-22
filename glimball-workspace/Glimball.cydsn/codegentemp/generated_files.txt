@@ -18,6 +18,36 @@
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\cyfitteriar.inc" value="HEADER;;;;;" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\cyfitter.h" value="HEADER;;;;;" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\cydisabledsheets.h" value="HEADER;;;;;" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED1_aliases.h" value="HEADER;;;;;LED1" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED1.c" value="SOURCE_C;CortexM3;;;;LED1" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED1.h" value="HEADER;;;;;LED1" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED2_aliases.h" value="HEADER;;;;;LED2" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED2.c" value="SOURCE_C;CortexM3;;;;LED2" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED2.h" value="HEADER;;;;;LED2" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED3_aliases.h" value="HEADER;;;;;LED3" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED3.c" value="SOURCE_C;CortexM3;;;;LED3" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED3.h" value="HEADER;;;;;LED3" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED4_aliases.h" value="HEADER;;;;;LED4" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED4.c" value="SOURCE_C;CortexM3;;;;LED4" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LED4.h" value="HEADER;;;;;LED4" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW1_aliases.h" value="HEADER;;;;;SW1" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW1.c" value="SOURCE_C;CortexM3;;;;SW1" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW1.h" value="HEADER;;;;;SW1" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW2_aliases.h" value="HEADER;;;;;SW2" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW2.c" value="SOURCE_C;CortexM3;;;;SW2" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW2.h" value="HEADER;;;;;SW2" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW3_aliases.h" value="HEADER;;;;;SW3" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW3.c" value="SOURCE_C;CortexM3;;;;SW3" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW3.h" value="HEADER;;;;;SW3" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW4_aliases.h" value="HEADER;;;;;SW4" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW4.c" value="SOURCE_C;CortexM3;;;;SW4" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\SW4.h" value="HEADER;;;;;SW4" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD.c" value="SOURCE_C;CortexM3;;;;LCD" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD.h" value="HEADER;;;;;LCD" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD_PM.c" value="SOURCE_C;CortexM3;;;;LCD" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD_LCDPort_aliases.h" value="HEADER;;;;;LCD_LCDPort" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD_LCDPort.c" value="SOURCE_C;CortexM3;;;;LCD_LCDPort" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD_LCDPort.h" value="HEADER;;;;;LCD_LCDPort" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\cm3gcc.ld" value="LINKER_SCRIPT;;;b98f980c-3bd1-4fc7-a887-c56a20a46fdd;;cy_boot" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\Cm3RealView.scat" value="LINKER_SCRIPT;;;fdb8e1ae-f83a-46cf-9446-1d703716f38a;;cy_boot" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\Cm3Start.c" value="SOURCE_C;CortexM3;;;;cy_boot" />

@@ -9,21 +9,22 @@
  *
  * ========================================
 */
-#include "project.h"
+
 #include "functions.h"
 #include "interruptions.c"
+
+
 
 
 
 int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
-
-    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
-
+    initialize();
     for(;;)
     {
-        /* Place your application code here. */
+        switch_mode();
+        CyDelay(100);
     }
 }
 
