@@ -15,8 +15,6 @@
 
 
 
-
-
 int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */

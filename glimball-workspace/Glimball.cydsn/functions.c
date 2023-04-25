@@ -11,6 +11,7 @@ int glimbal_mode = 0; // 1 = true | 0 = false
 void initialize(){
     LCD_Start();
     LCD_ClearDisplay();
+    keypadInit();
 }
 
 
@@ -58,4 +59,19 @@ void switch_mode(){
 void error(){
     LCD_Position(0,0);
     LCD_PrintString("ERROR");
+    CyDelay(100000);
+}
+
+void rotate_left();
+
+void rotate_right();
+
+
+void react_to_keypad(){
+    uint8_t value = keypadScan();
+    switch (value){
+        case 1: switch_mode();
+        case 2: rotate_left();
+        case 3: rotate_right();
+    }
 }

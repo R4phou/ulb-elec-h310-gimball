@@ -2,6 +2,8 @@
 * Header file: list all the name and type of the functions that will be written
 */
 #include "project.h"
+#include "keypad.h"
+
 
 /**
  * Function that lights all the LEDS
@@ -38,11 +40,27 @@ void switch_mode();
 
 
 /**
- * Prints ERROR on the LCD screen
+ * Prints ERROR on the LCD screen and delays for 10 seconds
 */
 void error();
 
 
+/**
+ * Function that concerns the reading of the keypad and calls the function that needs to be called
+*/
+void react_to_keypad();
+
+
+
+/**
+ * Function that rotates the servo to the right
+*/
+void rotate_right();
+
+/**
+ * Function that rotates the servo to the left
+*/
+void rotate_left();
 
 /*
     Initialisation de tous les composants de bases

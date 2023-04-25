@@ -1,5 +1,5 @@
 # Glimball
-# 2023-04-22 07:06:16Z
+# 2023-04-25 12:59:42Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -23,3 +23,10 @@ set_io "\LCD:LCDPort(3)\" iocell 2 3
 set_io "\LCD:LCDPort(4)\" iocell 2 4
 set_io "\LCD:LCDPort(5)\" iocell 2 5
 set_io "\LCD:LCDPort(6)\" iocell 2 6
+set_io "ROW0(0)" iocell 0 2
+set_io "ROW1(0)" iocell 0 3
+set_io "ROW2(0)" iocell 0 4
+set_io "ROW3(0)" iocell 0 7
+set_io "COL1(0)" iocell 1 2
+set_io "COL2(0)" iocell 1 4
+set_io "COL3(0)" iocell 1 5
