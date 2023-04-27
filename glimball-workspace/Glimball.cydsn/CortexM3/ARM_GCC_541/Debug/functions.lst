@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 1
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 1
 
 
    1              		.syntax unified
@@ -33,13 +33,15 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 1
    3:functions.c   **** * All imports and include should be done in header file
    4:functions.c   **** */
    5:functions.c   **** #include "functions.h"
-   6:functions.c   **** 
-   7:functions.c   **** int test_mode = 1;  // 1 = true | 0 = false
-   8:functions.c   **** int glimbal_mode = 0; // 1 = true | 0 = false
+   6:functions.c   **** #define MIN_SERVO 500
+   7:functions.c   **** #define MAX_SERVO 2500
+   8:functions.c   **** 
    9:functions.c   **** 
-  10:functions.c   **** 
-  11:functions.c   **** void initialize(){
-  28              		.loc 1 11 0
+  10:functions.c   **** int mode = 0;  // 1 = glimball | 0 = test
+  11:functions.c   **** 
+  12:functions.c   **** 
+  13:functions.c   **** void initialize(){
+  28              		.loc 1 13 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -47,1383 +49,2194 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 1
   33              		.cfi_def_cfa_offset 8
   34              		.cfi_offset 3, -8
   35              		.cfi_offset 14, -4
-  12:functions.c   ****     LCD_Start();
-  36              		.loc 1 12 0
+  14:functions.c   ****     LCD_Start();
+  36              		.loc 1 14 0
   37 0002 FFF7FEFF 		bl	LCD_Start
   38              	.LVL0:
-  13:functions.c   ****     LCD_ClearDisplay();
-  39              		.loc 1 13 0
+  15:functions.c   ****     LCD_ClearDisplay();
+  39              		.loc 1 15 0
   40 0006 0120     		movs	r0, #1
   41 0008 FFF7FEFF 		bl	LCD_WriteControl
   42              	.LVL1:
-  14:functions.c   ****     keypadInit();
-  43              		.loc 1 14 0
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 2
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 2
 
 
-  44 000c FFF7FEFF 		bl	keypadInit
+  16:functions.c   ****     PWM_Init();
+  43              		.loc 1 16 0
+  44 000c FFF7FEFF 		bl	PWM_Init
   45              	.LVL2:
-  46 0010 08BD     		pop	{r3, pc}
-  47              		.cfi_endproc
-  48              	.LFE63:
-  49              		.size	initialize, .-initialize
-  50 0012 00BF     		.section	.text.light_LEDS,"ax",%progbits
-  51              		.align	2
-  52              		.global	light_LEDS
-  53              		.thumb
-  54              		.thumb_func
-  55              		.type	light_LEDS, %function
-  56              	light_LEDS:
-  57              	.LFB64:
-  15:functions.c   **** }
-  16:functions.c   **** 
-  17:functions.c   **** 
-  18:functions.c   **** void light_LEDS(){
-  58              		.loc 1 18 0
-  59              		.cfi_startproc
-  60              		@ args = 0, pretend = 0, frame = 0
-  61              		@ frame_needed = 0, uses_anonymous_args = 0
-  62 0000 08B5     		push	{r3, lr}
-  63              		.cfi_def_cfa_offset 8
-  64              		.cfi_offset 3, -8
-  65              		.cfi_offset 14, -4
-  19:functions.c   ****     LED1_Write(1);
-  66              		.loc 1 19 0
-  67 0002 0120     		movs	r0, #1
-  68 0004 FFF7FEFF 		bl	LED1_Write
-  69              	.LVL3:
-  20:functions.c   ****     LED2_Write(1);
-  70              		.loc 1 20 0
-  71 0008 0120     		movs	r0, #1
-  72 000a FFF7FEFF 		bl	LED2_Write
-  73              	.LVL4:
-  21:functions.c   ****     LED3_Write(1),
-  74              		.loc 1 21 0
-  75 000e 0120     		movs	r0, #1
-  76 0010 FFF7FEFF 		bl	LED3_Write
-  77              	.LVL5:
-  22:functions.c   ****     LED4_Write(1);
-  78              		.loc 1 22 0
-  79 0014 0120     		movs	r0, #1
-  80 0016 FFF7FEFF 		bl	LED4_Write
-  81              	.LVL6:
-  82 001a 08BD     		pop	{r3, pc}
-  83              		.cfi_endproc
-  84              	.LFE64:
-  85              		.size	light_LEDS, .-light_LEDS
-  86              		.section	.text.turn_off_LEDS,"ax",%progbits
-  87              		.align	2
-  88              		.global	turn_off_LEDS
-  89              		.thumb
-  90              		.thumb_func
-  91              		.type	turn_off_LEDS, %function
-  92              	turn_off_LEDS:
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 3
+  17:functions.c   ****     PWM_Start();
+  46              		.loc 1 17 0
+  47 0010 FFF7FEFF 		bl	PWM_Start
+  48              	.LVL3:
+  18:functions.c   ****     ADC_Start();
+  49              		.loc 1 18 0
+  50 0014 FFF7FEFF 		bl	ADC_Start
+  51              	.LVL4:
+  19:functions.c   ****     keypadInit();
+  52              		.loc 1 19 0
+  53 0018 FFF7FEFF 		bl	keypadInit
+  54              	.LVL5:
+  55 001c 08BD     		pop	{r3, pc}
+  56              		.cfi_endproc
+  57              	.LFE63:
+  58              		.size	initialize, .-initialize
+  59 001e 00BF     		.section	.text.light_LEDS,"ax",%progbits
+  60              		.align	2
+  61              		.global	light_LEDS
+  62              		.thumb
+  63              		.thumb_func
+  64              		.type	light_LEDS, %function
+  65              	light_LEDS:
+  66              	.LFB64:
+  20:functions.c   **** }
+  21:functions.c   **** 
+  22:functions.c   **** 
+  23:functions.c   **** void light_LEDS(){
+  67              		.loc 1 23 0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71 0000 08B5     		push	{r3, lr}
+  72              		.cfi_def_cfa_offset 8
+  73              		.cfi_offset 3, -8
+  74              		.cfi_offset 14, -4
+  24:functions.c   ****     LED1_Write(1);
+  75              		.loc 1 24 0
+  76 0002 0120     		movs	r0, #1
+  77 0004 FFF7FEFF 		bl	LED1_Write
+  78              	.LVL6:
+  25:functions.c   ****     LED2_Write(1);
+  79              		.loc 1 25 0
+  80 0008 0120     		movs	r0, #1
+  81 000a FFF7FEFF 		bl	LED2_Write
+  82              	.LVL7:
+  26:functions.c   ****     LED3_Write(1),
+  83              		.loc 1 26 0
+  84 000e 0120     		movs	r0, #1
+  85 0010 FFF7FEFF 		bl	LED3_Write
+  86              	.LVL8:
+  27:functions.c   ****     LED4_Write(1);
+  87              		.loc 1 27 0
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 3
 
 
-  93              	.LFB65:
-  23:functions.c   **** }
-  24:functions.c   **** 
-  25:functions.c   **** void turn_off_LEDS(){
-  94              		.loc 1 25 0
-  95              		.cfi_startproc
-  96              		@ args = 0, pretend = 0, frame = 0
-  97              		@ frame_needed = 0, uses_anonymous_args = 0
-  98 0000 08B5     		push	{r3, lr}
-  99              		.cfi_def_cfa_offset 8
- 100              		.cfi_offset 3, -8
- 101              		.cfi_offset 14, -4
-  26:functions.c   ****     LED1_Write(0);
- 102              		.loc 1 26 0
- 103 0002 0020     		movs	r0, #0
- 104 0004 FFF7FEFF 		bl	LED1_Write
- 105              	.LVL7:
-  27:functions.c   ****     LED2_Write(0);
- 106              		.loc 1 27 0
- 107 0008 0020     		movs	r0, #0
- 108 000a FFF7FEFF 		bl	LED2_Write
- 109              	.LVL8:
-  28:functions.c   ****     LED3_Write(0),
- 110              		.loc 1 28 0
- 111 000e 0020     		movs	r0, #0
- 112 0010 FFF7FEFF 		bl	LED3_Write
- 113              	.LVL9:
-  29:functions.c   ****     LED4_Write(0);
- 114              		.loc 1 29 0
- 115 0014 0020     		movs	r0, #0
- 116 0016 FFF7FEFF 		bl	LED4_Write
- 117              	.LVL10:
- 118 001a 08BD     		pop	{r3, pc}
- 119              		.cfi_endproc
- 120              	.LFE65:
- 121              		.size	turn_off_LEDS, .-turn_off_LEDS
- 122              		.section	.text.switch_to_glimball_mode,"ax",%progbits
- 123              		.align	2
- 124              		.global	switch_to_glimball_mode
- 125              		.thumb
- 126              		.thumb_func
- 127              		.type	switch_to_glimball_mode, %function
- 128              	switch_to_glimball_mode:
- 129              	.LFB66:
-  30:functions.c   **** }
-  31:functions.c   **** 
-  32:functions.c   **** void switch_to_glimball_mode(){
- 130              		.loc 1 32 0
- 131              		.cfi_startproc
- 132              		@ args = 0, pretend = 0, frame = 0
- 133              		@ frame_needed = 0, uses_anonymous_args = 0
- 134 0000 08B5     		push	{r3, lr}
- 135              		.cfi_def_cfa_offset 8
- 136              		.cfi_offset 3, -8
- 137              		.cfi_offset 14, -4
-  33:functions.c   ****     glimbal_mode = 1;
- 138              		.loc 1 33 0
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 4
+  88 0014 0120     		movs	r0, #1
+  89 0016 FFF7FEFF 		bl	LED4_Write
+  90              	.LVL9:
+  91 001a 08BD     		pop	{r3, pc}
+  92              		.cfi_endproc
+  93              	.LFE64:
+  94              		.size	light_LEDS, .-light_LEDS
+  95              		.section	.text.turn_off_LEDS,"ax",%progbits
+  96              		.align	2
+  97              		.global	turn_off_LEDS
+  98              		.thumb
+  99              		.thumb_func
+ 100              		.type	turn_off_LEDS, %function
+ 101              	turn_off_LEDS:
+ 102              	.LFB65:
+  28:functions.c   **** }
+  29:functions.c   **** 
+  30:functions.c   **** void turn_off_LEDS(){
+ 103              		.loc 1 30 0
+ 104              		.cfi_startproc
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107 0000 08B5     		push	{r3, lr}
+ 108              		.cfi_def_cfa_offset 8
+ 109              		.cfi_offset 3, -8
+ 110              		.cfi_offset 14, -4
+  31:functions.c   ****     LED1_Write(0);
+ 111              		.loc 1 31 0
+ 112 0002 0020     		movs	r0, #0
+ 113 0004 FFF7FEFF 		bl	LED1_Write
+ 114              	.LVL10:
+  32:functions.c   ****     LED2_Write(0);
+ 115              		.loc 1 32 0
+ 116 0008 0020     		movs	r0, #0
+ 117 000a FFF7FEFF 		bl	LED2_Write
+ 118              	.LVL11:
+  33:functions.c   ****     LED3_Write(0),
+ 119              		.loc 1 33 0
+ 120 000e 0020     		movs	r0, #0
+ 121 0010 FFF7FEFF 		bl	LED3_Write
+ 122              	.LVL12:
+  34:functions.c   ****     LED4_Write(0);
+ 123              		.loc 1 34 0
+ 124 0014 0020     		movs	r0, #0
+ 125 0016 FFF7FEFF 		bl	LED4_Write
+ 126              	.LVL13:
+ 127 001a 08BD     		pop	{r3, pc}
+ 128              		.cfi_endproc
+ 129              	.LFE65:
+ 130              		.size	turn_off_LEDS, .-turn_off_LEDS
+ 131              		.section	.text.error,"ax",%progbits
+ 132              		.align	2
+ 133              		.global	error
+ 134              		.thumb
+ 135              		.thumb_func
+ 136              		.type	error, %function
+ 137              	error:
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 4
 
 
- 139 0002 0122     		movs	r2, #1
- 140 0004 034B     		ldr	r3, .L9
- 141 0006 1A60     		str	r2, [r3]
-  34:functions.c   ****     test_mode = 0;
- 142              		.loc 1 34 0
- 143 0008 0022     		movs	r2, #0
- 144 000a 034B     		ldr	r3, .L9+4
- 145 000c 1A60     		str	r2, [r3]
-  35:functions.c   ****     light_LEDS();
- 146              		.loc 1 35 0
- 147 000e FFF7FEFF 		bl	light_LEDS
- 148              	.LVL11:
- 149 0012 08BD     		pop	{r3, pc}
- 150              	.L10:
- 151              		.align	2
- 152              	.L9:
- 153 0014 00000000 		.word	.LANCHOR0
- 154 0018 00000000 		.word	.LANCHOR1
- 155              		.cfi_endproc
- 156              	.LFE66:
- 157              		.size	switch_to_glimball_mode, .-switch_to_glimball_mode
- 158              		.section	.text.switch_to_test_mode,"ax",%progbits
- 159              		.align	2
- 160              		.global	switch_to_test_mode
- 161              		.thumb
- 162              		.thumb_func
- 163              		.type	switch_to_test_mode, %function
- 164              	switch_to_test_mode:
- 165              	.LFB67:
-  36:functions.c   **** }
-  37:functions.c   **** 
-  38:functions.c   **** void switch_to_test_mode(){
- 166              		.loc 1 38 0
- 167              		.cfi_startproc
- 168              		@ args = 0, pretend = 0, frame = 0
- 169              		@ frame_needed = 0, uses_anonymous_args = 0
- 170 0000 08B5     		push	{r3, lr}
- 171              		.cfi_def_cfa_offset 8
- 172              		.cfi_offset 3, -8
- 173              		.cfi_offset 14, -4
-  39:functions.c   ****     glimbal_mode = 0;
- 174              		.loc 1 39 0
- 175 0002 0022     		movs	r2, #0
- 176 0004 034B     		ldr	r3, .L13
- 177 0006 1A60     		str	r2, [r3]
-  40:functions.c   ****     test_mode = 1;
- 178              		.loc 1 40 0
- 179 0008 0122     		movs	r2, #1
- 180 000a 034B     		ldr	r3, .L13+4
- 181 000c 1A60     		str	r2, [r3]
-  41:functions.c   ****     turn_off_LEDS();
- 182              		.loc 1 41 0
- 183 000e FFF7FEFF 		bl	turn_off_LEDS
- 184              	.LVL12:
- 185 0012 08BD     		pop	{r3, pc}
- 186              	.L14:
- 187              		.align	2
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 5
-
-
- 188              	.L13:
- 189 0014 00000000 		.word	.LANCHOR0
- 190 0018 00000000 		.word	.LANCHOR1
- 191              		.cfi_endproc
- 192              	.LFE67:
- 193              		.size	switch_to_test_mode, .-switch_to_test_mode
- 194              		.section	.text.error,"ax",%progbits
- 195              		.align	2
- 196              		.global	error
- 197              		.thumb
- 198              		.thumb_func
- 199              		.type	error, %function
- 200              	error:
- 201              	.LFB69:
+ 138              	.LFB70:
+  35:functions.c   **** }
+  36:functions.c   **** 
+  37:functions.c   **** void switch_to_glimball_mode(){
+  38:functions.c   ****     mode = 1;
+  39:functions.c   ****     light_LEDS();
+  40:functions.c   ****     const char8* var = "Glim";
+  41:functions.c   ****     print_screen(var);
   42:functions.c   **** }
   43:functions.c   **** 
-  44:functions.c   **** 
-  45:functions.c   **** void switch_mode(){
-  46:functions.c   ****     if (SW1_Read()){
-  47:functions.c   ****         if (!glimbal_mode && test_mode){
-  48:functions.c   ****             switch_to_glimball_mode();
-  49:functions.c   ****         }
-  50:functions.c   ****         else if (glimbal_mode && !test_mode){
-  51:functions.c   ****             switch_to_test_mode();
-  52:functions.c   ****         }
-  53:functions.c   ****         else{
-  54:functions.c   ****             error();
-  55:functions.c   ****         }
+  44:functions.c   **** void switch_to_test_mode(){
+  45:functions.c   ****     mode = 0;
+  46:functions.c   ****     turn_off_LEDS();
+  47:functions.c   ****     const char8* var = "Test";
+  48:functions.c   ****     print_screen(var);
+  49:functions.c   **** }
+  50:functions.c   **** 
+  51:functions.c   **** 
+  52:functions.c   **** void read_SW1(){
+  53:functions.c   ****     if (SW1_Read()){
+  54:functions.c   ****         CyDelay(200);
+  55:functions.c   ****         switch_mode();
   56:functions.c   ****     }
   57:functions.c   **** }
   58:functions.c   **** 
-  59:functions.c   **** void error(){
- 202              		.loc 1 59 0
- 203              		.cfi_startproc
- 204              		@ args = 0, pretend = 0, frame = 0
- 205              		@ frame_needed = 0, uses_anonymous_args = 0
- 206 0000 08B5     		push	{r3, lr}
- 207              		.cfi_def_cfa_offset 8
- 208              		.cfi_offset 3, -8
- 209              		.cfi_offset 14, -4
-  60:functions.c   ****     LCD_Position(0,0);
- 210              		.loc 1 60 0
- 211 0002 0021     		movs	r1, #0
- 212 0004 0846     		mov	r0, r1
- 213 0006 FFF7FEFF 		bl	LCD_Position
- 214              	.LVL13:
-  61:functions.c   ****     LCD_PrintString("ERROR");
- 215              		.loc 1 61 0
- 216 000a 0348     		ldr	r0, .L17
- 217 000c FFF7FEFF 		bl	LCD_PrintString
- 218              	.LVL14:
-  62:functions.c   ****     CyDelay(100000);
- 219              		.loc 1 62 0
- 220 0010 0248     		ldr	r0, .L17+4
- 221 0012 FFF7FEFF 		bl	CyDelay
- 222              	.LVL15:
- 223 0016 08BD     		pop	{r3, pc}
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 6
+  59:functions.c   **** 
+  60:functions.c   **** void switch_mode(){
+  61:functions.c   ****     if (mode){
+  62:functions.c   ****         switch_to_test_mode();
+  63:functions.c   ****     }
+  64:functions.c   ****     else if (!mode){
+  65:functions.c   ****         switch_to_glimball_mode();
+  66:functions.c   ****     }
+  67:functions.c   ****     else{
+  68:functions.c   ****         error();
+  69:functions.c   ****     }
+  70:functions.c   **** }
+  71:functions.c   **** 
+  72:functions.c   **** void error(){
+ 139              		.loc 1 72 0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143 0000 08B5     		push	{r3, lr}
+ 144              		.cfi_def_cfa_offset 8
+ 145              		.cfi_offset 3, -8
+ 146              		.cfi_offset 14, -4
+  73:functions.c   ****     LCD_Position(0,0);
+ 147              		.loc 1 73 0
+ 148 0002 0021     		movs	r1, #0
+ 149 0004 0846     		mov	r0, r1
+ 150 0006 FFF7FEFF 		bl	LCD_Position
+ 151              	.LVL14:
+  74:functions.c   ****     LCD_PrintString("ERROR");
+ 152              		.loc 1 74 0
+ 153 000a 0348     		ldr	r0, .L9
+ 154 000c FFF7FEFF 		bl	LCD_PrintString
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 5
 
 
- 224              	.L18:
- 225              		.align	2
- 226              	.L17:
- 227 0018 00000000 		.word	.LC0
- 228 001c A0860100 		.word	100000
- 229              		.cfi_endproc
- 230              	.LFE69:
- 231              		.size	error, .-error
- 232              		.section	.text.switch_mode,"ax",%progbits
- 233              		.align	2
- 234              		.global	switch_mode
- 235              		.thumb
- 236              		.thumb_func
- 237              		.type	switch_mode, %function
- 238              	switch_mode:
- 239              	.LFB68:
-  45:functions.c   ****     if (SW1_Read()){
- 240              		.loc 1 45 0
- 241              		.cfi_startproc
- 242              		@ args = 0, pretend = 0, frame = 0
- 243              		@ frame_needed = 0, uses_anonymous_args = 0
- 244 0000 08B5     		push	{r3, lr}
- 245              		.cfi_def_cfa_offset 8
- 246              		.cfi_offset 3, -8
- 247              		.cfi_offset 14, -4
-  46:functions.c   ****         if (!glimbal_mode && test_mode){
- 248              		.loc 1 46 0
- 249 0002 FFF7FEFF 		bl	SW1_Read
- 250              	.LVL16:
- 251 0006 88B1     		cbz	r0, .L19
-  47:functions.c   ****             switch_to_glimball_mode();
- 252              		.loc 1 47 0
- 253 0008 094B     		ldr	r3, .L24
- 254 000a 1B68     		ldr	r3, [r3]
- 255 000c 2BB9     		cbnz	r3, .L21
-  47:functions.c   ****             switch_to_glimball_mode();
- 256              		.loc 1 47 0 is_stmt 0 discriminator 1
- 257 000e 094A     		ldr	r2, .L24+4
- 258 0010 1268     		ldr	r2, [r2]
- 259 0012 12B1     		cbz	r2, .L21
-  48:functions.c   ****         }
- 260              		.loc 1 48 0 is_stmt 1
- 261 0014 FFF7FEFF 		bl	switch_to_glimball_mode
- 262              	.LVL17:
- 263 0018 08BD     		pop	{r3, pc}
- 264              	.L21:
-  50:functions.c   ****             switch_to_test_mode();
- 265              		.loc 1 50 0
- 266 001a 2BB1     		cbz	r3, .L22
-  50:functions.c   ****             switch_to_test_mode();
- 267              		.loc 1 50 0 is_stmt 0 discriminator 1
- 268 001c 054B     		ldr	r3, .L24+4
- 269 001e 1B68     		ldr	r3, [r3]
- 270 0020 13B9     		cbnz	r3, .L22
-  51:functions.c   ****         }
- 271              		.loc 1 51 0 is_stmt 1
- 272 0022 FFF7FEFF 		bl	switch_to_test_mode
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 7
+ 155              	.LVL15:
+  75:functions.c   ****     CyDelay(100000);
+ 156              		.loc 1 75 0
+ 157 0010 0248     		ldr	r0, .L9+4
+ 158 0012 FFF7FEFF 		bl	CyDelay
+ 159              	.LVL16:
+ 160 0016 08BD     		pop	{r3, pc}
+ 161              	.L10:
+ 162              		.align	2
+ 163              	.L9:
+ 164 0018 00000000 		.word	.LC0
+ 165 001c A0860100 		.word	100000
+ 166              		.cfi_endproc
+ 167              	.LFE70:
+ 168              		.size	error, .-error
+ 169              		.section	.text.print_screen,"ax",%progbits
+ 170              		.align	2
+ 171              		.global	print_screen
+ 172              		.thumb
+ 173              		.thumb_func
+ 174              		.type	print_screen, %function
+ 175              	print_screen:
+ 176              	.LFB72:
+  76:functions.c   **** }
+  77:functions.c   **** 
+  78:functions.c   **** void rotate_left();
+  79:functions.c   **** 
+  80:functions.c   **** void rotate_right();
+  81:functions.c   **** 
+  82:functions.c   **** 
+  83:functions.c   **** void react_to_keypad(){
+  84:functions.c   ****     uint8_t value = keypadScan();
+  85:functions.c   ****     if (value != 'z'){
+  86:functions.c   ****         CyDelay(200);
+  87:functions.c   ****         switch (value){
+  88:functions.c   ****             case '1': switch_mode();
+  89:functions.c   ****             // case 2: rotate_left();
+  90:functions.c   ****             // case 3: rotate_right();
+  91:functions.c   ****         }
+  92:functions.c   ****     }   
+  93:functions.c   **** }
+  94:functions.c   **** 
+  95:functions.c   **** void print_screen(const char8 * string){
+ 177              		.loc 1 95 0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181              	.LVL17:
+ 182 0000 10B5     		push	{r4, lr}
+ 183              		.cfi_def_cfa_offset 8
+ 184              		.cfi_offset 4, -8
+ 185              		.cfi_offset 14, -4
+ 186 0002 0446     		mov	r4, r0
+  96:functions.c   ****     LCD_ClearDisplay();
+ 187              		.loc 1 96 0
+ 188 0004 0120     		movs	r0, #1
+ 189              	.LVL18:
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 6
 
 
- 273              	.LVL18:
- 274 0026 08BD     		pop	{r3, pc}
- 275              	.L22:
-  54:functions.c   ****         }
- 276              		.loc 1 54 0
- 277 0028 FFF7FEFF 		bl	error
- 278              	.LVL19:
- 279              	.L19:
- 280 002c 08BD     		pop	{r3, pc}
- 281              	.L25:
- 282 002e 00BF     		.align	2
- 283              	.L24:
- 284 0030 00000000 		.word	.LANCHOR0
- 285 0034 00000000 		.word	.LANCHOR1
- 286              		.cfi_endproc
- 287              	.LFE68:
- 288              		.size	switch_mode, .-switch_mode
- 289              		.section	.text.react_to_keypad,"ax",%progbits
- 290              		.align	2
- 291              		.global	react_to_keypad
- 292              		.thumb
- 293              		.thumb_func
- 294              		.type	react_to_keypad, %function
- 295              	react_to_keypad:
- 296              	.LFB70:
-  63:functions.c   **** }
-  64:functions.c   **** 
-  65:functions.c   **** void rotate_left();
-  66:functions.c   **** 
-  67:functions.c   **** void rotate_right();
-  68:functions.c   **** 
-  69:functions.c   **** 
-  70:functions.c   **** void react_to_keypad(){
- 297              		.loc 1 70 0
- 298              		.cfi_startproc
- 299              		@ args = 0, pretend = 0, frame = 0
- 300              		@ frame_needed = 0, uses_anonymous_args = 0
- 301 0000 08B5     		push	{r3, lr}
- 302              		.cfi_def_cfa_offset 8
- 303              		.cfi_offset 3, -8
- 304              		.cfi_offset 14, -4
-  71:functions.c   ****     uint8_t value = keypadScan();
- 305              		.loc 1 71 0
- 306 0002 FFF7FEFF 		bl	keypadScan
- 307              	.LVL20:
-  72:functions.c   ****     switch (value){
- 308              		.loc 1 72 0
- 309 0006 0228     		cmp	r0, #2
- 310 0008 05D0     		beq	.L28
- 311 000a 0328     		cmp	r0, #3
- 312 000c 05D0     		beq	.L29
- 313 000e 0128     		cmp	r0, #1
- 314 0010 05D1     		bne	.L26
-  73:functions.c   ****         case 1: switch_mode();
- 315              		.loc 1 73 0
- 316 0012 FFF7FEFF 		bl	switch_mode
- 317              	.LVL21:
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 8
+ 190 0006 FFF7FEFF 		bl	LCD_WriteControl
+ 191              	.LVL19:
+  97:functions.c   ****     LCD_Position(0,0);
+ 192              		.loc 1 97 0
+ 193 000a 0021     		movs	r1, #0
+ 194 000c 0846     		mov	r0, r1
+ 195 000e FFF7FEFF 		bl	LCD_Position
+ 196              	.LVL20:
+  98:functions.c   ****     LCD_PrintString(string);
+ 197              		.loc 1 98 0
+ 198 0012 2046     		mov	r0, r4
+ 199 0014 FFF7FEFF 		bl	LCD_PrintString
+ 200              	.LVL21:
+ 201 0018 10BD     		pop	{r4, pc}
+ 202              		.cfi_endproc
+ 203              	.LFE72:
+ 204              		.size	print_screen, .-print_screen
+ 205 001a 00BF     		.section	.text.switch_to_glimball_mode,"ax",%progbits
+ 206              		.align	2
+ 207              		.global	switch_to_glimball_mode
+ 208              		.thumb
+ 209              		.thumb_func
+ 210              		.type	switch_to_glimball_mode, %function
+ 211              	switch_to_glimball_mode:
+ 212              	.LFB66:
+  37:functions.c   ****     mode = 1;
+ 213              		.loc 1 37 0
+ 214              		.cfi_startproc
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217 0000 08B5     		push	{r3, lr}
+ 218              		.cfi_def_cfa_offset 8
+ 219              		.cfi_offset 3, -8
+ 220              		.cfi_offset 14, -4
+  38:functions.c   ****     light_LEDS();
+ 221              		.loc 1 38 0
+ 222 0002 0122     		movs	r2, #1
+ 223 0004 034B     		ldr	r3, .L15
+ 224 0006 1A60     		str	r2, [r3]
+  39:functions.c   ****     const char8* var = "Glim";
+ 225              		.loc 1 39 0
+ 226 0008 FFF7FEFF 		bl	light_LEDS
+ 227              	.LVL22:
+  41:functions.c   **** }
+ 228              		.loc 1 41 0
+ 229 000c 0248     		ldr	r0, .L15+4
+ 230 000e FFF7FEFF 		bl	print_screen
+ 231              	.LVL23:
+ 232 0012 08BD     		pop	{r3, pc}
+ 233              	.L16:
+ 234              		.align	2
+ 235              	.L15:
+ 236 0014 00000000 		.word	.LANCHOR0
+ 237 0018 08000000 		.word	.LC1
+ 238              		.cfi_endproc
+ 239              	.LFE66:
+ 240              		.size	switch_to_glimball_mode, .-switch_to_glimball_mode
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 7
 
 
- 318              	.L28:
-  74:functions.c   ****         case 2: rotate_left();
- 319              		.loc 1 74 0
- 320 0016 FFF7FEFF 		bl	rotate_left
- 321              	.LVL22:
- 322              	.L29:
-  75:functions.c   ****         case 3: rotate_right();
- 323              		.loc 1 75 0
- 324 001a FFF7FEFF 		bl	rotate_right
- 325              	.LVL23:
- 326              	.L26:
- 327 001e 08BD     		pop	{r3, pc}
- 328              		.cfi_endproc
- 329              	.LFE70:
- 330              		.size	react_to_keypad, .-react_to_keypad
- 331              		.global	glimbal_mode
- 332              		.global	test_mode
- 333              		.data
- 334              		.align	2
- 335              		.set	.LANCHOR1,. + 0
- 336              		.type	test_mode, %object
- 337              		.size	test_mode, 4
- 338              	test_mode:
- 339 0000 01000000 		.word	1
- 340              		.section	.rodata.str1.4,"aMS",%progbits,1
- 341              		.align	2
- 342              	.LC0:
- 343 0000 4552524F 		.ascii	"ERROR\000"
- 343      5200
- 344              		.bss
- 345              		.align	2
- 346              		.set	.LANCHOR0,. + 0
- 347              		.type	glimbal_mode, %object
- 348              		.size	glimbal_mode, 4
- 349              	glimbal_mode:
- 350 0000 00000000 		.space	4
- 351              		.text
- 352              	.Letext0:
- 353              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 354              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 355              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
- 356              		.file 5 "Generated_Source\\PSoC5/LCD.h"
- 357              		.file 6 "keypad.h"
- 358              		.file 7 "Generated_Source\\PSoC5/LED1.h"
- 359              		.file 8 "Generated_Source\\PSoC5/LED2.h"
- 360              		.file 9 "Generated_Source\\PSoC5/LED3.h"
- 361              		.file 10 "Generated_Source\\PSoC5/LED4.h"
- 362              		.file 11 "Generated_Source\\PSoC5/CyLib.h"
- 363              		.file 12 "Generated_Source\\PSoC5/SW1.h"
- 364              		.section	.debug_info,"",%progbits
- 365              	.Ldebug_info0:
- 366 0000 94030000 		.4byte	0x394
- 367 0004 0400     		.2byte	0x4
- 368 0006 00000000 		.4byte	.Ldebug_abbrev0
- 369 000a 04       		.byte	0x4
- 370 000b 01       		.uleb128 0x1
- 371 000c AC000000 		.4byte	.LASF43
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 9
+ 241              		.section	.text.switch_to_test_mode,"ax",%progbits
+ 242              		.align	2
+ 243              		.global	switch_to_test_mode
+ 244              		.thumb
+ 245              		.thumb_func
+ 246              		.type	switch_to_test_mode, %function
+ 247              	switch_to_test_mode:
+ 248              	.LFB67:
+  44:functions.c   ****     mode = 0;
+ 249              		.loc 1 44 0
+ 250              		.cfi_startproc
+ 251              		@ args = 0, pretend = 0, frame = 0
+ 252              		@ frame_needed = 0, uses_anonymous_args = 0
+ 253 0000 08B5     		push	{r3, lr}
+ 254              		.cfi_def_cfa_offset 8
+ 255              		.cfi_offset 3, -8
+ 256              		.cfi_offset 14, -4
+  45:functions.c   ****     turn_off_LEDS();
+ 257              		.loc 1 45 0
+ 258 0002 0022     		movs	r2, #0
+ 259 0004 034B     		ldr	r3, .L19
+ 260 0006 1A60     		str	r2, [r3]
+  46:functions.c   ****     const char8* var = "Test";
+ 261              		.loc 1 46 0
+ 262 0008 FFF7FEFF 		bl	turn_off_LEDS
+ 263              	.LVL24:
+  48:functions.c   **** }
+ 264              		.loc 1 48 0
+ 265 000c 0248     		ldr	r0, .L19+4
+ 266 000e FFF7FEFF 		bl	print_screen
+ 267              	.LVL25:
+ 268 0012 08BD     		pop	{r3, pc}
+ 269              	.L20:
+ 270              		.align	2
+ 271              	.L19:
+ 272 0014 00000000 		.word	.LANCHOR0
+ 273 0018 10000000 		.word	.LC2
+ 274              		.cfi_endproc
+ 275              	.LFE67:
+ 276              		.size	switch_to_test_mode, .-switch_to_test_mode
+ 277              		.section	.text.switch_mode,"ax",%progbits
+ 278              		.align	2
+ 279              		.global	switch_mode
+ 280              		.thumb
+ 281              		.thumb_func
+ 282              		.type	switch_mode, %function
+ 283              	switch_mode:
+ 284              	.LFB69:
+  60:functions.c   ****     if (mode){
+ 285              		.loc 1 60 0
+ 286              		.cfi_startproc
+ 287              		@ args = 0, pretend = 0, frame = 0
+ 288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 289 0000 08B5     		push	{r3, lr}
+ 290              		.cfi_def_cfa_offset 8
+ 291              		.cfi_offset 3, -8
+ 292              		.cfi_offset 14, -4
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 8
 
 
- 372 0010 0C       		.byte	0xc
- 373 0011 68000000 		.4byte	.LASF44
- 374 0015 6C020000 		.4byte	.LASF45
- 375 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 376 001d 00000000 		.4byte	0
- 377 0021 00000000 		.4byte	.Ldebug_line0
- 378 0025 02       		.uleb128 0x2
- 379 0026 01       		.byte	0x1
- 380 0027 06       		.byte	0x6
- 381 0028 E9020000 		.4byte	.LASF0
- 382 002c 03       		.uleb128 0x3
- 383 002d 0B000000 		.4byte	.LASF4
- 384 0031 02       		.byte	0x2
- 385 0032 1D       		.byte	0x1d
- 386 0033 37000000 		.4byte	0x37
- 387 0037 02       		.uleb128 0x2
- 388 0038 01       		.byte	0x1
- 389 0039 08       		.byte	0x8
- 390 003a 72010000 		.4byte	.LASF1
- 391 003e 02       		.uleb128 0x2
- 392 003f 02       		.byte	0x2
- 393 0040 05       		.byte	0x5
- 394 0041 62020000 		.4byte	.LASF2
- 395 0045 02       		.uleb128 0x2
- 396 0046 02       		.byte	0x2
- 397 0047 07       		.byte	0x7
- 398 0048 52010000 		.4byte	.LASF3
- 399 004c 03       		.uleb128 0x3
- 400 004d 48000000 		.4byte	.LASF5
- 401 0051 02       		.byte	0x2
- 402 0052 3F       		.byte	0x3f
- 403 0053 57000000 		.4byte	0x57
- 404 0057 02       		.uleb128 0x2
- 405 0058 04       		.byte	0x4
- 406 0059 05       		.byte	0x5
- 407 005a D4020000 		.4byte	.LASF6
- 408 005e 02       		.uleb128 0x2
- 409 005f 04       		.byte	0x4
- 410 0060 07       		.byte	0x7
- 411 0061 80010000 		.4byte	.LASF7
- 412 0065 02       		.uleb128 0x2
- 413 0066 08       		.byte	0x8
- 414 0067 05       		.byte	0x5
- 415 0068 2D020000 		.4byte	.LASF8
- 416 006c 02       		.uleb128 0x2
- 417 006d 08       		.byte	0x8
- 418 006e 07       		.byte	0x7
- 419 006f C9010000 		.4byte	.LASF9
- 420 0073 04       		.uleb128 0x4
- 421 0074 04       		.byte	0x4
- 422 0075 05       		.byte	0x5
- 423 0076 696E7400 		.ascii	"int\000"
- 424 007a 02       		.uleb128 0x2
- 425 007b 04       		.byte	0x4
- 426 007c 07       		.byte	0x7
- 427 007d B0010000 		.4byte	.LASF10
- 428 0081 03       		.uleb128 0x3
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 10
+  61:functions.c   ****         switch_to_test_mode();
+ 293              		.loc 1 61 0
+ 294 0002 064B     		ldr	r3, .L26
+ 295 0004 1B68     		ldr	r3, [r3]
+ 296 0006 13B1     		cbz	r3, .L22
+  62:functions.c   ****     }
+ 297              		.loc 1 62 0
+ 298 0008 FFF7FEFF 		bl	switch_to_test_mode
+ 299              	.LVL26:
+ 300 000c 08BD     		pop	{r3, pc}
+ 301              	.L22:
+  64:functions.c   ****         switch_to_glimball_mode();
+ 302              		.loc 1 64 0
+ 303 000e 13B9     		cbnz	r3, .L24
+  65:functions.c   ****     }
+ 304              		.loc 1 65 0
+ 305 0010 FFF7FEFF 		bl	switch_to_glimball_mode
+ 306              	.LVL27:
+ 307 0014 08BD     		pop	{r3, pc}
+ 308              	.L24:
+  68:functions.c   ****     }
+ 309              		.loc 1 68 0
+ 310 0016 FFF7FEFF 		bl	error
+ 311              	.LVL28:
+ 312 001a 08BD     		pop	{r3, pc}
+ 313              	.L27:
+ 314              		.align	2
+ 315              	.L26:
+ 316 001c 00000000 		.word	.LANCHOR0
+ 317              		.cfi_endproc
+ 318              	.LFE69:
+ 319              		.size	switch_mode, .-switch_mode
+ 320              		.section	.text.read_SW1,"ax",%progbits
+ 321              		.align	2
+ 322              		.global	read_SW1
+ 323              		.thumb
+ 324              		.thumb_func
+ 325              		.type	read_SW1, %function
+ 326              	read_SW1:
+ 327              	.LFB68:
+  52:functions.c   ****     if (SW1_Read()){
+ 328              		.loc 1 52 0
+ 329              		.cfi_startproc
+ 330              		@ args = 0, pretend = 0, frame = 0
+ 331              		@ frame_needed = 0, uses_anonymous_args = 0
+ 332 0000 08B5     		push	{r3, lr}
+ 333              		.cfi_def_cfa_offset 8
+ 334              		.cfi_offset 3, -8
+ 335              		.cfi_offset 14, -4
+  53:functions.c   ****         CyDelay(200);
+ 336              		.loc 1 53 0
+ 337 0002 FFF7FEFF 		bl	SW1_Read
+ 338              	.LVL29:
+ 339 0006 20B1     		cbz	r0, .L28
+  54:functions.c   ****         switch_mode();
+ 340              		.loc 1 54 0
+ 341 0008 C820     		movs	r0, #200
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 9
 
 
- 429 0082 E0010000 		.4byte	.LASF11
- 430 0086 03       		.byte	0x3
- 431 0087 18       		.byte	0x18
- 432 0088 2C000000 		.4byte	0x2c
- 433 008c 03       		.uleb128 0x3
- 434 008d 16020000 		.4byte	.LASF12
- 435 0091 03       		.byte	0x3
- 436 0092 2C       		.byte	0x2c
- 437 0093 4C000000 		.4byte	0x4c
- 438 0097 02       		.uleb128 0x2
- 439 0098 04       		.byte	0x4
- 440 0099 04       		.byte	0x4
- 441 009a 91000000 		.4byte	.LASF13
- 442 009e 02       		.uleb128 0x2
- 443 009f 08       		.byte	0x8
- 444 00a0 04       		.byte	0x4
- 445 00a1 74000000 		.4byte	.LASF14
- 446 00a5 02       		.uleb128 0x2
- 447 00a6 01       		.byte	0x1
- 448 00a7 08       		.byte	0x8
- 449 00a8 45020000 		.4byte	.LASF15
- 450 00ac 02       		.uleb128 0x2
- 451 00ad 04       		.byte	0x4
- 452 00ae 07       		.byte	0x7
- 453 00af 1E020000 		.4byte	.LASF16
- 454 00b3 02       		.uleb128 0x2
- 455 00b4 08       		.byte	0x8
- 456 00b5 04       		.byte	0x4
- 457 00b6 DD020000 		.4byte	.LASF17
- 458 00ba 05       		.uleb128 0x5
- 459 00bb 5D000000 		.4byte	.LASF18
- 460 00bf 01       		.byte	0x1
- 461 00c0 0B       		.byte	0xb
- 462 00c1 00000000 		.4byte	.LFB63
- 463 00c5 12000000 		.4byte	.LFE63-.LFB63
- 464 00c9 01       		.uleb128 0x1
- 465 00ca 9C       		.byte	0x9c
- 466 00cb F5000000 		.4byte	0xf5
- 467 00cf 06       		.uleb128 0x6
- 468 00d0 06000000 		.4byte	.LVL0
- 469 00d4 FD020000 		.4byte	0x2fd
- 470 00d8 07       		.uleb128 0x7
- 471 00d9 0C000000 		.4byte	.LVL1
- 472 00dd 08030000 		.4byte	0x308
- 473 00e1 EB000000 		.4byte	0xeb
- 474 00e5 08       		.uleb128 0x8
- 475 00e6 01       		.uleb128 0x1
- 476 00e7 50       		.byte	0x50
- 477 00e8 01       		.uleb128 0x1
- 478 00e9 31       		.byte	0x31
- 479 00ea 00       		.byte	0
- 480 00eb 06       		.uleb128 0x6
- 481 00ec 10000000 		.4byte	.LVL2
- 482 00f0 13030000 		.4byte	0x313
- 483 00f4 00       		.byte	0
- 484 00f5 05       		.uleb128 0x5
- 485 00f6 86000000 		.4byte	.LASF19
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 11
+ 342 000a FFF7FEFF 		bl	CyDelay
+ 343              	.LVL30:
+  55:functions.c   ****     }
+ 344              		.loc 1 55 0
+ 345 000e FFF7FEFF 		bl	switch_mode
+ 346              	.LVL31:
+ 347              	.L28:
+ 348 0012 08BD     		pop	{r3, pc}
+ 349              		.cfi_endproc
+ 350              	.LFE68:
+ 351              		.size	read_SW1, .-read_SW1
+ 352              		.section	.text.react_to_keypad,"ax",%progbits
+ 353              		.align	2
+ 354              		.global	react_to_keypad
+ 355              		.thumb
+ 356              		.thumb_func
+ 357              		.type	react_to_keypad, %function
+ 358              	react_to_keypad:
+ 359              	.LFB71:
+  83:functions.c   ****     uint8_t value = keypadScan();
+ 360              		.loc 1 83 0
+ 361              		.cfi_startproc
+ 362              		@ args = 0, pretend = 0, frame = 0
+ 363              		@ frame_needed = 0, uses_anonymous_args = 0
+ 364 0000 10B5     		push	{r4, lr}
+ 365              		.cfi_def_cfa_offset 8
+ 366              		.cfi_offset 4, -8
+ 367              		.cfi_offset 14, -4
+  84:functions.c   ****     if (value != 'z'){
+ 368              		.loc 1 84 0
+ 369 0002 FFF7FEFF 		bl	keypadScan
+ 370              	.LVL32:
+  85:functions.c   ****         CyDelay(200);
+ 371              		.loc 1 85 0
+ 372 0006 7A28     		cmp	r0, #122
+ 373 0008 07D0     		beq	.L31
+ 374 000a 0446     		mov	r4, r0
+  86:functions.c   ****         switch (value){
+ 375              		.loc 1 86 0
+ 376 000c C820     		movs	r0, #200
+ 377              	.LVL33:
+ 378 000e FFF7FEFF 		bl	CyDelay
+ 379              	.LVL34:
+  87:functions.c   ****             case '1': switch_mode();
+ 380              		.loc 1 87 0
+ 381 0012 312C     		cmp	r4, #49
+ 382 0014 01D1     		bne	.L31
+  88:functions.c   ****             // case 2: rotate_left();
+ 383              		.loc 1 88 0
+ 384 0016 FFF7FEFF 		bl	switch_mode
+ 385              	.LVL35:
+ 386              	.L31:
+ 387 001a 10BD     		pop	{r4, pc}
+ 388              		.cfi_endproc
+ 389              	.LFE71:
+ 390              		.size	react_to_keypad, .-react_to_keypad
+ 391              		.global	__aeabi_ui2f
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 10
 
 
- 486 00fa 01       		.byte	0x1
- 487 00fb 12       		.byte	0x12
- 488 00fc 00000000 		.4byte	.LFB64
- 489 0100 1C000000 		.4byte	.LFE64-.LFB64
- 490 0104 01       		.uleb128 0x1
- 491 0105 9C       		.byte	0x9c
- 492 0106 53010000 		.4byte	0x153
- 493 010a 07       		.uleb128 0x7
- 494 010b 08000000 		.4byte	.LVL3
- 495 010f 1E030000 		.4byte	0x31e
- 496 0113 1D010000 		.4byte	0x11d
- 497 0117 08       		.uleb128 0x8
- 498 0118 01       		.uleb128 0x1
- 499 0119 50       		.byte	0x50
- 500 011a 01       		.uleb128 0x1
- 501 011b 31       		.byte	0x31
- 502 011c 00       		.byte	0
- 503 011d 07       		.uleb128 0x7
- 504 011e 0E000000 		.4byte	.LVL4
- 505 0122 29030000 		.4byte	0x329
- 506 0126 30010000 		.4byte	0x130
- 507 012a 08       		.uleb128 0x8
- 508 012b 01       		.uleb128 0x1
- 509 012c 50       		.byte	0x50
- 510 012d 01       		.uleb128 0x1
- 511 012e 31       		.byte	0x31
- 512 012f 00       		.byte	0
- 513 0130 07       		.uleb128 0x7
- 514 0131 14000000 		.4byte	.LVL5
- 515 0135 34030000 		.4byte	0x334
- 516 0139 43010000 		.4byte	0x143
- 517 013d 08       		.uleb128 0x8
- 518 013e 01       		.uleb128 0x1
- 519 013f 50       		.byte	0x50
- 520 0140 01       		.uleb128 0x1
- 521 0141 31       		.byte	0x31
- 522 0142 00       		.byte	0
- 523 0143 09       		.uleb128 0x9
- 524 0144 1A000000 		.4byte	.LVL6
- 525 0148 3F030000 		.4byte	0x33f
- 526 014c 08       		.uleb128 0x8
- 527 014d 01       		.uleb128 0x1
- 528 014e 50       		.byte	0x50
- 529 014f 01       		.uleb128 0x1
- 530 0150 31       		.byte	0x31
- 531 0151 00       		.byte	0
- 532 0152 00       		.byte	0
- 533 0153 05       		.uleb128 0x5
- 534 0154 A2010000 		.4byte	.LASF20
- 535 0158 01       		.byte	0x1
- 536 0159 19       		.byte	0x19
- 537 015a 00000000 		.4byte	.LFB65
- 538 015e 1C000000 		.4byte	.LFE65-.LFB65
- 539 0162 01       		.uleb128 0x1
- 540 0163 9C       		.byte	0x9c
- 541 0164 B1010000 		.4byte	0x1b1
- 542 0168 07       		.uleb128 0x7
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 12
+ 392              		.global	__aeabi_fdiv
+ 393              		.global	__aeabi_fadd
+ 394              		.global	__aeabi_f2uiz
+ 395              		.section	.text.testing_mode,"ax",%progbits
+ 396              		.align	2
+ 397              		.global	testing_mode
+ 398              		.thumb
+ 399              		.thumb_func
+ 400              		.type	testing_mode, %function
+ 401              	testing_mode:
+ 402              	.LFB73:
+  99:functions.c   **** }
+ 100:functions.c   **** 
+ 101:functions.c   **** 
+ 102:functions.c   **** void testing_mode(){ 
+ 403              		.loc 1 102 0
+ 404              		.cfi_startproc
+ 405              		@ args = 0, pretend = 0, frame = 0
+ 406              		@ frame_needed = 0, uses_anonymous_args = 0
+ 407 0000 08B5     		push	{r3, lr}
+ 408              		.cfi_def_cfa_offset 8
+ 409              		.cfi_offset 3, -8
+ 410              		.cfi_offset 14, -4
+ 411              	.LVL36:
+ 103:functions.c   ****     uint32_t potval = 0;
+ 104:functions.c   ****     ADC_StartConvert();
+ 412              		.loc 1 104 0
+ 413 0002 FFF7FEFF 		bl	ADC_StartConvert
+ 414              	.LVL37:
+ 105:functions.c   ****     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
+ 415              		.loc 1 105 0
+ 416 0006 0020     		movs	r0, #0
+ 417 0008 FFF7FEFF 		bl	ADC_IsEndConversion
+ 418              	.LVL38:
+ 419 000c 10B1     		cbz	r0, .L37
+ 420              		.loc 1 105 0 is_stmt 0 discriminator 1
+ 421 000e FFF7FEFF 		bl	ADC_GetResult32
+ 422              	.LVL39:
+ 423 0012 00E0     		b	.L36
+ 424              	.LVL40:
+ 425              	.L37:
+ 103:functions.c   ****     uint32_t potval = 0;
+ 426              		.loc 1 103 0 is_stmt 1
+ 427 0014 0020     		movs	r0, #0
+ 428              	.LVL41:
+ 429              	.L36:
+ 106:functions.c   ****     potval = MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF); // transférer le max du p
+ 430              		.loc 1 106 0
+ 431 0016 4FF4FA63 		mov	r3, #2000
+ 432 001a 03FB00F0 		mul	r0, r3, r0
+ 433              	.LVL42:
+ 434 001e FFF7FEFF 		bl	__aeabi_ui2f
+ 435              	.LVL43:
+ 436 0022 0749     		ldr	r1, .L39
+ 437 0024 FFF7FEFF 		bl	__aeabi_fdiv
+ 438              	.LVL44:
+ 439 0028 0649     		ldr	r1, .L39+4
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 11
 
 
- 543 0169 08000000 		.4byte	.LVL7
- 544 016d 1E030000 		.4byte	0x31e
- 545 0171 7B010000 		.4byte	0x17b
- 546 0175 08       		.uleb128 0x8
- 547 0176 01       		.uleb128 0x1
- 548 0177 50       		.byte	0x50
- 549 0178 01       		.uleb128 0x1
- 550 0179 30       		.byte	0x30
- 551 017a 00       		.byte	0
- 552 017b 07       		.uleb128 0x7
- 553 017c 0E000000 		.4byte	.LVL8
- 554 0180 29030000 		.4byte	0x329
- 555 0184 8E010000 		.4byte	0x18e
- 556 0188 08       		.uleb128 0x8
- 557 0189 01       		.uleb128 0x1
- 558 018a 50       		.byte	0x50
- 559 018b 01       		.uleb128 0x1
- 560 018c 30       		.byte	0x30
- 561 018d 00       		.byte	0
- 562 018e 07       		.uleb128 0x7
- 563 018f 14000000 		.4byte	.LVL9
- 564 0193 34030000 		.4byte	0x334
- 565 0197 A1010000 		.4byte	0x1a1
- 566 019b 08       		.uleb128 0x8
- 567 019c 01       		.uleb128 0x1
- 568 019d 50       		.byte	0x50
- 569 019e 01       		.uleb128 0x1
- 570 019f 30       		.byte	0x30
- 571 01a0 00       		.byte	0
- 572 01a1 09       		.uleb128 0x9
- 573 01a2 1A000000 		.4byte	.LVL10
- 574 01a6 3F030000 		.4byte	0x33f
- 575 01aa 08       		.uleb128 0x8
- 576 01ab 01       		.uleb128 0x1
- 577 01ac 50       		.byte	0x50
- 578 01ad 01       		.uleb128 0x1
- 579 01ae 30       		.byte	0x30
- 580 01af 00       		.byte	0
- 581 01b0 00       		.byte	0
- 582 01b1 05       		.uleb128 0x5
- 583 01b2 3A010000 		.4byte	.LASF21
- 584 01b6 01       		.byte	0x1
- 585 01b7 20       		.byte	0x20
- 586 01b8 00000000 		.4byte	.LFB66
- 587 01bc 1C000000 		.4byte	.LFE66-.LFB66
- 588 01c0 01       		.uleb128 0x1
- 589 01c1 9C       		.byte	0x9c
- 590 01c2 D0010000 		.4byte	0x1d0
- 591 01c6 06       		.uleb128 0x6
- 592 01c7 12000000 		.4byte	.LVL11
- 593 01cb F5000000 		.4byte	0xf5
- 594 01cf 00       		.byte	0
- 595 01d0 05       		.uleb128 0x5
- 596 01d1 C0020000 		.4byte	.LASF22
- 597 01d5 01       		.byte	0x1
- 598 01d6 26       		.byte	0x26
- 599 01d7 00000000 		.4byte	.LFB67
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 13
+ 440 002a FFF7FEFF 		bl	__aeabi_fadd
+ 441              	.LVL45:
+ 442 002e FFF7FEFF 		bl	__aeabi_f2uiz
+ 443              	.LVL46:
+ 107:functions.c   ****     PWM_WriteCompare(potval);
+ 444              		.loc 1 107 0
+ 445 0032 80B2     		uxth	r0, r0
+ 446              	.LVL47:
+ 447 0034 FFF7FEFF 		bl	PWM_WriteCompare
+ 448              	.LVL48:
+ 108:functions.c   ****     CyDelay(50);
+ 449              		.loc 1 108 0
+ 450 0038 3220     		movs	r0, #50
+ 451 003a FFF7FEFF 		bl	CyDelay
+ 452              	.LVL49:
+ 453 003e 08BD     		pop	{r3, pc}
+ 454              	.L40:
+ 455              		.align	2
+ 456              	.L39:
+ 457 0040 00FF7F47 		.word	1199570688
+ 458 0044 0000FA43 		.word	1140457472
+ 459              		.cfi_endproc
+ 460              	.LFE73:
+ 461              		.size	testing_mode, .-testing_mode
+ 462              		.section	.text.glimball_mode,"ax",%progbits
+ 463              		.align	2
+ 464              		.global	glimball_mode
+ 465              		.thumb
+ 466              		.thumb_func
+ 467              		.type	glimball_mode, %function
+ 468              	glimball_mode:
+ 469              	.LFB74:
+ 109:functions.c   **** }
+ 110:functions.c   **** 
+ 111:functions.c   **** 
+ 112:functions.c   **** void glimball_mode(){
+ 470              		.loc 1 112 0
+ 471              		.cfi_startproc
+ 472              		@ args = 0, pretend = 0, frame = 0
+ 473              		@ frame_needed = 0, uses_anonymous_args = 0
+ 474              		@ link register save eliminated.
+ 475 0000 7047     		bx	lr
+ 476              		.cfi_endproc
+ 477              	.LFE74:
+ 478              		.size	glimball_mode, .-glimball_mode
+ 479 0002 00BF     		.section	.text.react,"ax",%progbits
+ 480              		.align	2
+ 481              		.global	react
+ 482              		.thumb
+ 483              		.thumb_func
+ 484              		.type	react, %function
+ 485              	react:
+ 486              	.LFB75:
+ 113:functions.c   ****     // TO DO
+ 114:functions.c   **** }
+ 115:functions.c   **** 
+ 116:functions.c   **** 
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 12
 
 
- 600 01db 1C000000 		.4byte	.LFE67-.LFB67
- 601 01df 01       		.uleb128 0x1
- 602 01e0 9C       		.byte	0x9c
- 603 01e1 EF010000 		.4byte	0x1ef
- 604 01e5 06       		.uleb128 0x6
- 605 01e6 12000000 		.4byte	.LVL12
- 606 01ea 53010000 		.4byte	0x153
- 607 01ee 00       		.byte	0
- 608 01ef 05       		.uleb128 0x5
- 609 01f0 27020000 		.4byte	.LASF23
- 610 01f4 01       		.byte	0x1
- 611 01f5 3B       		.byte	0x3b
- 612 01f6 00000000 		.4byte	.LFB69
- 613 01fa 20000000 		.4byte	.LFE69-.LFB69
- 614 01fe 01       		.uleb128 0x1
- 615 01ff 9C       		.byte	0x9c
- 616 0200 47020000 		.4byte	0x247
- 617 0204 07       		.uleb128 0x7
- 618 0205 0A000000 		.4byte	.LVL13
- 619 0209 4A030000 		.4byte	0x34a
- 620 020d 1C020000 		.4byte	0x21c
- 621 0211 08       		.uleb128 0x8
- 622 0212 01       		.uleb128 0x1
- 623 0213 50       		.byte	0x50
- 624 0214 01       		.uleb128 0x1
- 625 0215 30       		.byte	0x30
- 626 0216 08       		.uleb128 0x8
- 627 0217 01       		.uleb128 0x1
- 628 0218 51       		.byte	0x51
- 629 0219 01       		.uleb128 0x1
- 630 021a 30       		.byte	0x30
- 631 021b 00       		.byte	0
- 632 021c 07       		.uleb128 0x7
- 633 021d 10000000 		.4byte	.LVL14
- 634 0221 55030000 		.4byte	0x355
- 635 0225 33020000 		.4byte	0x233
- 636 0229 08       		.uleb128 0x8
- 637 022a 01       		.uleb128 0x1
- 638 022b 50       		.byte	0x50
- 639 022c 05       		.uleb128 0x5
- 640 022d 03       		.byte	0x3
- 641 022e 00000000 		.4byte	.LC0
- 642 0232 00       		.byte	0
- 643 0233 09       		.uleb128 0x9
- 644 0234 16000000 		.4byte	.LVL15
- 645 0238 60030000 		.4byte	0x360
- 646 023c 08       		.uleb128 0x8
- 647 023d 01       		.uleb128 0x1
- 648 023e 50       		.byte	0x50
- 649 023f 05       		.uleb128 0x5
- 650 0240 0C       		.byte	0xc
- 651 0241 A0860100 		.4byte	0x186a0
- 652 0245 00       		.byte	0
- 653 0246 00       		.byte	0
- 654 0247 05       		.uleb128 0x5
- 655 0248 36000000 		.4byte	.LASF24
- 656 024c 01       		.byte	0x1
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 14
+ 117:functions.c   **** void react(){
+ 487              		.loc 1 117 0
+ 488              		.cfi_startproc
+ 489              		@ args = 0, pretend = 0, frame = 0
+ 490              		@ frame_needed = 0, uses_anonymous_args = 0
+ 491              		.loc 1 117 0
+ 492 0000 08B5     		push	{r3, lr}
+ 493              		.cfi_def_cfa_offset 8
+ 494              		.cfi_offset 3, -8
+ 495              		.cfi_offset 14, -4
+ 118:functions.c   ****     react_to_keypad();
+ 496              		.loc 1 118 0
+ 497 0002 FFF7FEFF 		bl	react_to_keypad
+ 498              	.LVL50:
+ 119:functions.c   ****     read_SW1();
+ 499              		.loc 1 119 0
+ 500 0006 FFF7FEFF 		bl	read_SW1
+ 501              	.LVL51:
+ 502 000a 08BD     		pop	{r3, pc}
+ 503              		.cfi_endproc
+ 504              	.LFE75:
+ 505              		.size	react, .-react
+ 506              		.section	.text.modes,"ax",%progbits
+ 507              		.align	2
+ 508              		.global	modes
+ 509              		.thumb
+ 510              		.thumb_func
+ 511              		.type	modes, %function
+ 512              	modes:
+ 513              	.LFB76:
+ 120:functions.c   **** }
+ 121:functions.c   **** 
+ 122:functions.c   **** void modes(){   
+ 514              		.loc 1 122 0
+ 515              		.cfi_startproc
+ 516              		@ args = 0, pretend = 0, frame = 0
+ 517              		@ frame_needed = 0, uses_anonymous_args = 0
+ 518 0000 08B5     		push	{r3, lr}
+ 519              		.cfi_def_cfa_offset 8
+ 520              		.cfi_offset 3, -8
+ 521              		.cfi_offset 14, -4
+ 123:functions.c   ****    if (!mode){
+ 522              		.loc 1 123 0
+ 523 0002 034B     		ldr	r3, .L47
+ 524 0004 1B68     		ldr	r3, [r3]
+ 525 0006 0BB9     		cbnz	r3, .L44
+ 124:functions.c   ****         testing_mode();
+ 526              		.loc 1 124 0
+ 527 0008 FFF7FEFF 		bl	testing_mode
+ 528              	.LVL52:
+ 529              	.L44:
+ 530 000c 08BD     		pop	{r3, pc}
+ 531              	.L48:
+ 532 000e 00BF     		.align	2
+ 533              	.L47:
+ 534 0010 00000000 		.word	.LANCHOR0
+ 535              		.cfi_endproc
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 13
 
 
- 657 024d 2D       		.byte	0x2d
- 658 024e 00000000 		.4byte	.LFB68
- 659 0252 38000000 		.4byte	.LFE68-.LFB68
- 660 0256 01       		.uleb128 0x1
- 661 0257 9C       		.byte	0x9c
- 662 0258 81020000 		.4byte	0x281
- 663 025c 06       		.uleb128 0x6
- 664 025d 06000000 		.4byte	.LVL16
- 665 0261 6B030000 		.4byte	0x36b
- 666 0265 06       		.uleb128 0x6
- 667 0266 18000000 		.4byte	.LVL17
- 668 026a B1010000 		.4byte	0x1b1
- 669 026e 06       		.uleb128 0x6
- 670 026f 26000000 		.4byte	.LVL18
- 671 0273 D0010000 		.4byte	0x1d0
- 672 0277 06       		.uleb128 0x6
- 673 0278 2C000000 		.4byte	.LVL19
- 674 027c EF010000 		.4byte	0x1ef
- 675 0280 00       		.byte	0
- 676 0281 05       		.uleb128 0x5
- 677 0282 15000000 		.4byte	.LASF25
- 678 0286 01       		.byte	0x1
- 679 0287 46       		.byte	0x46
- 680 0288 00000000 		.4byte	.LFB70
- 681 028c 20000000 		.4byte	.LFE70-.LFB70
- 682 0290 01       		.uleb128 0x1
- 683 0291 9C       		.byte	0x9c
- 684 0292 CA020000 		.4byte	0x2ca
- 685 0296 0A       		.uleb128 0xa
- 686 0297 42000000 		.4byte	.LASF46
- 687 029b 01       		.byte	0x1
- 688 029c 47       		.byte	0x47
- 689 029d 81000000 		.4byte	0x81
- 690 02a1 00000000 		.4byte	.LLST0
- 691 02a5 06       		.uleb128 0x6
- 692 02a6 06000000 		.4byte	.LVL20
- 693 02aa 76030000 		.4byte	0x376
- 694 02ae 06       		.uleb128 0x6
- 695 02af 16000000 		.4byte	.LVL21
- 696 02b3 47020000 		.4byte	0x247
- 697 02b7 06       		.uleb128 0x6
- 698 02b8 1A000000 		.4byte	.LVL22
- 699 02bc 81030000 		.4byte	0x381
- 700 02c0 06       		.uleb128 0x6
- 701 02c1 1E000000 		.4byte	.LVL23
- 702 02c5 8C030000 		.4byte	0x38c
- 703 02c9 00       		.byte	0
- 704 02ca 0B       		.uleb128 0xb
- 705 02cb 65010000 		.4byte	.LASF26
- 706 02cf 04       		.byte	0x4
- 707 02d0 1207     		.2byte	0x712
- 708 02d2 D6020000 		.4byte	0x2d6
- 709 02d6 0C       		.uleb128 0xc
- 710 02d7 8C000000 		.4byte	0x8c
- 711 02db 0D       		.uleb128 0xd
- 712 02dc 3B020000 		.4byte	.LASF27
- 713 02e0 01       		.byte	0x1
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 15
+ 536              	.LFE76:
+ 537              		.size	modes, .-modes
+ 538              		.global	mode
+ 539              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 540              		.align	2
+ 541              	.LC0:
+ 542 0000 4552524F 		.ascii	"ERROR\000"
+ 542      5200
+ 543 0006 0000     		.space	2
+ 544              	.LC1:
+ 545 0008 476C696D 		.ascii	"Glim\000"
+ 545      00
+ 546 000d 000000   		.space	3
+ 547              	.LC2:
+ 548 0010 54657374 		.ascii	"Test\000"
+ 548      00
+ 549              		.bss
+ 550              		.align	2
+ 551              		.set	.LANCHOR0,. + 0
+ 552              		.type	mode, %object
+ 553              		.size	mode, 4
+ 554              	mode:
+ 555 0000 00000000 		.space	4
+ 556              		.text
+ 557              	.Letext0:
+ 558              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 559              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 560              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 561              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 562              		.file 6 "Generated_Source\\PSoC5/LCD.h"
+ 563              		.file 7 "Generated_Source\\PSoC5/PWM.h"
+ 564              		.file 8 "Generated_Source\\PSoC5/ADC.h"
+ 565              		.file 9 "keypad.h"
+ 566              		.file 10 "Generated_Source\\PSoC5/LED1.h"
+ 567              		.file 11 "Generated_Source\\PSoC5/LED2.h"
+ 568              		.file 12 "Generated_Source\\PSoC5/LED3.h"
+ 569              		.file 13 "Generated_Source\\PSoC5/LED4.h"
+ 570              		.file 14 "Generated_Source\\PSoC5/CyLib.h"
+ 571              		.file 15 "Generated_Source\\PSoC5/SW1.h"
+ 572              		.section	.debug_info,"",%progbits
+ 573              	.Ldebug_info0:
+ 574 0000 9C050000 		.4byte	0x59c
+ 575 0004 0400     		.2byte	0x4
+ 576 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 577 000a 04       		.byte	0x4
+ 578 000b 01       		.uleb128 0x1
+ 579 000c CA020000 		.4byte	.LASF56
+ 580 0010 0C       		.byte	0xc
+ 581 0011 09020000 		.4byte	.LASF57
+ 582 0015 69020000 		.4byte	.LASF58
+ 583 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 584 001d 00000000 		.4byte	0
+ 585 0021 00000000 		.4byte	.Ldebug_line0
+ 586 0025 02       		.uleb128 0x2
+ 587 0026 01       		.byte	0x1
+ 588 0027 06       		.byte	0x6
+ 589 0028 0E010000 		.4byte	.LASF0
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 14
 
 
- 714 02e1 07       		.byte	0x7
- 715 02e2 73000000 		.4byte	0x73
- 716 02e6 05       		.uleb128 0x5
- 717 02e7 03       		.byte	0x3
- 718 02e8 00000000 		.4byte	test_mode
- 719 02ec 0D       		.uleb128 0xd
- 720 02ed 4A020000 		.4byte	.LASF28
- 721 02f1 01       		.byte	0x1
- 722 02f2 08       		.byte	0x8
- 723 02f3 73000000 		.4byte	0x73
- 724 02f7 05       		.uleb128 0x5
- 725 02f8 03       		.byte	0x3
- 726 02f9 00000000 		.4byte	glimbal_mode
- 727 02fd 0E       		.uleb128 0xe
- 728 02fe 97000000 		.4byte	.LASF29
- 729 0302 97000000 		.4byte	.LASF29
- 730 0306 05       		.byte	0x5
- 731 0307 38       		.byte	0x38
- 732 0308 0E       		.uleb128 0xe
- 733 0309 25000000 		.4byte	.LASF30
- 734 030d 25000000 		.4byte	.LASF30
- 735 0311 05       		.byte	0x5
- 736 0312 3A       		.byte	0x3a
- 737 0313 0E       		.uleb128 0xe
- 738 0314 F5010000 		.4byte	.LASF31
- 739 0318 F5010000 		.4byte	.LASF31
- 740 031c 06       		.byte	0x6
- 741 031d 0E       		.byte	0xe
- 742 031e 0E       		.uleb128 0xe
- 743 031f 00000000 		.4byte	.LASF32
- 744 0323 00000000 		.4byte	.LASF32
- 745 0327 07       		.byte	0x7
- 746 0328 26       		.byte	0x26
- 747 0329 0E       		.uleb128 0xe
- 748 032a 52000000 		.4byte	.LASF33
- 749 032e 52000000 		.4byte	.LASF33
- 750 0332 08       		.byte	0x8
- 751 0333 26       		.byte	0x26
- 752 0334 0E       		.uleb128 0xe
- 753 0335 7B000000 		.4byte	.LASF34
- 754 0339 7B000000 		.4byte	.LASF34
- 755 033d 09       		.byte	0x9
- 756 033e 26       		.byte	0x26
- 757 033f 0E       		.uleb128 0xe
- 758 0340 A1000000 		.4byte	.LASF35
- 759 0344 A1000000 		.4byte	.LASF35
- 760 0348 0A       		.byte	0xa
- 761 0349 26       		.byte	0x26
- 762 034a 0E       		.uleb128 0xe
- 763 034b E8010000 		.4byte	.LASF36
- 764 034f E8010000 		.4byte	.LASF36
- 765 0353 05       		.byte	0x5
- 766 0354 3D       		.byte	0x3d
- 767 0355 0E       		.uleb128 0xe
- 768 0356 92010000 		.4byte	.LASF37
- 769 035a 92010000 		.4byte	.LASF37
- 770 035e 05       		.byte	0x5
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 16
+ 590 002c 03       		.uleb128 0x3
+ 591 002d 87030000 		.4byte	.LASF4
+ 592 0031 02       		.byte	0x2
+ 593 0032 1D       		.byte	0x1d
+ 594 0033 37000000 		.4byte	0x37
+ 595 0037 02       		.uleb128 0x2
+ 596 0038 01       		.byte	0x1
+ 597 0039 08       		.byte	0x8
+ 598 003a 00010000 		.4byte	.LASF1
+ 599 003e 02       		.uleb128 0x2
+ 600 003f 02       		.byte	0x2
+ 601 0040 05       		.byte	0x5
+ 602 0041 1E000000 		.4byte	.LASF2
+ 603 0045 02       		.uleb128 0x2
+ 604 0046 02       		.byte	0x2
+ 605 0047 07       		.byte	0x7
+ 606 0048 88010000 		.4byte	.LASF3
+ 607 004c 03       		.uleb128 0x3
+ 608 004d 20020000 		.4byte	.LASF5
+ 609 0051 02       		.byte	0x2
+ 610 0052 3F       		.byte	0x3f
+ 611 0053 57000000 		.4byte	0x57
+ 612 0057 02       		.uleb128 0x2
+ 613 0058 04       		.byte	0x4
+ 614 0059 05       		.byte	0x5
+ 615 005a C3010000 		.4byte	.LASF6
+ 616 005e 03       		.uleb128 0x3
+ 617 005f 37000000 		.4byte	.LASF7
+ 618 0063 02       		.byte	0x2
+ 619 0064 41       		.byte	0x41
+ 620 0065 69000000 		.4byte	0x69
+ 621 0069 02       		.uleb128 0x2
+ 622 006a 04       		.byte	0x4
+ 623 006b 07       		.byte	0x7
+ 624 006c EA010000 		.4byte	.LASF8
+ 625 0070 02       		.uleb128 0x2
+ 626 0071 08       		.byte	0x8
+ 627 0072 05       		.byte	0x5
+ 628 0073 A1000000 		.4byte	.LASF9
+ 629 0077 02       		.uleb128 0x2
+ 630 0078 08       		.byte	0x8
+ 631 0079 07       		.byte	0x7
+ 632 007a 1A010000 		.4byte	.LASF10
+ 633 007e 04       		.uleb128 0x4
+ 634 007f 04       		.byte	0x4
+ 635 0080 05       		.byte	0x5
+ 636 0081 696E7400 		.ascii	"int\000"
+ 637 0085 02       		.uleb128 0x2
+ 638 0086 04       		.byte	0x4
+ 639 0087 07       		.byte	0x7
+ 640 0088 4A010000 		.4byte	.LASF11
+ 641 008c 03       		.uleb128 0x3
+ 642 008d 61000000 		.4byte	.LASF12
+ 643 0091 03       		.byte	0x3
+ 644 0092 18       		.byte	0x18
+ 645 0093 2C000000 		.4byte	0x2c
+ 646 0097 03       		.uleb128 0x3
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 15
 
 
- 771 035f 3C       		.byte	0x3c
- 772 0360 0E       		.uleb128 0xe
- 773 0361 F5020000 		.4byte	.LASF38
- 774 0365 F5020000 		.4byte	.LASF38
- 775 0369 0B       		.byte	0xb
- 776 036a 76       		.byte	0x76
- 777 036b 0E       		.uleb128 0xe
- 778 036c 00020000 		.4byte	.LASF39
- 779 0370 00020000 		.4byte	.LASF39
- 780 0374 0C       		.byte	0xc
- 781 0375 29       		.byte	0x29
- 782 0376 0E       		.uleb128 0xe
- 783 0377 57020000 		.4byte	.LASF40
- 784 037b 57020000 		.4byte	.LASF40
- 785 037f 06       		.byte	0x6
- 786 0380 0F       		.byte	0xf
- 787 0381 0E       		.uleb128 0xe
- 788 0382 BD010000 		.4byte	.LASF41
- 789 0386 BD010000 		.4byte	.LASF41
- 790 038a 01       		.byte	0x1
- 791 038b 41       		.byte	0x41
- 792 038c 0E       		.uleb128 0xe
- 793 038d 09020000 		.4byte	.LASF42
- 794 0391 09020000 		.4byte	.LASF42
- 795 0395 01       		.byte	0x1
- 796 0396 43       		.byte	0x43
- 797 0397 00       		.byte	0
- 798              		.section	.debug_abbrev,"",%progbits
- 799              	.Ldebug_abbrev0:
- 800 0000 01       		.uleb128 0x1
- 801 0001 11       		.uleb128 0x11
- 802 0002 01       		.byte	0x1
- 803 0003 25       		.uleb128 0x25
- 804 0004 0E       		.uleb128 0xe
- 805 0005 13       		.uleb128 0x13
- 806 0006 0B       		.uleb128 0xb
- 807 0007 03       		.uleb128 0x3
- 808 0008 0E       		.uleb128 0xe
- 809 0009 1B       		.uleb128 0x1b
- 810 000a 0E       		.uleb128 0xe
- 811 000b 55       		.uleb128 0x55
- 812 000c 17       		.uleb128 0x17
- 813 000d 11       		.uleb128 0x11
- 814 000e 01       		.uleb128 0x1
- 815 000f 10       		.uleb128 0x10
- 816 0010 17       		.uleb128 0x17
- 817 0011 00       		.byte	0
- 818 0012 00       		.byte	0
- 819 0013 02       		.uleb128 0x2
- 820 0014 24       		.uleb128 0x24
- 821 0015 00       		.byte	0
- 822 0016 0B       		.uleb128 0xb
- 823 0017 0B       		.uleb128 0xb
- 824 0018 3E       		.uleb128 0x3e
- 825 0019 0B       		.uleb128 0xb
- 826 001a 03       		.uleb128 0x3
- 827 001b 0E       		.uleb128 0xe
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 17
+ 647 0098 CC010000 		.4byte	.LASF13
+ 648 009c 03       		.byte	0x3
+ 649 009d 2C       		.byte	0x2c
+ 650 009e 4C000000 		.4byte	0x4c
+ 651 00a2 03       		.uleb128 0x3
+ 652 00a3 31010000 		.4byte	.LASF14
+ 653 00a7 03       		.byte	0x3
+ 654 00a8 30       		.byte	0x30
+ 655 00a9 5E000000 		.4byte	0x5e
+ 656 00ad 02       		.uleb128 0x2
+ 657 00ae 04       		.byte	0x4
+ 658 00af 04       		.byte	0x4
+ 659 00b0 90000000 		.4byte	.LASF15
+ 660 00b4 02       		.uleb128 0x2
+ 661 00b5 08       		.byte	0x8
+ 662 00b6 04       		.byte	0x4
+ 663 00b7 02020000 		.4byte	.LASF16
+ 664 00bb 05       		.uleb128 0x5
+ 665 00bc 31000000 		.4byte	.LASF17
+ 666 00c0 04       		.byte	0x4
+ 667 00c1 F901     		.2byte	0x1f9
+ 668 00c3 C7000000 		.4byte	0xc7
+ 669 00c7 02       		.uleb128 0x2
+ 670 00c8 01       		.byte	0x1
+ 671 00c9 08       		.byte	0x8
+ 672 00ca BE010000 		.4byte	.LASF18
+ 673 00ce 02       		.uleb128 0x2
+ 674 00cf 08       		.byte	0x8
+ 675 00d0 04       		.byte	0x4
+ 676 00d1 E9000000 		.4byte	.LASF19
+ 677 00d5 02       		.uleb128 0x2
+ 678 00d6 04       		.byte	0x4
+ 679 00d7 07       		.byte	0x7
+ 680 00d8 28000000 		.4byte	.LASF20
+ 681 00dc 06       		.uleb128 0x6
+ 682 00dd F5000000 		.4byte	.LASF21
+ 683 00e1 01       		.byte	0x1
+ 684 00e2 0D       		.byte	0xd
+ 685 00e3 00000000 		.4byte	.LFB63
+ 686 00e7 1E000000 		.4byte	.LFE63-.LFB63
+ 687 00eb 01       		.uleb128 0x1
+ 688 00ec 9C       		.byte	0x9c
+ 689 00ed 32010000 		.4byte	0x132
+ 690 00f1 07       		.uleb128 0x7
+ 691 00f2 06000000 		.4byte	.LVL0
+ 692 00f6 CE040000 		.4byte	0x4ce
+ 693 00fa 08       		.uleb128 0x8
+ 694 00fb 0C000000 		.4byte	.LVL1
+ 695 00ff D9040000 		.4byte	0x4d9
+ 696 0103 0D010000 		.4byte	0x10d
+ 697 0107 09       		.uleb128 0x9
+ 698 0108 01       		.uleb128 0x1
+ 699 0109 50       		.byte	0x50
+ 700 010a 01       		.uleb128 0x1
+ 701 010b 31       		.byte	0x31
+ 702 010c 00       		.byte	0
+ 703 010d 07       		.uleb128 0x7
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 16
 
 
- 828 001c 00       		.byte	0
- 829 001d 00       		.byte	0
- 830 001e 03       		.uleb128 0x3
- 831 001f 16       		.uleb128 0x16
- 832 0020 00       		.byte	0
- 833 0021 03       		.uleb128 0x3
- 834 0022 0E       		.uleb128 0xe
- 835 0023 3A       		.uleb128 0x3a
- 836 0024 0B       		.uleb128 0xb
- 837 0025 3B       		.uleb128 0x3b
- 838 0026 0B       		.uleb128 0xb
- 839 0027 49       		.uleb128 0x49
- 840 0028 13       		.uleb128 0x13
- 841 0029 00       		.byte	0
- 842 002a 00       		.byte	0
- 843 002b 04       		.uleb128 0x4
- 844 002c 24       		.uleb128 0x24
- 845 002d 00       		.byte	0
- 846 002e 0B       		.uleb128 0xb
- 847 002f 0B       		.uleb128 0xb
- 848 0030 3E       		.uleb128 0x3e
- 849 0031 0B       		.uleb128 0xb
- 850 0032 03       		.uleb128 0x3
- 851 0033 08       		.uleb128 0x8
- 852 0034 00       		.byte	0
- 853 0035 00       		.byte	0
- 854 0036 05       		.uleb128 0x5
- 855 0037 2E       		.uleb128 0x2e
- 856 0038 01       		.byte	0x1
- 857 0039 3F       		.uleb128 0x3f
- 858 003a 19       		.uleb128 0x19
- 859 003b 03       		.uleb128 0x3
- 860 003c 0E       		.uleb128 0xe
- 861 003d 3A       		.uleb128 0x3a
- 862 003e 0B       		.uleb128 0xb
- 863 003f 3B       		.uleb128 0x3b
- 864 0040 0B       		.uleb128 0xb
- 865 0041 11       		.uleb128 0x11
- 866 0042 01       		.uleb128 0x1
- 867 0043 12       		.uleb128 0x12
- 868 0044 06       		.uleb128 0x6
- 869 0045 40       		.uleb128 0x40
- 870 0046 18       		.uleb128 0x18
- 871 0047 9742     		.uleb128 0x2117
- 872 0049 19       		.uleb128 0x19
- 873 004a 01       		.uleb128 0x1
- 874 004b 13       		.uleb128 0x13
- 875 004c 00       		.byte	0
- 876 004d 00       		.byte	0
- 877 004e 06       		.uleb128 0x6
- 878 004f 898201   		.uleb128 0x4109
- 879 0052 00       		.byte	0
- 880 0053 11       		.uleb128 0x11
- 881 0054 01       		.uleb128 0x1
- 882 0055 31       		.uleb128 0x31
- 883 0056 13       		.uleb128 0x13
- 884 0057 00       		.byte	0
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 18
+ 704 010e 10000000 		.4byte	.LVL2
+ 705 0112 E4040000 		.4byte	0x4e4
+ 706 0116 07       		.uleb128 0x7
+ 707 0117 14000000 		.4byte	.LVL3
+ 708 011b EF040000 		.4byte	0x4ef
+ 709 011f 07       		.uleb128 0x7
+ 710 0120 18000000 		.4byte	.LVL4
+ 711 0124 FA040000 		.4byte	0x4fa
+ 712 0128 07       		.uleb128 0x7
+ 713 0129 1C000000 		.4byte	.LVL5
+ 714 012d 05050000 		.4byte	0x505
+ 715 0131 00       		.byte	0
+ 716 0132 06       		.uleb128 0x6
+ 717 0133 D4000000 		.4byte	.LASF22
+ 718 0137 01       		.byte	0x1
+ 719 0138 17       		.byte	0x17
+ 720 0139 00000000 		.4byte	.LFB64
+ 721 013d 1C000000 		.4byte	.LFE64-.LFB64
+ 722 0141 01       		.uleb128 0x1
+ 723 0142 9C       		.byte	0x9c
+ 724 0143 90010000 		.4byte	0x190
+ 725 0147 08       		.uleb128 0x8
+ 726 0148 08000000 		.4byte	.LVL6
+ 727 014c 10050000 		.4byte	0x510
+ 728 0150 5A010000 		.4byte	0x15a
+ 729 0154 09       		.uleb128 0x9
+ 730 0155 01       		.uleb128 0x1
+ 731 0156 50       		.byte	0x50
+ 732 0157 01       		.uleb128 0x1
+ 733 0158 31       		.byte	0x31
+ 734 0159 00       		.byte	0
+ 735 015a 08       		.uleb128 0x8
+ 736 015b 0E000000 		.4byte	.LVL7
+ 737 015f 1B050000 		.4byte	0x51b
+ 738 0163 6D010000 		.4byte	0x16d
+ 739 0167 09       		.uleb128 0x9
+ 740 0168 01       		.uleb128 0x1
+ 741 0169 50       		.byte	0x50
+ 742 016a 01       		.uleb128 0x1
+ 743 016b 31       		.byte	0x31
+ 744 016c 00       		.byte	0
+ 745 016d 08       		.uleb128 0x8
+ 746 016e 14000000 		.4byte	.LVL8
+ 747 0172 26050000 		.4byte	0x526
+ 748 0176 80010000 		.4byte	0x180
+ 749 017a 09       		.uleb128 0x9
+ 750 017b 01       		.uleb128 0x1
+ 751 017c 50       		.byte	0x50
+ 752 017d 01       		.uleb128 0x1
+ 753 017e 31       		.byte	0x31
+ 754 017f 00       		.byte	0
+ 755 0180 0A       		.uleb128 0xa
+ 756 0181 1A000000 		.4byte	.LVL9
+ 757 0185 31050000 		.4byte	0x531
+ 758 0189 09       		.uleb128 0x9
+ 759 018a 01       		.uleb128 0x1
+ 760 018b 50       		.byte	0x50
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 17
 
 
- 885 0058 00       		.byte	0
- 886 0059 07       		.uleb128 0x7
- 887 005a 898201   		.uleb128 0x4109
- 888 005d 01       		.byte	0x1
- 889 005e 11       		.uleb128 0x11
- 890 005f 01       		.uleb128 0x1
- 891 0060 31       		.uleb128 0x31
- 892 0061 13       		.uleb128 0x13
- 893 0062 01       		.uleb128 0x1
- 894 0063 13       		.uleb128 0x13
- 895 0064 00       		.byte	0
- 896 0065 00       		.byte	0
- 897 0066 08       		.uleb128 0x8
- 898 0067 8A8201   		.uleb128 0x410a
- 899 006a 00       		.byte	0
- 900 006b 02       		.uleb128 0x2
- 901 006c 18       		.uleb128 0x18
- 902 006d 9142     		.uleb128 0x2111
- 903 006f 18       		.uleb128 0x18
- 904 0070 00       		.byte	0
- 905 0071 00       		.byte	0
- 906 0072 09       		.uleb128 0x9
- 907 0073 898201   		.uleb128 0x4109
- 908 0076 01       		.byte	0x1
- 909 0077 11       		.uleb128 0x11
- 910 0078 01       		.uleb128 0x1
- 911 0079 31       		.uleb128 0x31
- 912 007a 13       		.uleb128 0x13
- 913 007b 00       		.byte	0
- 914 007c 00       		.byte	0
- 915 007d 0A       		.uleb128 0xa
- 916 007e 34       		.uleb128 0x34
- 917 007f 00       		.byte	0
- 918 0080 03       		.uleb128 0x3
- 919 0081 0E       		.uleb128 0xe
- 920 0082 3A       		.uleb128 0x3a
- 921 0083 0B       		.uleb128 0xb
- 922 0084 3B       		.uleb128 0x3b
- 923 0085 0B       		.uleb128 0xb
- 924 0086 49       		.uleb128 0x49
- 925 0087 13       		.uleb128 0x13
- 926 0088 02       		.uleb128 0x2
- 927 0089 17       		.uleb128 0x17
- 928 008a 00       		.byte	0
- 929 008b 00       		.byte	0
- 930 008c 0B       		.uleb128 0xb
- 931 008d 34       		.uleb128 0x34
- 932 008e 00       		.byte	0
- 933 008f 03       		.uleb128 0x3
- 934 0090 0E       		.uleb128 0xe
- 935 0091 3A       		.uleb128 0x3a
- 936 0092 0B       		.uleb128 0xb
- 937 0093 3B       		.uleb128 0x3b
- 938 0094 05       		.uleb128 0x5
- 939 0095 49       		.uleb128 0x49
- 940 0096 13       		.uleb128 0x13
- 941 0097 3F       		.uleb128 0x3f
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 19
+ 761 018c 01       		.uleb128 0x1
+ 762 018d 31       		.byte	0x31
+ 763 018e 00       		.byte	0
+ 764 018f 00       		.byte	0
+ 765 0190 06       		.uleb128 0x6
+ 766 0191 6B030000 		.4byte	.LASF23
+ 767 0195 01       		.byte	0x1
+ 768 0196 1E       		.byte	0x1e
+ 769 0197 00000000 		.4byte	.LFB65
+ 770 019b 1C000000 		.4byte	.LFE65-.LFB65
+ 771 019f 01       		.uleb128 0x1
+ 772 01a0 9C       		.byte	0x9c
+ 773 01a1 EE010000 		.4byte	0x1ee
+ 774 01a5 08       		.uleb128 0x8
+ 775 01a6 08000000 		.4byte	.LVL10
+ 776 01aa 10050000 		.4byte	0x510
+ 777 01ae B8010000 		.4byte	0x1b8
+ 778 01b2 09       		.uleb128 0x9
+ 779 01b3 01       		.uleb128 0x1
+ 780 01b4 50       		.byte	0x50
+ 781 01b5 01       		.uleb128 0x1
+ 782 01b6 30       		.byte	0x30
+ 783 01b7 00       		.byte	0
+ 784 01b8 08       		.uleb128 0x8
+ 785 01b9 0E000000 		.4byte	.LVL11
+ 786 01bd 1B050000 		.4byte	0x51b
+ 787 01c1 CB010000 		.4byte	0x1cb
+ 788 01c5 09       		.uleb128 0x9
+ 789 01c6 01       		.uleb128 0x1
+ 790 01c7 50       		.byte	0x50
+ 791 01c8 01       		.uleb128 0x1
+ 792 01c9 30       		.byte	0x30
+ 793 01ca 00       		.byte	0
+ 794 01cb 08       		.uleb128 0x8
+ 795 01cc 14000000 		.4byte	.LVL12
+ 796 01d0 26050000 		.4byte	0x526
+ 797 01d4 DE010000 		.4byte	0x1de
+ 798 01d8 09       		.uleb128 0x9
+ 799 01d9 01       		.uleb128 0x1
+ 800 01da 50       		.byte	0x50
+ 801 01db 01       		.uleb128 0x1
+ 802 01dc 30       		.byte	0x30
+ 803 01dd 00       		.byte	0
+ 804 01de 0A       		.uleb128 0xa
+ 805 01df 1A000000 		.4byte	.LVL13
+ 806 01e3 31050000 		.4byte	0x531
+ 807 01e7 09       		.uleb128 0x9
+ 808 01e8 01       		.uleb128 0x1
+ 809 01e9 50       		.byte	0x50
+ 810 01ea 01       		.uleb128 0x1
+ 811 01eb 30       		.byte	0x30
+ 812 01ec 00       		.byte	0
+ 813 01ed 00       		.byte	0
+ 814 01ee 06       		.uleb128 0x6
+ 815 01ef 63020000 		.4byte	.LASF24
+ 816 01f3 01       		.byte	0x1
+ 817 01f4 48       		.byte	0x48
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 18
 
 
- 942 0098 19       		.uleb128 0x19
- 943 0099 3C       		.uleb128 0x3c
- 944 009a 19       		.uleb128 0x19
- 945 009b 00       		.byte	0
- 946 009c 00       		.byte	0
- 947 009d 0C       		.uleb128 0xc
- 948 009e 35       		.uleb128 0x35
- 949 009f 00       		.byte	0
- 950 00a0 49       		.uleb128 0x49
- 951 00a1 13       		.uleb128 0x13
- 952 00a2 00       		.byte	0
- 953 00a3 00       		.byte	0
- 954 00a4 0D       		.uleb128 0xd
- 955 00a5 34       		.uleb128 0x34
- 956 00a6 00       		.byte	0
- 957 00a7 03       		.uleb128 0x3
- 958 00a8 0E       		.uleb128 0xe
- 959 00a9 3A       		.uleb128 0x3a
- 960 00aa 0B       		.uleb128 0xb
- 961 00ab 3B       		.uleb128 0x3b
- 962 00ac 0B       		.uleb128 0xb
- 963 00ad 49       		.uleb128 0x49
- 964 00ae 13       		.uleb128 0x13
- 965 00af 3F       		.uleb128 0x3f
- 966 00b0 19       		.uleb128 0x19
- 967 00b1 02       		.uleb128 0x2
- 968 00b2 18       		.uleb128 0x18
- 969 00b3 00       		.byte	0
- 970 00b4 00       		.byte	0
- 971 00b5 0E       		.uleb128 0xe
- 972 00b6 2E       		.uleb128 0x2e
- 973 00b7 00       		.byte	0
- 974 00b8 3F       		.uleb128 0x3f
- 975 00b9 19       		.uleb128 0x19
- 976 00ba 3C       		.uleb128 0x3c
- 977 00bb 19       		.uleb128 0x19
- 978 00bc 6E       		.uleb128 0x6e
- 979 00bd 0E       		.uleb128 0xe
- 980 00be 03       		.uleb128 0x3
- 981 00bf 0E       		.uleb128 0xe
- 982 00c0 3A       		.uleb128 0x3a
- 983 00c1 0B       		.uleb128 0xb
- 984 00c2 3B       		.uleb128 0x3b
- 985 00c3 0B       		.uleb128 0xb
- 986 00c4 00       		.byte	0
- 987 00c5 00       		.byte	0
- 988 00c6 00       		.byte	0
- 989              		.section	.debug_loc,"",%progbits
- 990              	.Ldebug_loc0:
- 991              	.LLST0:
- 992 0000 06000000 		.4byte	.LVL20
- 993 0004 15000000 		.4byte	.LVL21-1
- 994 0008 0100     		.2byte	0x1
- 995 000a 50       		.byte	0x50
- 996 000b 00000000 		.4byte	0
- 997 000f 00000000 		.4byte	0
- 998              		.section	.debug_aranges,"",%progbits
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 20
+ 818 01f5 00000000 		.4byte	.LFB70
+ 819 01f9 20000000 		.4byte	.LFE70-.LFB70
+ 820 01fd 01       		.uleb128 0x1
+ 821 01fe 9C       		.byte	0x9c
+ 822 01ff 46020000 		.4byte	0x246
+ 823 0203 08       		.uleb128 0x8
+ 824 0204 0A000000 		.4byte	.LVL14
+ 825 0208 3C050000 		.4byte	0x53c
+ 826 020c 1B020000 		.4byte	0x21b
+ 827 0210 09       		.uleb128 0x9
+ 828 0211 01       		.uleb128 0x1
+ 829 0212 50       		.byte	0x50
+ 830 0213 01       		.uleb128 0x1
+ 831 0214 30       		.byte	0x30
+ 832 0215 09       		.uleb128 0x9
+ 833 0216 01       		.uleb128 0x1
+ 834 0217 51       		.byte	0x51
+ 835 0218 01       		.uleb128 0x1
+ 836 0219 30       		.byte	0x30
+ 837 021a 00       		.byte	0
+ 838 021b 08       		.uleb128 0x8
+ 839 021c 10000000 		.4byte	.LVL15
+ 840 0220 47050000 		.4byte	0x547
+ 841 0224 32020000 		.4byte	0x232
+ 842 0228 09       		.uleb128 0x9
+ 843 0229 01       		.uleb128 0x1
+ 844 022a 50       		.byte	0x50
+ 845 022b 05       		.uleb128 0x5
+ 846 022c 03       		.byte	0x3
+ 847 022d 00000000 		.4byte	.LC0
+ 848 0231 00       		.byte	0
+ 849 0232 0A       		.uleb128 0xa
+ 850 0233 16000000 		.4byte	.LVL16
+ 851 0237 52050000 		.4byte	0x552
+ 852 023b 09       		.uleb128 0x9
+ 853 023c 01       		.uleb128 0x1
+ 854 023d 50       		.byte	0x50
+ 855 023e 05       		.uleb128 0x5
+ 856 023f 0C       		.byte	0xc
+ 857 0240 A0860100 		.4byte	0x186a0
+ 858 0244 00       		.byte	0
+ 859 0245 00       		.byte	0
+ 860 0246 0B       		.uleb128 0xb
+ 861 0247 00000000 		.4byte	.LASF59
+ 862 024b 01       		.byte	0x1
+ 863 024c 5F       		.byte	0x5f
+ 864 024d 00000000 		.4byte	.LFB72
+ 865 0251 1A000000 		.4byte	.LFE72-.LFB72
+ 866 0255 01       		.uleb128 0x1
+ 867 0256 9C       		.byte	0x9c
+ 868 0257 A6020000 		.4byte	0x2a6
+ 869 025b 0C       		.uleb128 0xc
+ 870 025c C2000000 		.4byte	.LASF60
+ 871 0260 01       		.byte	0x1
+ 872 0261 5F       		.byte	0x5f
+ 873 0262 A6020000 		.4byte	0x2a6
+ 874 0266 00000000 		.4byte	.LLST0
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 19
 
 
- 999 0000 54000000 		.4byte	0x54
- 1000 0004 0200     		.2byte	0x2
- 1001 0006 00000000 		.4byte	.Ldebug_info0
- 1002 000a 04       		.byte	0x4
- 1003 000b 00       		.byte	0
- 1004 000c 0000     		.2byte	0
- 1005 000e 0000     		.2byte	0
- 1006 0010 00000000 		.4byte	.LFB63
- 1007 0014 12000000 		.4byte	.LFE63-.LFB63
- 1008 0018 00000000 		.4byte	.LFB64
- 1009 001c 1C000000 		.4byte	.LFE64-.LFB64
- 1010 0020 00000000 		.4byte	.LFB65
- 1011 0024 1C000000 		.4byte	.LFE65-.LFB65
- 1012 0028 00000000 		.4byte	.LFB66
- 1013 002c 1C000000 		.4byte	.LFE66-.LFB66
- 1014 0030 00000000 		.4byte	.LFB67
- 1015 0034 1C000000 		.4byte	.LFE67-.LFB67
- 1016 0038 00000000 		.4byte	.LFB69
- 1017 003c 20000000 		.4byte	.LFE69-.LFB69
- 1018 0040 00000000 		.4byte	.LFB68
- 1019 0044 38000000 		.4byte	.LFE68-.LFB68
- 1020 0048 00000000 		.4byte	.LFB70
- 1021 004c 20000000 		.4byte	.LFE70-.LFB70
- 1022 0050 00000000 		.4byte	0
- 1023 0054 00000000 		.4byte	0
- 1024              		.section	.debug_ranges,"",%progbits
- 1025              	.Ldebug_ranges0:
- 1026 0000 00000000 		.4byte	.LFB63
- 1027 0004 12000000 		.4byte	.LFE63
- 1028 0008 00000000 		.4byte	.LFB64
- 1029 000c 1C000000 		.4byte	.LFE64
- 1030 0010 00000000 		.4byte	.LFB65
- 1031 0014 1C000000 		.4byte	.LFE65
- 1032 0018 00000000 		.4byte	.LFB66
- 1033 001c 1C000000 		.4byte	.LFE66
- 1034 0020 00000000 		.4byte	.LFB67
- 1035 0024 1C000000 		.4byte	.LFE67
- 1036 0028 00000000 		.4byte	.LFB69
- 1037 002c 20000000 		.4byte	.LFE69
- 1038 0030 00000000 		.4byte	.LFB68
- 1039 0034 38000000 		.4byte	.LFE68
- 1040 0038 00000000 		.4byte	.LFB70
- 1041 003c 20000000 		.4byte	.LFE70
- 1042 0040 00000000 		.4byte	0
- 1043 0044 00000000 		.4byte	0
- 1044              		.section	.debug_line,"",%progbits
- 1045              	.Ldebug_line0:
- 1046 0000 41020000 		.section	.debug_str,"MS",%progbits,1
- 1046      02009501 
- 1046      00000201 
- 1046      FB0E0D00 
- 1046      01010101 
- 1047              	.LASF32:
- 1048 0000 4C454431 		.ascii	"LED1_Write\000"
- 1048      5F577269 
- 1048      746500
- 1049              	.LASF4:
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 21
+ 875 026a 08       		.uleb128 0x8
+ 876 026b 0A000000 		.4byte	.LVL19
+ 877 026f D9040000 		.4byte	0x4d9
+ 878 0273 7D020000 		.4byte	0x27d
+ 879 0277 09       		.uleb128 0x9
+ 880 0278 01       		.uleb128 0x1
+ 881 0279 50       		.byte	0x50
+ 882 027a 01       		.uleb128 0x1
+ 883 027b 31       		.byte	0x31
+ 884 027c 00       		.byte	0
+ 885 027d 08       		.uleb128 0x8
+ 886 027e 12000000 		.4byte	.LVL20
+ 887 0282 3C050000 		.4byte	0x53c
+ 888 0286 95020000 		.4byte	0x295
+ 889 028a 09       		.uleb128 0x9
+ 890 028b 01       		.uleb128 0x1
+ 891 028c 50       		.byte	0x50
+ 892 028d 01       		.uleb128 0x1
+ 893 028e 30       		.byte	0x30
+ 894 028f 09       		.uleb128 0x9
+ 895 0290 01       		.uleb128 0x1
+ 896 0291 51       		.byte	0x51
+ 897 0292 01       		.uleb128 0x1
+ 898 0293 30       		.byte	0x30
+ 899 0294 00       		.byte	0
+ 900 0295 0A       		.uleb128 0xa
+ 901 0296 18000000 		.4byte	.LVL21
+ 902 029a 47050000 		.4byte	0x547
+ 903 029e 09       		.uleb128 0x9
+ 904 029f 01       		.uleb128 0x1
+ 905 02a0 50       		.byte	0x50
+ 906 02a1 02       		.uleb128 0x2
+ 907 02a2 74       		.byte	0x74
+ 908 02a3 00       		.sleb128 0
+ 909 02a4 00       		.byte	0
+ 910 02a5 00       		.byte	0
+ 911 02a6 0D       		.uleb128 0xd
+ 912 02a7 04       		.byte	0x4
+ 913 02a8 AC020000 		.4byte	0x2ac
+ 914 02ac 0E       		.uleb128 0xe
+ 915 02ad BB000000 		.4byte	0xbb
+ 916 02b1 06       		.uleb128 0x6
+ 917 02b2 A6010000 		.4byte	.LASF25
+ 918 02b6 01       		.byte	0x1
+ 919 02b7 25       		.byte	0x25
+ 920 02b8 00000000 		.4byte	.LFB66
+ 921 02bc 1C000000 		.4byte	.LFE66-.LFB66
+ 922 02c0 01       		.uleb128 0x1
+ 923 02c1 9C       		.byte	0x9c
+ 924 02c2 F5020000 		.4byte	0x2f5
+ 925 02c6 0F       		.uleb128 0xf
+ 926 02c7 76617200 		.ascii	"var\000"
+ 927 02cb 01       		.byte	0x1
+ 928 02cc 28       		.byte	0x28
+ 929 02cd A6020000 		.4byte	0x2a6
+ 930 02d1 06       		.uleb128 0x6
+ 931 02d2 03       		.byte	0x3
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 20
 
 
- 1050 000b 5F5F7569 		.ascii	"__uint8_t\000"
- 1050      6E74385F 
- 1050      7400
- 1051              	.LASF25:
- 1052 0015 72656163 		.ascii	"react_to_keypad\000"
- 1052      745F746F 
- 1052      5F6B6579 
- 1052      70616400 
- 1053              	.LASF30:
- 1054 0025 4C43445F 		.ascii	"LCD_WriteControl\000"
- 1054      57726974 
- 1054      65436F6E 
- 1054      74726F6C 
- 1054      00
- 1055              	.LASF24:
- 1056 0036 73776974 		.ascii	"switch_mode\000"
- 1056      63685F6D 
- 1056      6F646500 
- 1057              	.LASF46:
- 1058 0042 76616C75 		.ascii	"value\000"
- 1058      6500
- 1059              	.LASF5:
- 1060 0048 5F5F696E 		.ascii	"__int32_t\000"
- 1060      7433325F 
- 1060      7400
- 1061              	.LASF33:
- 1062 0052 4C454432 		.ascii	"LED2_Write\000"
- 1062      5F577269 
- 1062      746500
- 1063              	.LASF18:
- 1064 005d 696E6974 		.ascii	"initialize\000"
- 1064      69616C69 
- 1064      7A6500
- 1065              	.LASF44:
- 1066 0068 66756E63 		.ascii	"functions.c\000"
- 1066      74696F6E 
- 1066      732E6300 
- 1067              	.LASF14:
- 1068 0074 646F7562 		.ascii	"double\000"
- 1068      6C6500
- 1069              	.LASF34:
- 1070 007b 4C454433 		.ascii	"LED3_Write\000"
- 1070      5F577269 
- 1070      746500
- 1071              	.LASF19:
- 1072 0086 6C696768 		.ascii	"light_LEDS\000"
- 1072      745F4C45 
- 1072      445300
- 1073              	.LASF13:
- 1074 0091 666C6F61 		.ascii	"float\000"
- 1074      7400
- 1075              	.LASF29:
- 1076 0097 4C43445F 		.ascii	"LCD_Start\000"
- 1076      53746172 
- 1076      7400
- 1077              	.LASF35:
- 1078 00a1 4C454434 		.ascii	"LED4_Write\000"
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 22
+ 932 02d3 08000000 		.4byte	.LC1
+ 933 02d7 9F       		.byte	0x9f
+ 934 02d8 07       		.uleb128 0x7
+ 935 02d9 0C000000 		.4byte	.LVL22
+ 936 02dd 32010000 		.4byte	0x132
+ 937 02e1 0A       		.uleb128 0xa
+ 938 02e2 12000000 		.4byte	.LVL23
+ 939 02e6 46020000 		.4byte	0x246
+ 940 02ea 09       		.uleb128 0x9
+ 941 02eb 01       		.uleb128 0x1
+ 942 02ec 50       		.byte	0x50
+ 943 02ed 05       		.uleb128 0x5
+ 944 02ee 03       		.byte	0x3
+ 945 02ef 08000000 		.4byte	.LC1
+ 946 02f3 00       		.byte	0
+ 947 02f4 00       		.byte	0
+ 948 02f5 06       		.uleb128 0x6
+ 949 02f6 69000000 		.4byte	.LASF26
+ 950 02fa 01       		.byte	0x1
+ 951 02fb 2C       		.byte	0x2c
+ 952 02fc 00000000 		.4byte	.LFB67
+ 953 0300 1C000000 		.4byte	.LFE67-.LFB67
+ 954 0304 01       		.uleb128 0x1
+ 955 0305 9C       		.byte	0x9c
+ 956 0306 39030000 		.4byte	0x339
+ 957 030a 0F       		.uleb128 0xf
+ 958 030b 76617200 		.ascii	"var\000"
+ 959 030f 01       		.byte	0x1
+ 960 0310 2F       		.byte	0x2f
+ 961 0311 A6020000 		.4byte	0x2a6
+ 962 0315 06       		.uleb128 0x6
+ 963 0316 03       		.byte	0x3
+ 964 0317 10000000 		.4byte	.LC2
+ 965 031b 9F       		.byte	0x9f
+ 966 031c 07       		.uleb128 0x7
+ 967 031d 0C000000 		.4byte	.LVL24
+ 968 0321 90010000 		.4byte	0x190
+ 969 0325 0A       		.uleb128 0xa
+ 970 0326 12000000 		.4byte	.LVL25
+ 971 032a 46020000 		.4byte	0x246
+ 972 032e 09       		.uleb128 0x9
+ 973 032f 01       		.uleb128 0x1
+ 974 0330 50       		.byte	0x50
+ 975 0331 05       		.uleb128 0x5
+ 976 0332 03       		.byte	0x3
+ 977 0333 10000000 		.4byte	.LC2
+ 978 0337 00       		.byte	0
+ 979 0338 00       		.byte	0
+ 980 0339 06       		.uleb128 0x6
+ 981 033a 84000000 		.4byte	.LASF27
+ 982 033e 01       		.byte	0x1
+ 983 033f 3C       		.byte	0x3c
+ 984 0340 00000000 		.4byte	.LFB69
+ 985 0344 20000000 		.4byte	.LFE69-.LFB69
+ 986 0348 01       		.uleb128 0x1
+ 987 0349 9C       		.byte	0x9c
+ 988 034a 6A030000 		.4byte	0x36a
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 21
 
 
- 1078      5F577269 
- 1078      746500
- 1079              	.LASF43:
- 1080 00ac 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1080      43313120 
- 1080      352E342E 
- 1080      31203230 
- 1080      31363036 
- 1081 00df 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1081      20726576 
- 1081      6973696F 
- 1081      6E203233 
- 1081      37373135 
- 1082 0112 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1082      66756E63 
- 1082      74696F6E 
- 1082      2D736563 
- 1082      74696F6E 
- 1083              	.LASF21:
- 1084 013a 73776974 		.ascii	"switch_to_glimball_mode\000"
- 1084      63685F74 
- 1084      6F5F676C 
- 1084      696D6261 
- 1084      6C6C5F6D 
- 1085              	.LASF3:
- 1086 0152 73686F72 		.ascii	"short unsigned int\000"
- 1086      7420756E 
- 1086      7369676E 
- 1086      65642069 
- 1086      6E7400
- 1087              	.LASF26:
- 1088 0165 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1088      52784275 
- 1088      66666572 
- 1088      00
- 1089              	.LASF1:
- 1090 0172 756E7369 		.ascii	"unsigned char\000"
- 1090      676E6564 
- 1090      20636861 
- 1090      7200
- 1091              	.LASF7:
- 1092 0180 6C6F6E67 		.ascii	"long unsigned int\000"
- 1092      20756E73 
- 1092      69676E65 
- 1092      6420696E 
- 1092      7400
- 1093              	.LASF37:
- 1094 0192 4C43445F 		.ascii	"LCD_PrintString\000"
- 1094      5072696E 
- 1094      74537472 
- 1094      696E6700 
- 1095              	.LASF20:
- 1096 01a2 7475726E 		.ascii	"turn_off_LEDS\000"
- 1096      5F6F6666 
- 1096      5F4C4544 
- 1096      5300
- 1097              	.LASF10:
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 23
+ 989 034e 07       		.uleb128 0x7
+ 990 034f 0C000000 		.4byte	.LVL26
+ 991 0353 F5020000 		.4byte	0x2f5
+ 992 0357 07       		.uleb128 0x7
+ 993 0358 14000000 		.4byte	.LVL27
+ 994 035c B1020000 		.4byte	0x2b1
+ 995 0360 07       		.uleb128 0x7
+ 996 0361 1A000000 		.4byte	.LVL28
+ 997 0365 EE010000 		.4byte	0x1ee
+ 998 0369 00       		.byte	0
+ 999 036a 06       		.uleb128 0x6
+ 1000 036b 91030000 		.4byte	.LASF28
+ 1001 036f 01       		.byte	0x1
+ 1002 0370 34       		.byte	0x34
+ 1003 0371 00000000 		.4byte	.LFB68
+ 1004 0375 14000000 		.4byte	.LFE68-.LFB68
+ 1005 0379 01       		.uleb128 0x1
+ 1006 037a 9C       		.byte	0x9c
+ 1007 037b A6030000 		.4byte	0x3a6
+ 1008 037f 07       		.uleb128 0x7
+ 1009 0380 06000000 		.4byte	.LVL29
+ 1010 0384 5D050000 		.4byte	0x55d
+ 1011 0388 08       		.uleb128 0x8
+ 1012 0389 0E000000 		.4byte	.LVL30
+ 1013 038d 52050000 		.4byte	0x552
+ 1014 0391 9C030000 		.4byte	0x39c
+ 1015 0395 09       		.uleb128 0x9
+ 1016 0396 01       		.uleb128 0x1
+ 1017 0397 50       		.byte	0x50
+ 1018 0398 02       		.uleb128 0x2
+ 1019 0399 08       		.byte	0x8
+ 1020 039a C8       		.byte	0xc8
+ 1021 039b 00       		.byte	0
+ 1022 039c 07       		.uleb128 0x7
+ 1023 039d 12000000 		.4byte	.LVL31
+ 1024 03a1 39030000 		.4byte	0x339
+ 1025 03a5 00       		.byte	0
+ 1026 03a6 06       		.uleb128 0x6
+ 1027 03a7 78010000 		.4byte	.LASF29
+ 1028 03ab 01       		.byte	0x1
+ 1029 03ac 53       		.byte	0x53
+ 1030 03ad 00000000 		.4byte	.LFB71
+ 1031 03b1 1C000000 		.4byte	.LFE71-.LFB71
+ 1032 03b5 01       		.uleb128 0x1
+ 1033 03b6 9C       		.byte	0x9c
+ 1034 03b7 F1030000 		.4byte	0x3f1
+ 1035 03bb 10       		.uleb128 0x10
+ 1036 03bc 5B000000 		.4byte	.LASF30
+ 1037 03c0 01       		.byte	0x1
+ 1038 03c1 54       		.byte	0x54
+ 1039 03c2 8C000000 		.4byte	0x8c
+ 1040 03c6 1E000000 		.4byte	.LLST1
+ 1041 03ca 07       		.uleb128 0x7
+ 1042 03cb 06000000 		.4byte	.LVL32
+ 1043 03cf 68050000 		.4byte	0x568
+ 1044 03d3 08       		.uleb128 0x8
+ 1045 03d4 12000000 		.4byte	.LVL34
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 22
 
 
- 1098 01b0 756E7369 		.ascii	"unsigned int\000"
- 1098      676E6564 
- 1098      20696E74 
- 1098      00
- 1099              	.LASF41:
- 1100 01bd 726F7461 		.ascii	"rotate_left\000"
- 1100      74655F6C 
- 1100      65667400 
- 1101              	.LASF9:
- 1102 01c9 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1102      206C6F6E 
- 1102      6720756E 
- 1102      7369676E 
- 1102      65642069 
- 1103              	.LASF11:
- 1104 01e0 75696E74 		.ascii	"uint8_t\000"
- 1104      385F7400 
- 1105              	.LASF36:
- 1106 01e8 4C43445F 		.ascii	"LCD_Position\000"
- 1106      506F7369 
- 1106      74696F6E 
- 1106      00
- 1107              	.LASF31:
- 1108 01f5 6B657970 		.ascii	"keypadInit\000"
- 1108      6164496E 
- 1108      697400
- 1109              	.LASF39:
- 1110 0200 5357315F 		.ascii	"SW1_Read\000"
- 1110      52656164 
- 1110      00
- 1111              	.LASF42:
- 1112 0209 726F7461 		.ascii	"rotate_right\000"
- 1112      74655F72 
- 1112      69676874 
- 1112      00
- 1113              	.LASF12:
- 1114 0216 696E7433 		.ascii	"int32_t\000"
- 1114      325F7400 
- 1115              	.LASF16:
- 1116 021e 73697A65 		.ascii	"sizetype\000"
- 1116      74797065 
- 1116      00
- 1117              	.LASF23:
- 1118 0227 6572726F 		.ascii	"error\000"
- 1118      7200
- 1119              	.LASF8:
- 1120 022d 6C6F6E67 		.ascii	"long long int\000"
- 1120      206C6F6E 
- 1120      6720696E 
- 1120      7400
- 1121              	.LASF27:
- 1122 023b 74657374 		.ascii	"test_mode\000"
- 1122      5F6D6F64 
- 1122      6500
- 1123              	.LASF15:
- 1124 0245 63686172 		.ascii	"char\000"
- 1124      00
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccarNAqD.s 			page 24
+ 1046 03d8 52050000 		.4byte	0x552
+ 1047 03dc E7030000 		.4byte	0x3e7
+ 1048 03e0 09       		.uleb128 0x9
+ 1049 03e1 01       		.uleb128 0x1
+ 1050 03e2 50       		.byte	0x50
+ 1051 03e3 02       		.uleb128 0x2
+ 1052 03e4 08       		.byte	0x8
+ 1053 03e5 C8       		.byte	0xc8
+ 1054 03e6 00       		.byte	0
+ 1055 03e7 07       		.uleb128 0x7
+ 1056 03e8 1A000000 		.4byte	.LVL35
+ 1057 03ec 39030000 		.4byte	0x339
+ 1058 03f0 00       		.byte	0
+ 1059 03f1 11       		.uleb128 0x11
+ 1060 03f2 D4010000 		.4byte	.LASF31
+ 1061 03f6 01       		.byte	0x1
+ 1062 03f7 66       		.byte	0x66
+ 1063 03f8 00000000 		.4byte	.LFB73
+ 1064 03fc 48000000 		.4byte	.LFE73-.LFB73
+ 1065 0400 01       		.uleb128 0x1
+ 1066 0401 9C       		.byte	0x9c
+ 1067 0402 54040000 		.4byte	0x454
+ 1068 0406 10       		.uleb128 0x10
+ 1069 0407 7D000000 		.4byte	.LASF32
+ 1070 040b 01       		.byte	0x1
+ 1071 040c 67       		.byte	0x67
+ 1072 040d A2000000 		.4byte	0xa2
+ 1073 0411 31000000 		.4byte	.LLST2
+ 1074 0415 07       		.uleb128 0x7
+ 1075 0416 06000000 		.4byte	.LVL37
+ 1076 041a 73050000 		.4byte	0x573
+ 1077 041e 08       		.uleb128 0x8
+ 1078 041f 0C000000 		.4byte	.LVL38
+ 1079 0423 7E050000 		.4byte	0x57e
+ 1080 0427 31040000 		.4byte	0x431
+ 1081 042b 09       		.uleb128 0x9
+ 1082 042c 01       		.uleb128 0x1
+ 1083 042d 50       		.byte	0x50
+ 1084 042e 01       		.uleb128 0x1
+ 1085 042f 30       		.byte	0x30
+ 1086 0430 00       		.byte	0
+ 1087 0431 07       		.uleb128 0x7
+ 1088 0432 12000000 		.4byte	.LVL39
+ 1089 0436 89050000 		.4byte	0x589
+ 1090 043a 07       		.uleb128 0x7
+ 1091 043b 38000000 		.4byte	.LVL48
+ 1092 043f 94050000 		.4byte	0x594
+ 1093 0443 0A       		.uleb128 0xa
+ 1094 0444 3E000000 		.4byte	.LVL49
+ 1095 0448 52050000 		.4byte	0x552
+ 1096 044c 09       		.uleb128 0x9
+ 1097 044d 01       		.uleb128 0x1
+ 1098 044e 50       		.byte	0x50
+ 1099 044f 02       		.uleb128 0x2
+ 1100 0450 08       		.byte	0x8
+ 1101 0451 32       		.byte	0x32
+ 1102 0452 00       		.byte	0
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 23
 
 
- 1125              	.LASF28:
- 1126 024a 676C696D 		.ascii	"glimbal_mode\000"
- 1126      62616C5F 
- 1126      6D6F6465 
- 1126      00
- 1127              	.LASF40:
- 1128 0257 6B657970 		.ascii	"keypadScan\000"
- 1128      61645363 
- 1128      616E00
- 1129              	.LASF2:
- 1130 0262 73686F72 		.ascii	"short int\000"
- 1130      7420696E 
- 1130      7400
- 1131              	.LASF45:
- 1132 026c 433A5C44 		.ascii	"C:\\Documents\\ULB\\BA3\\ELEC-H310\\elec-h310-glimb"
- 1132      6F63756D 
- 1132      656E7473 
- 1132      5C554C42 
- 1132      5C424133 
- 1133 029a 616C6C5C 		.ascii	"all\\glimball-workspace\\Glimball.cydsn\000"
- 1133      676C696D 
- 1133      62616C6C 
- 1133      2D776F72 
- 1133      6B737061 
- 1134              	.LASF22:
- 1135 02c0 73776974 		.ascii	"switch_to_test_mode\000"
- 1135      63685F74 
- 1135      6F5F7465 
- 1135      73745F6D 
- 1135      6F646500 
- 1136              	.LASF6:
- 1137 02d4 6C6F6E67 		.ascii	"long int\000"
- 1137      20696E74 
- 1137      00
- 1138              	.LASF17:
- 1139 02dd 6C6F6E67 		.ascii	"long double\000"
- 1139      20646F75 
- 1139      626C6500 
- 1140              	.LASF0:
- 1141 02e9 7369676E 		.ascii	"signed char\000"
- 1141      65642063 
- 1141      68617200 
- 1142              	.LASF38:
- 1143 02f5 43794465 		.ascii	"CyDelay\000"
- 1143      6C617900 
- 1144              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1103 0453 00       		.byte	0
+ 1104 0454 12       		.uleb128 0x12
+ 1105 0455 79030000 		.4byte	.LASF61
+ 1106 0459 01       		.byte	0x1
+ 1107 045a 70       		.byte	0x70
+ 1108 045b 00000000 		.4byte	.LFB74
+ 1109 045f 02000000 		.4byte	.LFE74-.LFB74
+ 1110 0463 01       		.uleb128 0x1
+ 1111 0464 9C       		.byte	0x9c
+ 1112 0465 06       		.uleb128 0x6
+ 1113 0466 FC010000 		.4byte	.LASF33
+ 1114 046a 01       		.byte	0x1
+ 1115 046b 75       		.byte	0x75
+ 1116 046c 00000000 		.4byte	.LFB75
+ 1117 0470 0C000000 		.4byte	.LFE75-.LFB75
+ 1118 0474 01       		.uleb128 0x1
+ 1119 0475 9C       		.byte	0x9c
+ 1120 0476 8D040000 		.4byte	0x48d
+ 1121 047a 07       		.uleb128 0x7
+ 1122 047b 06000000 		.4byte	.LVL50
+ 1123 047f A6030000 		.4byte	0x3a6
+ 1124 0483 07       		.uleb128 0x7
+ 1125 0484 0A000000 		.4byte	.LVL51
+ 1126 0488 6A030000 		.4byte	0x36a
+ 1127 048c 00       		.byte	0
+ 1128 048d 06       		.uleb128 0x6
+ 1129 048e 4C020000 		.4byte	.LASF34
+ 1130 0492 01       		.byte	0x1
+ 1131 0493 7A       		.byte	0x7a
+ 1132 0494 00000000 		.4byte	.LFB76
+ 1133 0498 14000000 		.4byte	.LFE76-.LFB76
+ 1134 049c 01       		.uleb128 0x1
+ 1135 049d 9C       		.byte	0x9c
+ 1136 049e AC040000 		.4byte	0x4ac
+ 1137 04a2 07       		.uleb128 0x7
+ 1138 04a3 0C000000 		.4byte	.LVL52
+ 1139 04a7 F1030000 		.4byte	0x3f1
+ 1140 04ab 00       		.byte	0
+ 1141 04ac 13       		.uleb128 0x13
+ 1142 04ad BD020000 		.4byte	.LASF35
+ 1143 04b1 05       		.byte	0x5
+ 1144 04b2 1207     		.2byte	0x712
+ 1145 04b4 B8040000 		.4byte	0x4b8
+ 1146 04b8 14       		.uleb128 0x14
+ 1147 04b9 97000000 		.4byte	0x97
+ 1148 04bd 15       		.uleb128 0x15
+ 1149 04be 42000000 		.4byte	.LASF36
+ 1150 04c2 01       		.byte	0x1
+ 1151 04c3 0A       		.byte	0xa
+ 1152 04c4 7E000000 		.4byte	0x7e
+ 1153 04c8 05       		.uleb128 0x5
+ 1154 04c9 03       		.byte	0x3
+ 1155 04ca 00000000 		.4byte	mode
+ 1156 04ce 16       		.uleb128 0x16
+ 1157 04cf DF000000 		.4byte	.LASF37
+ 1158 04d3 DF000000 		.4byte	.LASF37
+ 1159 04d7 06       		.byte	0x6
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 24
+
+
+ 1160 04d8 38       		.byte	0x38
+ 1161 04d9 16       		.uleb128 0x16
+ 1162 04da 0D000000 		.4byte	.LASF38
+ 1163 04de 0D000000 		.4byte	.LASF38
+ 1164 04e2 06       		.byte	0x6
+ 1165 04e3 3A       		.byte	0x3a
+ 1166 04e4 16       		.uleb128 0x16
+ 1167 04e5 B9000000 		.4byte	.LASF39
+ 1168 04e9 B9000000 		.4byte	.LASF39
+ 1169 04ed 07       		.byte	0x7
+ 1170 04ee DA       		.byte	0xda
+ 1171 04ef 16       		.uleb128 0x16
+ 1172 04f0 2A020000 		.4byte	.LASF40
+ 1173 04f4 2A020000 		.4byte	.LASF40
+ 1174 04f8 07       		.byte	0x7
+ 1175 04f9 92       		.byte	0x92
+ 1176 04fa 16       		.uleb128 0x16
+ 1177 04fb AF000000 		.4byte	.LASF41
+ 1178 04ff AF000000 		.4byte	.LASF41
+ 1179 0503 08       		.byte	0x8
+ 1180 0504 3A       		.byte	0x3a
+ 1181 0505 16       		.uleb128 0x16
+ 1182 0506 15020000 		.4byte	.LASF42
+ 1183 050a 15020000 		.4byte	.LASF42
+ 1184 050e 09       		.byte	0x9
+ 1185 050f 0E       		.byte	0xe
+ 1186 0510 16       		.uleb128 0x16
+ 1187 0511 96000000 		.4byte	.LASF43
+ 1188 0515 96000000 		.4byte	.LASF43
+ 1189 0519 0A       		.byte	0xa
+ 1190 051a 26       		.byte	0x26
+ 1191 051b 16       		.uleb128 0x16
+ 1192 051c 34020000 		.4byte	.LASF44
+ 1193 0520 34020000 		.4byte	.LASF44
+ 1194 0524 0B       		.byte	0xb
+ 1195 0525 26       		.byte	0x26
+ 1196 0526 16       		.uleb128 0x16
+ 1197 0527 C9000000 		.4byte	.LASF45
+ 1198 052b C9000000 		.4byte	.LASF45
+ 1199 052f 0C       		.byte	0xc
+ 1200 0530 26       		.byte	0x26
+ 1201 0531 16       		.uleb128 0x16
+ 1202 0532 60030000 		.4byte	.LASF46
+ 1203 0536 60030000 		.4byte	.LASF46
+ 1204 053a 0D       		.byte	0xd
+ 1205 053b 26       		.byte	0x26
+ 1206 053c 16       		.uleb128 0x16
+ 1207 053d 3F020000 		.4byte	.LASF47
+ 1208 0541 3F020000 		.4byte	.LASF47
+ 1209 0545 06       		.byte	0x6
+ 1210 0546 3D       		.byte	0x3d
+ 1211 0547 16       		.uleb128 0x16
+ 1212 0548 57010000 		.4byte	.LASF48
+ 1213 054c 57010000 		.4byte	.LASF48
+ 1214 0550 06       		.byte	0x6
+ 1215 0551 3C       		.byte	0x3c
+ 1216 0552 16       		.uleb128 0x16
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 25
+
+
+ 1217 0553 58030000 		.4byte	.LASF49
+ 1218 0557 58030000 		.4byte	.LASF49
+ 1219 055b 0E       		.byte	0xe
+ 1220 055c 76       		.byte	0x76
+ 1221 055d 16       		.uleb128 0x16
+ 1222 055e E1010000 		.4byte	.LASF50
+ 1223 0562 E1010000 		.4byte	.LASF50
+ 1224 0566 0F       		.byte	0xf
+ 1225 0567 29       		.byte	0x29
+ 1226 0568 16       		.uleb128 0x16
+ 1227 0569 9B010000 		.4byte	.LASF51
+ 1228 056d 9B010000 		.4byte	.LASF51
+ 1229 0571 09       		.byte	0x9
+ 1230 0572 0F       		.byte	0xf
+ 1231 0573 16       		.uleb128 0x16
+ 1232 0574 52020000 		.4byte	.LASF52
+ 1233 0578 52020000 		.4byte	.LASF52
+ 1234 057c 08       		.byte	0x8
+ 1235 057d 3D       		.byte	0x3d
+ 1236 057e 16       		.uleb128 0x16
+ 1237 057f 47000000 		.4byte	.LASF53
+ 1238 0583 47000000 		.4byte	.LASF53
+ 1239 0587 08       		.byte	0x8
+ 1240 0588 3F       		.byte	0x3f
+ 1241 0589 16       		.uleb128 0x16
+ 1242 058a 3A010000 		.4byte	.LASF54
+ 1243 058e 3A010000 		.4byte	.LASF54
+ 1244 0592 08       		.byte	0x8
+ 1245 0593 42       		.byte	0x42
+ 1246 0594 16       		.uleb128 0x16
+ 1247 0595 67010000 		.4byte	.LASF55
+ 1248 0599 67010000 		.4byte	.LASF55
+ 1249 059d 07       		.byte	0x7
+ 1250 059e C3       		.byte	0xc3
+ 1251 059f 00       		.byte	0
+ 1252              		.section	.debug_abbrev,"",%progbits
+ 1253              	.Ldebug_abbrev0:
+ 1254 0000 01       		.uleb128 0x1
+ 1255 0001 11       		.uleb128 0x11
+ 1256 0002 01       		.byte	0x1
+ 1257 0003 25       		.uleb128 0x25
+ 1258 0004 0E       		.uleb128 0xe
+ 1259 0005 13       		.uleb128 0x13
+ 1260 0006 0B       		.uleb128 0xb
+ 1261 0007 03       		.uleb128 0x3
+ 1262 0008 0E       		.uleb128 0xe
+ 1263 0009 1B       		.uleb128 0x1b
+ 1264 000a 0E       		.uleb128 0xe
+ 1265 000b 55       		.uleb128 0x55
+ 1266 000c 17       		.uleb128 0x17
+ 1267 000d 11       		.uleb128 0x11
+ 1268 000e 01       		.uleb128 0x1
+ 1269 000f 10       		.uleb128 0x10
+ 1270 0010 17       		.uleb128 0x17
+ 1271 0011 00       		.byte	0
+ 1272 0012 00       		.byte	0
+ 1273 0013 02       		.uleb128 0x2
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 26
+
+
+ 1274 0014 24       		.uleb128 0x24
+ 1275 0015 00       		.byte	0
+ 1276 0016 0B       		.uleb128 0xb
+ 1277 0017 0B       		.uleb128 0xb
+ 1278 0018 3E       		.uleb128 0x3e
+ 1279 0019 0B       		.uleb128 0xb
+ 1280 001a 03       		.uleb128 0x3
+ 1281 001b 0E       		.uleb128 0xe
+ 1282 001c 00       		.byte	0
+ 1283 001d 00       		.byte	0
+ 1284 001e 03       		.uleb128 0x3
+ 1285 001f 16       		.uleb128 0x16
+ 1286 0020 00       		.byte	0
+ 1287 0021 03       		.uleb128 0x3
+ 1288 0022 0E       		.uleb128 0xe
+ 1289 0023 3A       		.uleb128 0x3a
+ 1290 0024 0B       		.uleb128 0xb
+ 1291 0025 3B       		.uleb128 0x3b
+ 1292 0026 0B       		.uleb128 0xb
+ 1293 0027 49       		.uleb128 0x49
+ 1294 0028 13       		.uleb128 0x13
+ 1295 0029 00       		.byte	0
+ 1296 002a 00       		.byte	0
+ 1297 002b 04       		.uleb128 0x4
+ 1298 002c 24       		.uleb128 0x24
+ 1299 002d 00       		.byte	0
+ 1300 002e 0B       		.uleb128 0xb
+ 1301 002f 0B       		.uleb128 0xb
+ 1302 0030 3E       		.uleb128 0x3e
+ 1303 0031 0B       		.uleb128 0xb
+ 1304 0032 03       		.uleb128 0x3
+ 1305 0033 08       		.uleb128 0x8
+ 1306 0034 00       		.byte	0
+ 1307 0035 00       		.byte	0
+ 1308 0036 05       		.uleb128 0x5
+ 1309 0037 16       		.uleb128 0x16
+ 1310 0038 00       		.byte	0
+ 1311 0039 03       		.uleb128 0x3
+ 1312 003a 0E       		.uleb128 0xe
+ 1313 003b 3A       		.uleb128 0x3a
+ 1314 003c 0B       		.uleb128 0xb
+ 1315 003d 3B       		.uleb128 0x3b
+ 1316 003e 05       		.uleb128 0x5
+ 1317 003f 49       		.uleb128 0x49
+ 1318 0040 13       		.uleb128 0x13
+ 1319 0041 00       		.byte	0
+ 1320 0042 00       		.byte	0
+ 1321 0043 06       		.uleb128 0x6
+ 1322 0044 2E       		.uleb128 0x2e
+ 1323 0045 01       		.byte	0x1
+ 1324 0046 3F       		.uleb128 0x3f
+ 1325 0047 19       		.uleb128 0x19
+ 1326 0048 03       		.uleb128 0x3
+ 1327 0049 0E       		.uleb128 0xe
+ 1328 004a 3A       		.uleb128 0x3a
+ 1329 004b 0B       		.uleb128 0xb
+ 1330 004c 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 27
+
+
+ 1331 004d 0B       		.uleb128 0xb
+ 1332 004e 11       		.uleb128 0x11
+ 1333 004f 01       		.uleb128 0x1
+ 1334 0050 12       		.uleb128 0x12
+ 1335 0051 06       		.uleb128 0x6
+ 1336 0052 40       		.uleb128 0x40
+ 1337 0053 18       		.uleb128 0x18
+ 1338 0054 9742     		.uleb128 0x2117
+ 1339 0056 19       		.uleb128 0x19
+ 1340 0057 01       		.uleb128 0x1
+ 1341 0058 13       		.uleb128 0x13
+ 1342 0059 00       		.byte	0
+ 1343 005a 00       		.byte	0
+ 1344 005b 07       		.uleb128 0x7
+ 1345 005c 898201   		.uleb128 0x4109
+ 1346 005f 00       		.byte	0
+ 1347 0060 11       		.uleb128 0x11
+ 1348 0061 01       		.uleb128 0x1
+ 1349 0062 31       		.uleb128 0x31
+ 1350 0063 13       		.uleb128 0x13
+ 1351 0064 00       		.byte	0
+ 1352 0065 00       		.byte	0
+ 1353 0066 08       		.uleb128 0x8
+ 1354 0067 898201   		.uleb128 0x4109
+ 1355 006a 01       		.byte	0x1
+ 1356 006b 11       		.uleb128 0x11
+ 1357 006c 01       		.uleb128 0x1
+ 1358 006d 31       		.uleb128 0x31
+ 1359 006e 13       		.uleb128 0x13
+ 1360 006f 01       		.uleb128 0x1
+ 1361 0070 13       		.uleb128 0x13
+ 1362 0071 00       		.byte	0
+ 1363 0072 00       		.byte	0
+ 1364 0073 09       		.uleb128 0x9
+ 1365 0074 8A8201   		.uleb128 0x410a
+ 1366 0077 00       		.byte	0
+ 1367 0078 02       		.uleb128 0x2
+ 1368 0079 18       		.uleb128 0x18
+ 1369 007a 9142     		.uleb128 0x2111
+ 1370 007c 18       		.uleb128 0x18
+ 1371 007d 00       		.byte	0
+ 1372 007e 00       		.byte	0
+ 1373 007f 0A       		.uleb128 0xa
+ 1374 0080 898201   		.uleb128 0x4109
+ 1375 0083 01       		.byte	0x1
+ 1376 0084 11       		.uleb128 0x11
+ 1377 0085 01       		.uleb128 0x1
+ 1378 0086 31       		.uleb128 0x31
+ 1379 0087 13       		.uleb128 0x13
+ 1380 0088 00       		.byte	0
+ 1381 0089 00       		.byte	0
+ 1382 008a 0B       		.uleb128 0xb
+ 1383 008b 2E       		.uleb128 0x2e
+ 1384 008c 01       		.byte	0x1
+ 1385 008d 3F       		.uleb128 0x3f
+ 1386 008e 19       		.uleb128 0x19
+ 1387 008f 03       		.uleb128 0x3
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 28
+
+
+ 1388 0090 0E       		.uleb128 0xe
+ 1389 0091 3A       		.uleb128 0x3a
+ 1390 0092 0B       		.uleb128 0xb
+ 1391 0093 3B       		.uleb128 0x3b
+ 1392 0094 0B       		.uleb128 0xb
+ 1393 0095 27       		.uleb128 0x27
+ 1394 0096 19       		.uleb128 0x19
+ 1395 0097 11       		.uleb128 0x11
+ 1396 0098 01       		.uleb128 0x1
+ 1397 0099 12       		.uleb128 0x12
+ 1398 009a 06       		.uleb128 0x6
+ 1399 009b 40       		.uleb128 0x40
+ 1400 009c 18       		.uleb128 0x18
+ 1401 009d 9742     		.uleb128 0x2117
+ 1402 009f 19       		.uleb128 0x19
+ 1403 00a0 01       		.uleb128 0x1
+ 1404 00a1 13       		.uleb128 0x13
+ 1405 00a2 00       		.byte	0
+ 1406 00a3 00       		.byte	0
+ 1407 00a4 0C       		.uleb128 0xc
+ 1408 00a5 05       		.uleb128 0x5
+ 1409 00a6 00       		.byte	0
+ 1410 00a7 03       		.uleb128 0x3
+ 1411 00a8 0E       		.uleb128 0xe
+ 1412 00a9 3A       		.uleb128 0x3a
+ 1413 00aa 0B       		.uleb128 0xb
+ 1414 00ab 3B       		.uleb128 0x3b
+ 1415 00ac 0B       		.uleb128 0xb
+ 1416 00ad 49       		.uleb128 0x49
+ 1417 00ae 13       		.uleb128 0x13
+ 1418 00af 02       		.uleb128 0x2
+ 1419 00b0 17       		.uleb128 0x17
+ 1420 00b1 00       		.byte	0
+ 1421 00b2 00       		.byte	0
+ 1422 00b3 0D       		.uleb128 0xd
+ 1423 00b4 0F       		.uleb128 0xf
+ 1424 00b5 00       		.byte	0
+ 1425 00b6 0B       		.uleb128 0xb
+ 1426 00b7 0B       		.uleb128 0xb
+ 1427 00b8 49       		.uleb128 0x49
+ 1428 00b9 13       		.uleb128 0x13
+ 1429 00ba 00       		.byte	0
+ 1430 00bb 00       		.byte	0
+ 1431 00bc 0E       		.uleb128 0xe
+ 1432 00bd 26       		.uleb128 0x26
+ 1433 00be 00       		.byte	0
+ 1434 00bf 49       		.uleb128 0x49
+ 1435 00c0 13       		.uleb128 0x13
+ 1436 00c1 00       		.byte	0
+ 1437 00c2 00       		.byte	0
+ 1438 00c3 0F       		.uleb128 0xf
+ 1439 00c4 34       		.uleb128 0x34
+ 1440 00c5 00       		.byte	0
+ 1441 00c6 03       		.uleb128 0x3
+ 1442 00c7 08       		.uleb128 0x8
+ 1443 00c8 3A       		.uleb128 0x3a
+ 1444 00c9 0B       		.uleb128 0xb
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 29
+
+
+ 1445 00ca 3B       		.uleb128 0x3b
+ 1446 00cb 0B       		.uleb128 0xb
+ 1447 00cc 49       		.uleb128 0x49
+ 1448 00cd 13       		.uleb128 0x13
+ 1449 00ce 02       		.uleb128 0x2
+ 1450 00cf 18       		.uleb128 0x18
+ 1451 00d0 00       		.byte	0
+ 1452 00d1 00       		.byte	0
+ 1453 00d2 10       		.uleb128 0x10
+ 1454 00d3 34       		.uleb128 0x34
+ 1455 00d4 00       		.byte	0
+ 1456 00d5 03       		.uleb128 0x3
+ 1457 00d6 0E       		.uleb128 0xe
+ 1458 00d7 3A       		.uleb128 0x3a
+ 1459 00d8 0B       		.uleb128 0xb
+ 1460 00d9 3B       		.uleb128 0x3b
+ 1461 00da 0B       		.uleb128 0xb
+ 1462 00db 49       		.uleb128 0x49
+ 1463 00dc 13       		.uleb128 0x13
+ 1464 00dd 02       		.uleb128 0x2
+ 1465 00de 17       		.uleb128 0x17
+ 1466 00df 00       		.byte	0
+ 1467 00e0 00       		.byte	0
+ 1468 00e1 11       		.uleb128 0x11
+ 1469 00e2 2E       		.uleb128 0x2e
+ 1470 00e3 01       		.byte	0x1
+ 1471 00e4 3F       		.uleb128 0x3f
+ 1472 00e5 19       		.uleb128 0x19
+ 1473 00e6 03       		.uleb128 0x3
+ 1474 00e7 0E       		.uleb128 0xe
+ 1475 00e8 3A       		.uleb128 0x3a
+ 1476 00e9 0B       		.uleb128 0xb
+ 1477 00ea 3B       		.uleb128 0x3b
+ 1478 00eb 0B       		.uleb128 0xb
+ 1479 00ec 11       		.uleb128 0x11
+ 1480 00ed 01       		.uleb128 0x1
+ 1481 00ee 12       		.uleb128 0x12
+ 1482 00ef 06       		.uleb128 0x6
+ 1483 00f0 40       		.uleb128 0x40
+ 1484 00f1 18       		.uleb128 0x18
+ 1485 00f2 9642     		.uleb128 0x2116
+ 1486 00f4 19       		.uleb128 0x19
+ 1487 00f5 01       		.uleb128 0x1
+ 1488 00f6 13       		.uleb128 0x13
+ 1489 00f7 00       		.byte	0
+ 1490 00f8 00       		.byte	0
+ 1491 00f9 12       		.uleb128 0x12
+ 1492 00fa 2E       		.uleb128 0x2e
+ 1493 00fb 00       		.byte	0
+ 1494 00fc 3F       		.uleb128 0x3f
+ 1495 00fd 19       		.uleb128 0x19
+ 1496 00fe 03       		.uleb128 0x3
+ 1497 00ff 0E       		.uleb128 0xe
+ 1498 0100 3A       		.uleb128 0x3a
+ 1499 0101 0B       		.uleb128 0xb
+ 1500 0102 3B       		.uleb128 0x3b
+ 1501 0103 0B       		.uleb128 0xb
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 30
+
+
+ 1502 0104 11       		.uleb128 0x11
+ 1503 0105 01       		.uleb128 0x1
+ 1504 0106 12       		.uleb128 0x12
+ 1505 0107 06       		.uleb128 0x6
+ 1506 0108 40       		.uleb128 0x40
+ 1507 0109 18       		.uleb128 0x18
+ 1508 010a 9742     		.uleb128 0x2117
+ 1509 010c 19       		.uleb128 0x19
+ 1510 010d 00       		.byte	0
+ 1511 010e 00       		.byte	0
+ 1512 010f 13       		.uleb128 0x13
+ 1513 0110 34       		.uleb128 0x34
+ 1514 0111 00       		.byte	0
+ 1515 0112 03       		.uleb128 0x3
+ 1516 0113 0E       		.uleb128 0xe
+ 1517 0114 3A       		.uleb128 0x3a
+ 1518 0115 0B       		.uleb128 0xb
+ 1519 0116 3B       		.uleb128 0x3b
+ 1520 0117 05       		.uleb128 0x5
+ 1521 0118 49       		.uleb128 0x49
+ 1522 0119 13       		.uleb128 0x13
+ 1523 011a 3F       		.uleb128 0x3f
+ 1524 011b 19       		.uleb128 0x19
+ 1525 011c 3C       		.uleb128 0x3c
+ 1526 011d 19       		.uleb128 0x19
+ 1527 011e 00       		.byte	0
+ 1528 011f 00       		.byte	0
+ 1529 0120 14       		.uleb128 0x14
+ 1530 0121 35       		.uleb128 0x35
+ 1531 0122 00       		.byte	0
+ 1532 0123 49       		.uleb128 0x49
+ 1533 0124 13       		.uleb128 0x13
+ 1534 0125 00       		.byte	0
+ 1535 0126 00       		.byte	0
+ 1536 0127 15       		.uleb128 0x15
+ 1537 0128 34       		.uleb128 0x34
+ 1538 0129 00       		.byte	0
+ 1539 012a 03       		.uleb128 0x3
+ 1540 012b 0E       		.uleb128 0xe
+ 1541 012c 3A       		.uleb128 0x3a
+ 1542 012d 0B       		.uleb128 0xb
+ 1543 012e 3B       		.uleb128 0x3b
+ 1544 012f 0B       		.uleb128 0xb
+ 1545 0130 49       		.uleb128 0x49
+ 1546 0131 13       		.uleb128 0x13
+ 1547 0132 3F       		.uleb128 0x3f
+ 1548 0133 19       		.uleb128 0x19
+ 1549 0134 02       		.uleb128 0x2
+ 1550 0135 18       		.uleb128 0x18
+ 1551 0136 00       		.byte	0
+ 1552 0137 00       		.byte	0
+ 1553 0138 16       		.uleb128 0x16
+ 1554 0139 2E       		.uleb128 0x2e
+ 1555 013a 00       		.byte	0
+ 1556 013b 3F       		.uleb128 0x3f
+ 1557 013c 19       		.uleb128 0x19
+ 1558 013d 3C       		.uleb128 0x3c
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 31
+
+
+ 1559 013e 19       		.uleb128 0x19
+ 1560 013f 6E       		.uleb128 0x6e
+ 1561 0140 0E       		.uleb128 0xe
+ 1562 0141 03       		.uleb128 0x3
+ 1563 0142 0E       		.uleb128 0xe
+ 1564 0143 3A       		.uleb128 0x3a
+ 1565 0144 0B       		.uleb128 0xb
+ 1566 0145 3B       		.uleb128 0x3b
+ 1567 0146 0B       		.uleb128 0xb
+ 1568 0147 00       		.byte	0
+ 1569 0148 00       		.byte	0
+ 1570 0149 00       		.byte	0
+ 1571              		.section	.debug_loc,"",%progbits
+ 1572              	.Ldebug_loc0:
+ 1573              	.LLST0:
+ 1574 0000 00000000 		.4byte	.LVL17
+ 1575 0004 06000000 		.4byte	.LVL18
+ 1576 0008 0100     		.2byte	0x1
+ 1577 000a 50       		.byte	0x50
+ 1578 000b 06000000 		.4byte	.LVL18
+ 1579 000f 1A000000 		.4byte	.LFE72
+ 1580 0013 0100     		.2byte	0x1
+ 1581 0015 54       		.byte	0x54
+ 1582 0016 00000000 		.4byte	0
+ 1583 001a 00000000 		.4byte	0
+ 1584              	.LLST1:
+ 1585 001e 06000000 		.4byte	.LVL32
+ 1586 0022 0E000000 		.4byte	.LVL33
+ 1587 0026 0100     		.2byte	0x1
+ 1588 0028 50       		.byte	0x50
+ 1589 0029 00000000 		.4byte	0
+ 1590 002d 00000000 		.4byte	0
+ 1591              	.LLST2:
+ 1592 0031 02000000 		.4byte	.LVL36
+ 1593 0035 12000000 		.4byte	.LVL39
+ 1594 0039 0200     		.2byte	0x2
+ 1595 003b 30       		.byte	0x30
+ 1596 003c 9F       		.byte	0x9f
+ 1597 003d 12000000 		.4byte	.LVL39
+ 1598 0041 14000000 		.4byte	.LVL40
+ 1599 0045 0100     		.2byte	0x1
+ 1600 0047 50       		.byte	0x50
+ 1601 0048 14000000 		.4byte	.LVL40
+ 1602 004c 16000000 		.4byte	.LVL41
+ 1603 0050 0200     		.2byte	0x2
+ 1604 0052 30       		.byte	0x30
+ 1605 0053 9F       		.byte	0x9f
+ 1606 0054 16000000 		.4byte	.LVL41
+ 1607 0058 1E000000 		.4byte	.LVL42
+ 1608 005c 0100     		.2byte	0x1
+ 1609 005e 50       		.byte	0x50
+ 1610 005f 32000000 		.4byte	.LVL46
+ 1611 0063 34000000 		.4byte	.LVL47
+ 1612 0067 0100     		.2byte	0x1
+ 1613 0069 50       		.byte	0x50
+ 1614 006a 00000000 		.4byte	0
+ 1615 006e 00000000 		.4byte	0
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 32
+
+
+ 1616              		.section	.debug_aranges,"",%progbits
+ 1617 0000 84000000 		.4byte	0x84
+ 1618 0004 0200     		.2byte	0x2
+ 1619 0006 00000000 		.4byte	.Ldebug_info0
+ 1620 000a 04       		.byte	0x4
+ 1621 000b 00       		.byte	0
+ 1622 000c 0000     		.2byte	0
+ 1623 000e 0000     		.2byte	0
+ 1624 0010 00000000 		.4byte	.LFB63
+ 1625 0014 1E000000 		.4byte	.LFE63-.LFB63
+ 1626 0018 00000000 		.4byte	.LFB64
+ 1627 001c 1C000000 		.4byte	.LFE64-.LFB64
+ 1628 0020 00000000 		.4byte	.LFB65
+ 1629 0024 1C000000 		.4byte	.LFE65-.LFB65
+ 1630 0028 00000000 		.4byte	.LFB70
+ 1631 002c 20000000 		.4byte	.LFE70-.LFB70
+ 1632 0030 00000000 		.4byte	.LFB72
+ 1633 0034 1A000000 		.4byte	.LFE72-.LFB72
+ 1634 0038 00000000 		.4byte	.LFB66
+ 1635 003c 1C000000 		.4byte	.LFE66-.LFB66
+ 1636 0040 00000000 		.4byte	.LFB67
+ 1637 0044 1C000000 		.4byte	.LFE67-.LFB67
+ 1638 0048 00000000 		.4byte	.LFB69
+ 1639 004c 20000000 		.4byte	.LFE69-.LFB69
+ 1640 0050 00000000 		.4byte	.LFB68
+ 1641 0054 14000000 		.4byte	.LFE68-.LFB68
+ 1642 0058 00000000 		.4byte	.LFB71
+ 1643 005c 1C000000 		.4byte	.LFE71-.LFB71
+ 1644 0060 00000000 		.4byte	.LFB73
+ 1645 0064 48000000 		.4byte	.LFE73-.LFB73
+ 1646 0068 00000000 		.4byte	.LFB74
+ 1647 006c 02000000 		.4byte	.LFE74-.LFB74
+ 1648 0070 00000000 		.4byte	.LFB75
+ 1649 0074 0C000000 		.4byte	.LFE75-.LFB75
+ 1650 0078 00000000 		.4byte	.LFB76
+ 1651 007c 14000000 		.4byte	.LFE76-.LFB76
+ 1652 0080 00000000 		.4byte	0
+ 1653 0084 00000000 		.4byte	0
+ 1654              		.section	.debug_ranges,"",%progbits
+ 1655              	.Ldebug_ranges0:
+ 1656 0000 00000000 		.4byte	.LFB63
+ 1657 0004 1E000000 		.4byte	.LFE63
+ 1658 0008 00000000 		.4byte	.LFB64
+ 1659 000c 1C000000 		.4byte	.LFE64
+ 1660 0010 00000000 		.4byte	.LFB65
+ 1661 0014 1C000000 		.4byte	.LFE65
+ 1662 0018 00000000 		.4byte	.LFB70
+ 1663 001c 20000000 		.4byte	.LFE70
+ 1664 0020 00000000 		.4byte	.LFB72
+ 1665 0024 1A000000 		.4byte	.LFE72
+ 1666 0028 00000000 		.4byte	.LFB66
+ 1667 002c 1C000000 		.4byte	.LFE66
+ 1668 0030 00000000 		.4byte	.LFB67
+ 1669 0034 1C000000 		.4byte	.LFE67
+ 1670 0038 00000000 		.4byte	.LFB69
+ 1671 003c 20000000 		.4byte	.LFE69
+ 1672 0040 00000000 		.4byte	.LFB68
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 33
+
+
+ 1673 0044 14000000 		.4byte	.LFE68
+ 1674 0048 00000000 		.4byte	.LFB71
+ 1675 004c 1C000000 		.4byte	.LFE71
+ 1676 0050 00000000 		.4byte	.LFB73
+ 1677 0054 48000000 		.4byte	.LFE73
+ 1678 0058 00000000 		.4byte	.LFB74
+ 1679 005c 02000000 		.4byte	.LFE74
+ 1680 0060 00000000 		.4byte	.LFB75
+ 1681 0064 0C000000 		.4byte	.LFE75
+ 1682 0068 00000000 		.4byte	.LFB76
+ 1683 006c 14000000 		.4byte	.LFE76
+ 1684 0070 00000000 		.4byte	0
+ 1685 0074 00000000 		.4byte	0
+ 1686              		.section	.debug_line,"",%progbits
+ 1687              	.Ldebug_line0:
+ 1688 0000 CC020000 		.section	.debug_str,"MS",%progbits,1
+ 1688      0200B401 
+ 1688      00000201 
+ 1688      FB0E0D00 
+ 1688      01010101 
+ 1689              	.LASF59:
+ 1690 0000 7072696E 		.ascii	"print_screen\000"
+ 1690      745F7363 
+ 1690      7265656E 
+ 1690      00
+ 1691              	.LASF38:
+ 1692 000d 4C43445F 		.ascii	"LCD_WriteControl\000"
+ 1692      57726974 
+ 1692      65436F6E 
+ 1692      74726F6C 
+ 1692      00
+ 1693              	.LASF2:
+ 1694 001e 73686F72 		.ascii	"short int\000"
+ 1694      7420696E 
+ 1694      7400
+ 1695              	.LASF20:
+ 1696 0028 73697A65 		.ascii	"sizetype\000"
+ 1696      74797065 
+ 1696      00
+ 1697              	.LASF17:
+ 1698 0031 63686172 		.ascii	"char8\000"
+ 1698      3800
+ 1699              	.LASF7:
+ 1700 0037 5F5F7569 		.ascii	"__uint32_t\000"
+ 1700      6E743332 
+ 1700      5F7400
+ 1701              	.LASF36:
+ 1702 0042 6D6F6465 		.ascii	"mode\000"
+ 1702      00
+ 1703              	.LASF53:
+ 1704 0047 4144435F 		.ascii	"ADC_IsEndConversion\000"
+ 1704      4973456E 
+ 1704      64436F6E 
+ 1704      76657273 
+ 1704      696F6E00 
+ 1705              	.LASF30:
+ 1706 005b 76616C75 		.ascii	"value\000"
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 34
+
+
+ 1706      6500
+ 1707              	.LASF12:
+ 1708 0061 75696E74 		.ascii	"uint8_t\000"
+ 1708      385F7400 
+ 1709              	.LASF26:
+ 1710 0069 73776974 		.ascii	"switch_to_test_mode\000"
+ 1710      63685F74 
+ 1710      6F5F7465 
+ 1710      73745F6D 
+ 1710      6F646500 
+ 1711              	.LASF32:
+ 1712 007d 706F7476 		.ascii	"potval\000"
+ 1712      616C00
+ 1713              	.LASF27:
+ 1714 0084 73776974 		.ascii	"switch_mode\000"
+ 1714      63685F6D 
+ 1714      6F646500 
+ 1715              	.LASF15:
+ 1716 0090 666C6F61 		.ascii	"float\000"
+ 1716      7400
+ 1717              	.LASF43:
+ 1718 0096 4C454431 		.ascii	"LED1_Write\000"
+ 1718      5F577269 
+ 1718      746500
+ 1719              	.LASF9:
+ 1720 00a1 6C6F6E67 		.ascii	"long long int\000"
+ 1720      206C6F6E 
+ 1720      6720696E 
+ 1720      7400
+ 1721              	.LASF41:
+ 1722 00af 4144435F 		.ascii	"ADC_Start\000"
+ 1722      53746172 
+ 1722      7400
+ 1723              	.LASF39:
+ 1724 00b9 50574D5F 		.ascii	"PWM_Init\000"
+ 1724      496E6974 
+ 1724      00
+ 1725              	.LASF60:
+ 1726 00c2 73747269 		.ascii	"string\000"
+ 1726      6E6700
+ 1727              	.LASF45:
+ 1728 00c9 4C454433 		.ascii	"LED3_Write\000"
+ 1728      5F577269 
+ 1728      746500
+ 1729              	.LASF22:
+ 1730 00d4 6C696768 		.ascii	"light_LEDS\000"
+ 1730      745F4C45 
+ 1730      445300
+ 1731              	.LASF37:
+ 1732 00df 4C43445F 		.ascii	"LCD_Start\000"
+ 1732      53746172 
+ 1732      7400
+ 1733              	.LASF19:
+ 1734 00e9 6C6F6E67 		.ascii	"long double\000"
+ 1734      20646F75 
+ 1734      626C6500 
+ 1735              	.LASF21:
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 35
+
+
+ 1736 00f5 696E6974 		.ascii	"initialize\000"
+ 1736      69616C69 
+ 1736      7A6500
+ 1737              	.LASF1:
+ 1738 0100 756E7369 		.ascii	"unsigned char\000"
+ 1738      676E6564 
+ 1738      20636861 
+ 1738      7200
+ 1739              	.LASF0:
+ 1740 010e 7369676E 		.ascii	"signed char\000"
+ 1740      65642063 
+ 1740      68617200 
+ 1741              	.LASF10:
+ 1742 011a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1742      206C6F6E 
+ 1742      6720756E 
+ 1742      7369676E 
+ 1742      65642069 
+ 1743              	.LASF14:
+ 1744 0131 75696E74 		.ascii	"uint32_t\000"
+ 1744      33325F74 
+ 1744      00
+ 1745              	.LASF54:
+ 1746 013a 4144435F 		.ascii	"ADC_GetResult32\000"
+ 1746      47657452 
+ 1746      6573756C 
+ 1746      74333200 
+ 1747              	.LASF11:
+ 1748 014a 756E7369 		.ascii	"unsigned int\000"
+ 1748      676E6564 
+ 1748      20696E74 
+ 1748      00
+ 1749              	.LASF48:
+ 1750 0157 4C43445F 		.ascii	"LCD_PrintString\000"
+ 1750      5072696E 
+ 1750      74537472 
+ 1750      696E6700 
+ 1751              	.LASF55:
+ 1752 0167 50574D5F 		.ascii	"PWM_WriteCompare\000"
+ 1752      57726974 
+ 1752      65436F6D 
+ 1752      70617265 
+ 1752      00
+ 1753              	.LASF29:
+ 1754 0178 72656163 		.ascii	"react_to_keypad\000"
+ 1754      745F746F 
+ 1754      5F6B6579 
+ 1754      70616400 
+ 1755              	.LASF3:
+ 1756 0188 73686F72 		.ascii	"short unsigned int\000"
+ 1756      7420756E 
+ 1756      7369676E 
+ 1756      65642069 
+ 1756      6E7400
+ 1757              	.LASF51:
+ 1758 019b 6B657970 		.ascii	"keypadScan\000"
+ 1758      61645363 
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 36
+
+
+ 1758      616E00
+ 1759              	.LASF25:
+ 1760 01a6 73776974 		.ascii	"switch_to_glimball_mode\000"
+ 1760      63685F74 
+ 1760      6F5F676C 
+ 1760      696D6261 
+ 1760      6C6C5F6D 
+ 1761              	.LASF18:
+ 1762 01be 63686172 		.ascii	"char\000"
+ 1762      00
+ 1763              	.LASF6:
+ 1764 01c3 6C6F6E67 		.ascii	"long int\000"
+ 1764      20696E74 
+ 1764      00
+ 1765              	.LASF13:
+ 1766 01cc 696E7433 		.ascii	"int32_t\000"
+ 1766      325F7400 
+ 1767              	.LASF31:
+ 1768 01d4 74657374 		.ascii	"testing_mode\000"
+ 1768      696E675F 
+ 1768      6D6F6465 
+ 1768      00
+ 1769              	.LASF50:
+ 1770 01e1 5357315F 		.ascii	"SW1_Read\000"
+ 1770      52656164 
+ 1770      00
+ 1771              	.LASF8:
+ 1772 01ea 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1772      20756E73 
+ 1772      69676E65 
+ 1772      6420696E 
+ 1772      7400
+ 1773              	.LASF33:
+ 1774 01fc 72656163 		.ascii	"react\000"
+ 1774      7400
+ 1775              	.LASF16:
+ 1776 0202 646F7562 		.ascii	"double\000"
+ 1776      6C6500
+ 1777              	.LASF57:
+ 1778 0209 66756E63 		.ascii	"functions.c\000"
+ 1778      74696F6E 
+ 1778      732E6300 
+ 1779              	.LASF42:
+ 1780 0215 6B657970 		.ascii	"keypadInit\000"
+ 1780      6164496E 
+ 1780      697400
+ 1781              	.LASF5:
+ 1782 0220 5F5F696E 		.ascii	"__int32_t\000"
+ 1782      7433325F 
+ 1782      7400
+ 1783              	.LASF40:
+ 1784 022a 50574D5F 		.ascii	"PWM_Start\000"
+ 1784      53746172 
+ 1784      7400
+ 1785              	.LASF44:
+ 1786 0234 4C454432 		.ascii	"LED2_Write\000"
+ 1786      5F577269 
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 37
+
+
+ 1786      746500
+ 1787              	.LASF47:
+ 1788 023f 4C43445F 		.ascii	"LCD_Position\000"
+ 1788      506F7369 
+ 1788      74696F6E 
+ 1788      00
+ 1789              	.LASF34:
+ 1790 024c 6D6F6465 		.ascii	"modes\000"
+ 1790      7300
+ 1791              	.LASF52:
+ 1792 0252 4144435F 		.ascii	"ADC_StartConvert\000"
+ 1792      53746172 
+ 1792      74436F6E 
+ 1792      76657274 
+ 1792      00
+ 1793              	.LASF24:
+ 1794 0263 6572726F 		.ascii	"error\000"
+ 1794      7200
+ 1795              	.LASF58:
+ 1796 0269 433A5C44 		.ascii	"C:\\Documents\\ULB\\BA3\\ELEC-H310\\elec-h310-glimb"
+ 1796      6F63756D 
+ 1796      656E7473 
+ 1796      5C554C42 
+ 1796      5C424133 
+ 1797 0297 616C6C5C 		.ascii	"all\\glimball-workspace\\Glimball.cydsn\000"
+ 1797      676C696D 
+ 1797      62616C6C 
+ 1797      2D776F72 
+ 1797      6B737061 
+ 1798              	.LASF35:
+ 1799 02bd 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1799      52784275 
+ 1799      66666572 
+ 1799      00
+ 1800              	.LASF56:
+ 1801 02ca 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1801      43313120 
+ 1801      352E342E 
+ 1801      31203230 
+ 1801      31363036 
+ 1802 02fd 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1802      20726576 
+ 1802      6973696F 
+ 1802      6E203233 
+ 1802      37373135 
+ 1803 0330 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1803      66756E63 
+ 1803      74696F6E 
+ 1803      2D736563 
+ 1803      74696F6E 
+ 1804              	.LASF49:
+ 1805 0358 43794465 		.ascii	"CyDelay\000"
+ 1805      6C617900 
+ 1806              	.LASF46:
+ 1807 0360 4C454434 		.ascii	"LED4_Write\000"
+ 1807      5F577269 
+ 1807      746500
+ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccw5ZgW9.s 			page 38
+
+
+ 1808              	.LASF23:
+ 1809 036b 7475726E 		.ascii	"turn_off_LEDS\000"
+ 1809      5F6F6666 
+ 1809      5F4C4544 
+ 1809      5300
+ 1810              	.LASF61:
+ 1811 0379 676C696D 		.ascii	"glimball_mode\000"
+ 1811      62616C6C 
+ 1811      5F6D6F64 
+ 1811      6500
+ 1812              	.LASF4:
+ 1813 0387 5F5F7569 		.ascii	"__uint8_t\000"
+ 1813      6E74385F 
+ 1813      7400
+ 1814              	.LASF28:
+ 1815 0391 72656164 		.ascii	"read_SW1\000"
+ 1815      5F535731 
+ 1815      00
+ 1816              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

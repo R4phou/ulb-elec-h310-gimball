@@ -20,9 +20,9 @@ int main(void)
     CyGlobalIntEnable; /* Enable global interrupts. */
     initialize();
     for(;;)
-    {
-        switch_mode();
-        CyDelay(100);
+    {   
+        react();
+        modes();
     }
 }
 

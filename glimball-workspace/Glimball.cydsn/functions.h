@@ -36,6 +36,11 @@ void switch_to_test_mode();
 /**
  * function that changes the mode when a button is pressed
 */
+void read_SW1();
+
+/**
+ * Switch the mode
+*/
 void switch_mode();
 
 
@@ -61,6 +66,34 @@ void rotate_right();
  * Function that rotates the servo to the left
 */
 void rotate_left();
+
+/**
+ * Test the reaction on the buttons and keyboard
+*/
+void react();
+
+/**
+ * What is done in the testing mode
+*/
+void testing_mode();
+
+
+/**
+ * What is done in the glimball mode
+*/
+void glimball_mode();
+
+
+/**
+ * Execute the different modes depending on the mode
+*/
+void modes();
+
+
+/**
+ * Print the string on the LCD
+*/
+void print_screen(const char8 * string);
 
 /*
     Initialisation de tous les composants de bases
