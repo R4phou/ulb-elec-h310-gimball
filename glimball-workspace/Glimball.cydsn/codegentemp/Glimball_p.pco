@@ -38,6 +38,9 @@ set_io "COL1(0)" iocell 3 1
 set_io "COL2(0)" iocell 3 3
 set_io "COL3(0)" iocell 3 4
 set_io "PIN_ADC(0)" iocell 0 7
+set_io "Z_ADC(0)" iocell 1 5
+set_io "Y_ADC(0)" iocell 1 4
+set_io "X_ADC(0)" iocell 1 2
 # Note: port 15 is the logical name for port 8
 set_io "ROW3(0)" iocell 15 0
 set_location "\ADC:DEC\" decimatorcell -1 -1 0

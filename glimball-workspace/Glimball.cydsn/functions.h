@@ -38,6 +38,14 @@ void switch_to_test_mode();
 */
 void read_SW1();
 
+
+
+/**
+ * Function that reads the button 2 and change the testing mode 
+*/
+void read_SW2();
+    
+    
 /**
  * Switch the mode
 */

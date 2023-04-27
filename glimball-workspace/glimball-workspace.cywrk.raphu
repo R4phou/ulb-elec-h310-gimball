@@ -94,6 +94,7 @@
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\LED3.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\LED4.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\Mux.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\PIN_ADC.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_PM.lst</v>
@@ -106,6 +107,9 @@
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW2.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW3.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW4.lst</v>
+<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\X_ADC.lst</v>
+<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\Y_ADC.lst</v>
+<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\Z_ADC.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Glimball.elf</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Glimball.hex</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Glimball.map</v>
@@ -132,6 +136,7 @@
 <v>glimball-workspace\Glimball\System Reference Guides</v>
 <v>glimball-workspace\Glimball\System Reference Guides\cy_boot_v6_0</v>
 <v>glimball-workspace\Glimball\ADC_DelSig_v3_30.pdf</v>
+<v>glimball-workspace\Glimball\AMux_v1_80.pdf</v>
 <v>glimball-workspace\Glimball\CharLCD_v2_20.pdf</v>
 <v>glimball-workspace\Glimball\cy_clock_v2_20.pdf</v>
 <v>glimball-workspace\Glimball\cy_pins_v2_20</v>
@@ -146,6 +151,7 @@
 <v>glimball-workspace\Glimball\System Reference Guides</v>
 <v>glimball-workspace\Glimball\System Reference Guides\cy_boot_v6_0</v>
 <v>glimball-workspace\Glimball\ADC_DelSig_v3_30.pdf</v>
+<v>glimball-workspace\Glimball\AMux_v1_80.pdf</v>
 <v>glimball-workspace\Glimball\CharLCD_v2_20.pdf</v>
 <v>glimball-workspace\Glimball\cy_clock_v2_20.pdf</v>
 <v>glimball-workspace\Glimball\cy_pins_v2_20</v>

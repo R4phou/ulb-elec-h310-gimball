@@ -4,17 +4,19 @@
 */
 #include "functions.h"
 #define MIN_SERVO 500
-#define MAX_SERVO 2500
+#define MAX_SERVO 2508
+#define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/180
 
 
 int mode = 0;  // 1 = glimball | 0 = test
-
+int test_mode = 0; // potentiomètre = 1 | keypad = 0
 
 void initialize(){
     LCD_Start();
     LCD_ClearDisplay();
     PWM_Init();
     PWM_Start();
+    Mux_Start();
     ADC_Start();
     keypadInit();
 }
@@ -56,6 +58,21 @@ void read_SW1(){
     }
 }
 
+void read_SW2(){
+    if (!mode && SW2_Read()){
+        CyDelay(200);
+        if (test_mode) {
+            test_mode = 0;
+            const char8* var = "keypad";
+            print_screen(var);
+        }
+        else if (!test_mode){
+            test_mode = 1;
+            const char8* var = "pot";
+            print_screen(var);
+        } 
+    }
+}
 
 void switch_mode(){
     if (mode){
@@ -75,21 +92,48 @@ void error(){
     CyDelay(100000);
 }
 
-void rotate_left();
+void rotate_left(){
+    uint16 pos = PWM_ReadCompare();
+    LCD_ClearDisplay();
+    LCD_PrintDecUint16(pos);
+    pos -= 10*SERVO_ANGLE;
+    if (pos < MIN_SERVO) pos = MIN_SERVO;
+    PWM_WriteCompare(pos);
+    CyDelay(50);
+}
 
-void rotate_right();
+
+void rotate_right(){
+    uint16 pos = 0;
+    pos = PWM_ReadCompare();
+    LCD_ClearDisplay();
+    LCD_PrintDecUint16(pos);
+    pos += 10*SERVO_ANGLE;
+    if (pos > MAX_SERVO) pos = MAX_SERVO;
+    PWM_WriteCompare(pos);
+    CyDelay(50);
+    
+}
 
 
 void react_to_keypad(){
     uint8_t value = keypadScan();
     if (value != 'z'){
-        CyDelay(200);
-        switch (value){
-            case '1': switch_mode();
-            //case '2': rotate_left();
-            //case '3': rotate_right();
+        if ( value == '1'){
+            CyDelay(200);
+            switch_mode();
+        } 
+        else if (!mode && !test_mode){
+            if (value == '2'){
+                CyDelay(100);
+                rotate_left();
+            }
+            else if(value == '3'){
+                CyDelay(100);
+                rotate_right();
+            }
         }
-    }   
+    }
 }
 
 void print_screen(const char8 * string){
@@ -99,8 +143,11 @@ void print_screen(const char8 * string){
 }
 
 
-void testing_mode(){ 
+void testing_mode(){
+    if (!test_mode) return;
     uint32_t potval = 0;
+    Mux_Select(0);
+    CyDelay(10);
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
     potval = MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF); // transférer le max du potentiomètre en min et max du CMP du servo
@@ -110,13 +157,45 @@ void testing_mode(){
 
 
 void glimball_mode(){
-    // TO DO
+    uint32_t x,y,z = 0;
+    
+    Mux_Select(1); //Selection du premier channel
+    CyDelay(10);
+    ADC_StartConvert();
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  x = ADC_GetResult32();
+    Mux_Select(2); ///Selection du 2eme channel
+    CyDelay(10);
+    ADC_StartConvert();
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  y = ADC_GetResult32();
+    Mux_Select(3); //Selection du 3eme channel
+    CyDelay(10);
+    ADC_StartConvert();
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  z = ADC_GetResult32();
+    
+    LCD_ClearDisplay();
+    LCD_Position(0,0);
+    //Conversion des resultats
+    x = (x*3000/(0xFFFF)); //Donner la valeur entre 0 et 3000 mV
+    y = (y*3000/(0xFFFF));
+    z = (z*3000/(0xFFFF));
+    //Arrondi des valeures
+    float x_print = x / 1000.0;
+    float y_print = y / 1000.0;
+    float z_print = z / 1000.0;
+    
+    LCD_PrintNumber(x);
+    LCD_PrintString(" mV");
+    //LCD_PrintNumber(y);
+    //LCD_PrintString(" ");
+    //LCD_PrintNumber(z);
+   
 }
 
 
 void react(){
     react_to_keypad();
     read_SW1();
+    if (!mode) read_SW2();
 }
 
 void modes(){   
