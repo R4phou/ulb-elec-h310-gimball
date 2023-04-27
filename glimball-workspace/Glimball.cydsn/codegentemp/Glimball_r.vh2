@@ -1,5 +1,5 @@
 -- Project:   Glimball
--- Generated: 04/27/2023 11:20:00
+-- Generated: 04/27/2023 15:35:33
 -- PSoC Creator  4.4
 
 ENTITY Glimball IS
@@ -64,7 +64,9 @@ ARCHITECTURE __DEFAULT__ OF Glimball IS
     SIGNAL Net_30_local : bit;
     SIGNAL Net_37 : bit;
     ATTRIBUTE placement_force OF Net_37 : SIGNAL IS "U(3,0,A)2";
+    SIGNAL Net_65 : bit;
     SIGNAL PIN_ADC(0)__PA : bit;
+    SIGNAL PIN_DAC(0)__PA : bit;
     SIGNAL ROW0(0)__PA : bit;
     SIGNAL ROW1(0)__PA : bit;
     SIGNAL ROW2(0)__PA : bit;
@@ -125,6 +127,8 @@ ARCHITECTURE __DEFAULT__ OF Glimball IS
     ATTRIBUTE placement_force OF \PWM:PWMUDB:status_2\ : SIGNAL IS "U(3,0,A)1";
     SIGNAL \PWM:PWMUDB:status_3\ : bit;
     SIGNAL \PWM:PWMUDB:tc_i\ : bit;
+    SIGNAL \Timer:Net_261\ : bit;
+    SIGNAL \Timer:Net_51\ : bit;
     SIGNAL __ONE__ : bit;
     ATTRIBUTE placement_force OF __ONE__ : SIGNAL IS "U(3,2,A)0";
     ATTRIBUTE POWER OF __ONE__ : SIGNAL IS true;
@@ -134,6 +138,7 @@ ARCHITECTURE __DEFAULT__ OF Glimball IS
     ATTRIBUTE POWER OF tmpOE__LED1_net_0 : SIGNAL IS true;
     SIGNAL zero : bit;
     ATTRIBUTE GROUND OF zero : SIGNAL IS true;
+    SIGNAL \ClockBlock.clk_bus_glb_ff__sig\ : bit;
     SIGNAL \ClockBlock.aclk_glb_ff_0__sig\ : bit;
     SIGNAL \PWM:PWMUDB:sP16:pwmdp:u0.ce0__sig\ : bit;
     SIGNAL \PWM:PWMUDB:sP16:pwmdp:u0.cl0__sig\ : bit;
@@ -203,6 +208,8 @@ ARCHITECTURE __DEFAULT__ OF Glimball IS
     ATTRIBUTE Location OF Y_ADC(0) : LABEL IS "P1[4]";
     ATTRIBUTE lib_model OF X_ADC(0) : LABEL IS "iocell27";
     ATTRIBUTE Location OF X_ADC(0) : LABEL IS "P1[2]";
+    ATTRIBUTE lib_model OF PIN_DAC(0) : LABEL IS "iocell28";
+    ATTRIBUTE Location OF PIN_DAC(0) : LABEL IS "P15[5]";
     ATTRIBUTE lib_model OF \PWM:PWMUDB:status_2\ : LABEL IS "macrocell1";
     ATTRIBUTE Location OF \PWM:PWMUDB:status_2\ : LABEL IS "U(3,0)";
     ATTRIBUTE Location OF \ADC:DSM\ : LABEL IS "F(DSM,0)";
@@ -218,6 +225,9 @@ ARCHITECTURE __DEFAULT__ OF Glimball IS
     ATTRIBUTE Location OF \PWM:PWMUDB:sP16:pwmdp:u0\ : LABEL IS "U(2,0)";
     ATTRIBUTE lib_model OF \PWM:PWMUDB:sP16:pwmdp:u1\ : LABEL IS "datapathcell2";
     ATTRIBUTE Location OF \PWM:PWMUDB:sP16:pwmdp:u1\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \Timer:TimerHW\ : LABEL IS "F(Timer,0)";
+    ATTRIBUTE Location OF ISR_SOUND : LABEL IS "[IntrContainer=(0)][IntrId=(17)]";
+    ATTRIBUTE Location OF \VDAC:viDAC8\ : LABEL IS "F(VIDAC,0)";
     ATTRIBUTE lib_model OF \PWM:PWMUDB:runmode_enable\ : LABEL IS "macrocell3";
     ATTRIBUTE Location OF \PWM:PWMUDB:runmode_enable\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \PWM:PWMUDB:prevCompare1\ : LABEL IS "macrocell4";
@@ -542,6 +552,33 @@ ARCHITECTURE __DEFAULT__ OF Glimball IS
             interrupt : OUT std_ulogic;
             clk_en : IN std_ulogic);
     END COMPONENT;
+    COMPONENT timercell
+        PORT (
+            clock : IN std_ulogic;
+            kill : IN std_ulogic;
+            enable : IN std_ulogic;
+            capture : IN std_ulogic;
+            timer_reset : IN std_ulogic;
+            tc : OUT std_ulogic;
+            cmp : OUT std_ulogic;
+            irq : OUT std_ulogic);
+    END COMPONENT;
+    COMPONENT vidaccell
+        PORT (
+            data_0 : IN std_ulogic;
+            data_1 : IN std_ulogic;
+            data_2 : IN std_ulogic;
+            data_3 : IN std_ulogic;
+            data_4 : IN std_ulogic;
+            data_5 : IN std_ulogic;
+            data_6 : IN std_ulogic;
+            data_7 : IN std_ulogic;
+            strobe : IN std_ulogic;
+            strobe_udb : IN std_ulogic;
+            reset : IN std_ulogic;
+            idir : IN std_ulogic;
+            ioff : IN std_ulogic);
+    END COMPONENT;
 BEGIN
 
     ClockBlock:clockblockcell
@@ -567,6 +604,7 @@ BEGIN
             aclk_0 => \ADC:Net_488_local\,
             clk_a_dig_glb_0 => \ADC:Net_488_adig\,
             clk_a_dig_0 => \ADC:Net_488_adig_local\,
+            clk_bus_glb_ff => \ClockBlock.clk_bus_glb_ff__sig\,
             aclk_glb_ff_0 => \ClockBlock.aclk_glb_ff_0__sig\);
 
     LED1:logicalport
@@ -2571,6 +2609,95 @@ BEGIN
             out_clock_en => '1',
             out_reset => '0');
 
+    PIN_DAC:logicalport
+        GENERIC MAP(
+            drive_mode => "000",
+            ibuf_enabled => "0",
+            id => "012a8844-9252-4189-830e-7fead1a75bf7",
+            init_dr_st => "0",
+            input_buffer_sel => "00",
+            input_clk_en => 0,
+            input_sync => "1",
+            input_sync_mode => "0",
+            intr_mode => "00",
+            invert_in_clock => 0,
+            invert_in_clock_en => 0,
+            invert_in_reset => 0,
+            invert_out_clock => 0,
+            invert_out_clock_en => 0,
+            invert_out_reset => 0,
+            io_voltage => "",
+            layout_mode => "CONTIGUOUS",
+            oe_conn => "0",
+            oe_reset => 0,
+            oe_sync => "0",
+            output_clk_en => 0,
+            output_clock_mode => "0",
+            output_conn => "0",
+            output_mode => "0",
+            output_reset => 0,
+            output_sync => "0",
+            ovt_hyst_trim => "0",
+            ovt_needed => "0",
+            ovt_slew_control => "00",
+            pa_in_clock => -1,
+            pa_in_clock_en => -1,
+            pa_in_reset => -1,
+            pa_out_clock => -1,
+            pa_out_clock_en => -1,
+            pa_out_reset => -1,
+            pin_aliases => "",
+            pin_mode => "A",
+            por_state => 4,
+            port_alias_group => "",
+            port_alias_required => 0,
+            sio_group_cnt => 0,
+            sio_hifreq => "00000000",
+            sio_hyst => "1",
+            sio_ibuf => "00000000",
+            sio_info => "00",
+            sio_obuf => "00000000",
+            sio_refsel => "00000000",
+            sio_vohsel => "00000000",
+            sio_vtrip => "00000000",
+            slew_rate => "0",
+            spanning => 0,
+            sw_only => 0,
+            use_annotation => "0",
+            vtrip => "10",
+            width => 1,
+            in_clk_inv => 0,
+            in_clken_inv => 0,
+            in_clken_mode => 1,
+            in_rst_inv => 0,
+            out_clk_inv => 0,
+            out_clken_inv => 0,
+            out_clken_mode => 1,
+            out_rst_inv => 0)
+        PORT MAP(
+            in_clock_en => open,
+            in_reset => open,
+            out_clock_en => open,
+            out_reset => open);
+
+    PIN_DAC(0):iocell
+        GENERIC MAP(
+            in_sync_mode => 0,
+            out_sync_mode => 0,
+            oe_sync_mode => 0,
+            logicalport => "PIN_DAC",
+            logicalport_pin_id => 0,
+            io_capabilities => "0000000000000000000000000000000000000000000000000000000000000010")
+        PORT MAP(
+            pa_out => PIN_DAC(0)__PA,
+            oe => open,
+            in_clock => open,
+            in_clock_en => '1',
+            in_reset => '0',
+            out_clock => open,
+            out_clock_en => '1',
+            out_reset => '0');
+
     \PWM:PWMUDB:status_2\:macrocell
         GENERIC MAP(
             eqn_main => "(main_0 * main_1)",
@@ -2766,6 +2893,37 @@ BEGIN
             cfbi => \PWM:PWMUDB:sP16:pwmdp:u0.cfbo__sig\,
             sor => \PWM:PWMUDB:sP16:pwmdp:u1.sor__sig\,
             cmsbo => \PWM:PWMUDB:sP16:pwmdp:u1.cmsbo__sig\);
+
+    \Timer:TimerHW\:timercell
+        GENERIC MAP(
+            cy_registers => "")
+        PORT MAP(
+            clock => \ClockBlock.clk_bus_glb_ff__sig\,
+            kill => open,
+            enable => __ONE__,
+            capture => open,
+            timer_reset => open,
+            tc => \Timer:Net_51\,
+            cmp => \Timer:Net_261\,
+            irq => Net_65);
+
+    ISR_SOUND:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_65,
+            clock => ClockBlock_BUS_CLK);
+
+    \VDAC:viDAC8\:vidaccell
+        GENERIC MAP(
+            cy_registers => "",
+            is_all_if_any => 0,
+            reg_data => 0)
+        PORT MAP(
+            reset => open,
+            idir => open,
+            ioff => open);
 
     \PWM:PWMUDB:runmode_enable\:macrocell
         GENERIC MAP(

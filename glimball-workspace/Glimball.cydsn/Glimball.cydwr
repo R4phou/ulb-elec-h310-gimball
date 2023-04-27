@@ -253,6 +253,7 @@
     <Group key="Pin">
       <Data key="01a604b3-8155-4fc0-a738-c87cd17cf9a4" value="SW2" />
       <Data key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba" value="ROW0" />
+      <Data key="012a8844-9252-4189-830e-7fead1a75bf7" value="PIN_DAC" />
       <Data key="20d855cb-ed0d-4f87-aacc-776e19fb3a61" value="X_ADC" />
       <Data key="38c9a588-0362-4673-881f-2820097302e9" value="LED3" />
       <Data key="173f4ff0-3dff-4afc-80f2-7b949aa1459a" value="ROW3" />
@@ -3369,6 +3370,11 @@
     <Group key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba">
       <Group key="0">
         <Data key="Port Format" value="3,5" />
+      </Group>
+    </Group>
+    <Group key="012a8844-9252-4189-830e-7fead1a75bf7">
+      <Group key="0">
+        <Data key="Port Format" value="15,5" />
       </Group>
     </Group>
     <Group key="20d855cb-ed0d-4f87-aacc-776e19fb3a61">

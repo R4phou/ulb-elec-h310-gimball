@@ -6,10 +6,24 @@
 #define MIN_SERVO 500
 #define MAX_SERVO 2508
 #define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/180
+#define pi 3.1415
 
 
 int mode = 0;  // 1 = glimball | 0 = test
 int test_mode = 0; // potentiomètre = 1 | keypad = 0
+
+
+int iterator = 0;
+float sin_value;
+float sin_wave[100];
+
+CY_ISR(ISR_adress){
+    iterator++;
+    VDAC_SetValue((uint8)(sin_wave[iterator]));
+    if (iterator>=100)iterator=0;
+    Timer_ReadStatusRegister();
+}
+
 
 void initialize(){
     LCD_Start();
@@ -19,8 +33,16 @@ void initialize(){
     Mux_Start();
     ADC_Start();
     keypadInit();
+    Timer_Start();
+    VDAC_Start();
+    fill_sine(100);
 }
 
+void fill_sine(int len){
+    for (int i =0; i < len; i++){
+        sin_wave[i] = sin(i*2*pi/len)*128 + 128;
+    }
+}
 
 void light_LEDS(){
     LED1_Write(1);
@@ -92,6 +114,10 @@ void error(){
     CyDelay(100000);
 }
 
+void activate_sound(){
+    ISR_SOUND_StartEx(ISR_adress);
+}
+
 void rotate_left(){
     uint16 pos = PWM_ReadCompare();
     LCD_ClearDisplay();
@@ -101,7 +127,6 @@ void rotate_left(){
     PWM_WriteCompare(pos);
     CyDelay(50);
 }
-
 
 void rotate_right(){
     uint16 pos = 0;
@@ -114,7 +139,6 @@ void rotate_right(){
     CyDelay(50);
     
 }
-
 
 void react_to_keypad(){
     uint8_t value = keypadScan();
@@ -142,7 +166,6 @@ void print_screen(const char8 * string){
     LCD_PrintString(string);
 }
 
-
 void testing_mode(){
     if (!test_mode) return;
     uint32_t potval = 0;
@@ -155,9 +178,8 @@ void testing_mode(){
     CyDelay(50);
 }
 
-
 void glimball_mode(){
-    uint32_t x,y,z = 0;
+    uint32_t x=0;//y,z = 0;
     
     Mux_Select(1); //Selection du premier channel
     CyDelay(10);
@@ -166,22 +188,22 @@ void glimball_mode(){
     Mux_Select(2); ///Selection du 2eme channel
     CyDelay(10);
     ADC_StartConvert();
-    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  y = ADC_GetResult32();
+    //if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  y = ADC_GetResult32();
     Mux_Select(3); //Selection du 3eme channel
     CyDelay(10);
     ADC_StartConvert();
-    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  z = ADC_GetResult32();
+    //if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  z = ADC_GetResult32();
     
     LCD_ClearDisplay();
     LCD_Position(0,0);
     //Conversion des resultats
     x = (x*3000/(0xFFFF)); //Donner la valeur entre 0 et 3000 mV
-    y = (y*3000/(0xFFFF));
-    z = (z*3000/(0xFFFF));
+    //y = (y*3000/(0xFFFF));
+    //z = (z*3000/(0xFFFF));
     //Arrondi des valeures
-    float x_print = x / 1000.0;
-    float y_print = y / 1000.0;
-    float z_print = z / 1000.0;
+    //float x_print = x / 1000.0;
+    //float y_print = y / 1000.0;
+    //float z_print = z / 1000.0;
     
     LCD_PrintNumber(x);
     LCD_PrintString(" mV");
@@ -190,7 +212,6 @@ void glimball_mode(){
     //LCD_PrintNumber(z);
    
 }
-
 
 void react(){
     react_to_keypad();

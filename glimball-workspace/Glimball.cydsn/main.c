@@ -19,6 +19,7 @@ int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
     initialize();
+    activate_sound();
     for(;;)
     {   
         react();

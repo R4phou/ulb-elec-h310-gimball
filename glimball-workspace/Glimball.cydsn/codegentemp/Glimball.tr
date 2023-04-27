@@ -18,13 +18,14 @@
 ##################################################################### 
                     1::Clock Frequency Summary
 ===================================================================== 
-Number of clocks: 11
+Number of clocks: 12
 Clock: ADC_Ext_CP_Clk               | N/A                   | Target: 24.00 MHz   | 
 Clock: ADC_Ext_CP_Clk(routed)       | N/A                   | Target: 24.00 MHz   | 
 Clock: ADC_theACLK                  | N/A                   | Target: 0.63 MHz    | 
 Clock: ADC_theACLK(fixed-function)  | N/A                   | Target: 0.63 MHz    | 
 Clock: CLK                          | Frequency: 63.75 MHz  | Target: 1.00 MHz    | 
 Clock: CyBUS_CLK                    | N/A                   | Target: 24.00 MHz   | 
+Clock: CyBUS_CLK(fixed-function)    | N/A                   | Target: 24.00 MHz   | 
 Clock: CyILO                        | N/A                   | Target: 0.00 MHz    | 
 Clock: CyIMO                        | N/A                   | Target: 3.00 MHz    | 
 Clock: CyMASTER_CLK                 | N/A                   | Target: 24.00 MHz   | 
@@ -67,7 +68,7 @@ Port Name  Setup to Clk  Clock Name:Phase
 
 Port Name     Clock to Out  Clock Name:Phase  
 ------------  ------------  ----------------  
-SERVO(0)_PAD  26414         CLK:R             
+SERVO(0)_PAD  26466         CLK:R             
 
 
                          3.3::Pad to Pad

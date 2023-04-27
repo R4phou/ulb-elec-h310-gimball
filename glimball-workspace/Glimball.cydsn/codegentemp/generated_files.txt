@@ -92,6 +92,17 @@
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\X_ADC_aliases.h" value="HEADER;;;;;X_ADC" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\X_ADC.c" value="SOURCE_C;CortexM3;;;;X_ADC" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\X_ADC.h" value="HEADER;;;;;X_ADC" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\Timer.c" value="SOURCE_C;CortexM3;;;;Timer" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\Timer.h" value="HEADER;;;;;Timer" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\Timer_PM.c" value="SOURCE_C;CortexM3;;;;Timer" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\ISR_SOUND.c" value="SOURCE_C;CortexM3;;;;ISR_SOUND" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\ISR_SOUND.h" value="HEADER;;;;;ISR_SOUND" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\VDAC.c" value="SOURCE_C;CortexM3;;;;VDAC" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\VDAC.h" value="HEADER;;;;;VDAC" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\VDAC_PM.c" value="SOURCE_C;CortexM3;;;;VDAC" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\PIN_DAC_aliases.h" value="HEADER;;;;;PIN_DAC" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\PIN_DAC.c" value="SOURCE_C;CortexM3;;;;PIN_DAC" />
+  <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\PIN_DAC.h" value="HEADER;;;;;PIN_DAC" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD_LCDPort_aliases.h" value="HEADER;;;;;LCD_LCDPort" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD_LCDPort.c" value="SOURCE_C;CortexM3;;;;LCD_LCDPort" />
   <file name="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\codegentemp\LCD_LCDPort.h" value="HEADER;;;;;LCD_LCDPort" />

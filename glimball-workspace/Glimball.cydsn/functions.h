@@ -3,6 +3,7 @@
 */
 #include "project.h"
 #include "keypad.h"
+#include "math.h"
 
 
 /**
@@ -17,6 +18,16 @@ void light_LEDS();
 */
 void turn_off_LEDS();
 
+/**
+ * Function that fills the vector of the sine (len = lenght of the vector)
+*/
+void fill_sine(int len);
+
+
+/**
+ * Function that activates the interruption
+*/
+void activate_sound();
 
 
 /**
