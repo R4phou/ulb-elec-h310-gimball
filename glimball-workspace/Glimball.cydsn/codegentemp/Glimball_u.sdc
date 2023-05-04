@@ -1,3 +1,3 @@
-# Component constraints for C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Projet - Gimbal\glimball-workspace\Glimball.cydsn\TopDesign\TopDesign.cysch
-# Project: C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Projet - Gimbal\glimball-workspace\Glimball.cydsn\Glimball.cyprj
-# Date: Sat, 29 Apr 2023 08:40:45 GMT
+# Component constraints for C:\Users\alexa\Downloads\Glimball\elec-h310-glimball\glimball-workspace\Glimball.cydsn\TopDesign\TopDesign.cysch
+# Project: C:\Users\alexa\Downloads\Glimball\elec-h310-glimball\glimball-workspace\Glimball.cydsn\Glimball.cyprj
+# Date: Thu, 04 May 2023 07:08:06 GMT

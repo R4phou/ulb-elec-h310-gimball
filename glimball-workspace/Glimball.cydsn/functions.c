@@ -4,9 +4,11 @@
 */
 #include "functions.h"
 #define MIN_SERVO 500
-#define MAX_SERVO 2508
+#define MAX_SERVO 2500
 #define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/180
 #define pi 3.1415
+#define MIN_ACC 19000
+#define MAX_ACC 27000
 
 
 int mode = 0;  // 1 = glimball | 0 = test
@@ -180,6 +182,7 @@ void testing_mode(){
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
     
     servo = MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF); // transférer le max du potentiomètre en min et max du CMP du servo
+    
     PWM_WriteCompare(servo);
     CyDelay(50);
 }
@@ -192,39 +195,20 @@ void glimball_mode(){
     CyDelay(10);
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  x = ADC_GetResult32();
-    Mux_Select(2); ///Selection du 2eme channel
-    CyDelay(10);
-    ADC_StartConvert();
-    //if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  y = ADC_GetResult32();
-    Mux_Select(3); //Selection du 3eme channel
-    CyDelay(10);
-    ADC_StartConvert();
-    //if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  z = ADC_GetResult32();
     
     LCD_ClearDisplay();
     LCD_Position(0,0);
     //Conversion des resultats
-    x = (x*5000)/(0xFFFF); //Donner la valeur entre 0 et 5000 mV
-    x = (x-1300)*(5000/(float)(2300-1300));
-    servoX = MIN_SERVO + (x*(MAX_SERVO-MIN_SERVO))/5000; // transférer le max du potentiomètre en min et max du CMP du servo
+    
+    servoX = MIN_SERVO + (x-MIN_ACC)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ACC-MIN_ACC); // transférer le max du potentiomètre en min et max du CMP du servo
     PWM_WriteCompare(servoX);
     CyDelay(40);
     
-    //y = (y*3000/(0xFFFF));
-    //z = (z*3000/(0xFFFF));
-    //Arrondi des valeures
-    //float x_print = x / 1000.0;
-    //float y_print = y / 1000.0;
-    //float z_print = z / 1000.0;
-    
     LCD_PrintNumber(x);
     LCD_PrintString(" mV");
-    //LCD_PrintNumber(y);
-    //LCD_PrintString(" ");
-    //LCD_PrintNumber(z);
     
     char x_char[12];
-    sprintf(x_char, "x : %.3u \n", x);
+    sprintf(x_char, "pot : %.3u \n", x);
     UART_PutString(x_char);
 }
 
