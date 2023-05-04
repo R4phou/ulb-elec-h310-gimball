@@ -27,6 +27,11 @@ void fill_sine(int len);
 
 
 /**
+ * Function that reads the input of the computer and turn the servo
+*/
+void read_computer(uint8* rxData);
+
+/**
  * Function that activates the interruption
 */
 void activate_sound();

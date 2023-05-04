@@ -2,7 +2,7 @@
 --	Conversion of Glimball.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Thu May 04 09:08:10 2023
+--	Thu May 04 12:01:39 2023
 --
 
 USE cypress.cypress.all;
@@ -3364,7 +3364,7 @@ PIN_DAC:cy_psoc3_pins_v1_10
 		clock=>\UART:BUART:clock_op\,
 		status=>(zero, \UART:BUART:rx_status_5\, \UART:BUART:rx_status_4\, \UART:BUART:rx_status_3\,
 			\UART:BUART:rx_status_2\, zero, zero),
-		interrupt=>\UART:BUART:rx_interrupt_out\);
+		interrupt=>Net_99);
 Rx:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"1425177d-0d0e-4468-8bcc-e638e5509a9b",
 		drive_mode=>"001",
@@ -3505,6 +3505,10 @@ Tx:cy_psoc3_pins_v1_10
 		out_clock_en=>tmpOE__LED1_net_0,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__Tx_net_0);
+isr_uart:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_99);
 \PWM:PWMUDB:min_kill_reg\:cy_dsrff
 	PORT MAP(d=>tmpOE__LED1_net_0,
 		s=>zero,

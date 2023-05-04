@@ -200,6 +200,8 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\UART_BOOT.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\UART_IntClock.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\UART_IntClock.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_uart.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_uart.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\alexa\Downloads\Glimball\elec-h310-glimball\glimball-workspace\Glimball.cydsn\Export\ARM_GCC_Generic">

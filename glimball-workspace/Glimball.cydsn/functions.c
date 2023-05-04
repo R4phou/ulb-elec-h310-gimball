@@ -19,11 +19,47 @@ int iterator = 0;
 float sin_value;
 float sin_wave[100];
 
-CY_ISR(ISR_adress){
+
+
+CY_ISR(isr_sound_handler){
     iterator++;
     VDAC_SetValue((uint8)(sin_wave[iterator]));
     if (iterator>=100)iterator=0;
     Timer_ReadStatusRegister();
+}
+
+CY_ISR(isr_uart_handler){ // Receive instructions from Computer
+    uint8 rxData; // Value readed from computer
+    uint8_t status = 0;
+    do {
+    status = UART_ReadRxStatus();
+    if ((status & UART_RX_STS_PAR_ERROR ) |
+        ( status & UART_RX_STS_STOP_ERROR ) |
+        ( status & UART_RX_STS_BREAK ) |
+        ( status & UART_RX_STS_OVERRUN ) ) {
+    // Parity , framing , break or overrun error
+        LCD_Position(1 ,0) ;
+        LCD_PrintString(" UART err ") ;
+    }
+    if ((status & UART_RX_STS_FIFO_NOTEMPTY)!=0){
+        rxData = UART_GetChar();
+        UART_PutChar(rxData);
+        read_computer(&rxData);
+        
+        //ICI appeller fonction qui fait tourner du rxData
+    }
+    }while ((status & UART_RX_STS_FIFO_NOTEMPTY) != 0);
+}
+
+void read_computer(uint8* data){
+    if (!test_mode && !mode){
+        if (strcmp((const char *) data, "l") == 0) {
+            rotate_left();
+        }
+        else if(strcmp((const char *) data, "r") == 0){
+           rotate_right();
+        }
+    }
 }
 
 
@@ -38,13 +74,14 @@ void initialize(){
     Timer_Start();
     VDAC_Start();
     UART_Start();
+    isr_uart_StartEx(isr_uart_handler);
     
     fill_sine(100);
 }
 
 void fill_sine(int len){
     for (int i =0; i < len; i++){
-        sin_wave[i] = sin(i*2*pi/len)*128 + 128;
+        sin_wave[i] = sin(i*2*pi/len)*8 + 8;
     }
 }
 
@@ -119,7 +156,7 @@ void error(){
 }
 
 void activate_sound(){
-    ISR_SOUND_StartEx(ISR_adress);
+    ISR_SOUND_StartEx(isr_sound_handler);
 }
 
 void rotate_left(){
@@ -208,7 +245,7 @@ void glimball_mode(){
     LCD_PrintString(" mV");
     
     char x_char[12];
-    sprintf(x_char, "pot : %.3u \n", x);
+    sprintf(x_char, "pot : %.3u \n",(unsigned int) x);
     UART_PutString(x_char);
 }
 

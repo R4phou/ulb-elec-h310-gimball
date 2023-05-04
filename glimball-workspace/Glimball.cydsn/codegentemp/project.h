@@ -70,6 +70,7 @@
 #include "PIN_DAC_aliases.h"
 #include "PIN_DAC.h"
 #include "UART.h"
+#include "isr_uart.h"
 #include "LCD_LCDPort_aliases.h"
 #include "LCD_LCDPort.h"
 #include "ADC_AMux.h"

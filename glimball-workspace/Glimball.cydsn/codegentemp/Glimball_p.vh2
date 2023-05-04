@@ -1,5 +1,5 @@
 -- Project:   Glimball
--- Generated: 05/04/2023 09:08:13
+-- Generated: 05/04/2023 12:01:41
 -- PSoC Creator  4.4
 
 ENTITY Glimball IS
@@ -68,6 +68,7 @@ ARCHITECTURE __DEFAULT__ OF Glimball IS
     SIGNAL Net_37 : bit;
     SIGNAL Net_65 : bit;
     SIGNAL Net_96 : bit;
+    SIGNAL Net_99 : bit;
     SIGNAL PIN_ADC(0)__PA : bit;
     SIGNAL PIN_DAC(0)__PA : bit;
     SIGNAL ROW0(0)__PA : bit;
@@ -3453,7 +3454,16 @@ BEGIN
             status_3 => \UART:BUART:rx_status_3\,
             status_2 => open,
             status_1 => open,
-            status_0 => open);
+            status_0 => open,
+            interrupt => Net_99);
+
+    isr_uart:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_99,
+            clock => ClockBlock_BUS_CLK);
 
     \PWM:PWMUDB:runmode_enable\:macrocell
         GENERIC MAP(
