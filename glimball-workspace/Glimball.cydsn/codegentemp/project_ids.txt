@@ -1,0 +1,6 @@
+C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Projet - Gimbal\glimball-workspace\Glimball.cydsn\Glimball.cyprj|6e428b5c-71f4-44bf-80df-44f8deeeef03
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|fe293377-6fbc-4ccf-8500-a528c1ea094c
+C:\Users\dimit\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|24d182af-02fa-4cb4-9e56-379f7d6f653a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|d7701647-5e6d-464c-b597-229507e09a83
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|76df6802-57b6-47aa-abe8-c503f816dd90
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|08e68520-3bd5-46dc-a003-11976d24b12c

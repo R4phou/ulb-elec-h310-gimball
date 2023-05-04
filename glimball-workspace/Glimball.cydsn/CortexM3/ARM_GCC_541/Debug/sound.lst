@@ -1,0 +1,64 @@
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccGCDuEd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"sound.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              	.Letext0:
+  20              		.section	.debug_line,"",%progbits
+  21              	.Ldebug_line0:
+  22              		.section	.debug_str,"MS",%progbits,1
+  23              	.LASF0:
+  24 0000 736F756E 		.ascii	"sound.c\000"
+  24      642E6300 
+  25              	.LASF1:
+  26 0008 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+  26      43313120 
+  26      352E342E 
+  26      31203230 
+  26      31363036 
+  27 003b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+  27      20726576 
+  27      6973696F 
+  27      6E203233 
+  27      37373135 
+  28 006e 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+  28      66756E63 
+  28      74696F6E 
+  28      2D736563 
+  28      74696F6E 
+  29              	.LASF2:
+  30 0096 433A5C55 		.ascii	"C:\\Users\\dimit\\Desktop\\Polytech\\BA3\\ELEC-H310"
+  30      73657273 
+  30      5C64696D 
+  30      69745C44 
+  30      65736B74 
+  31 00c3 202D2044 		.ascii	" - Digital electronics\\Projet - Gimbal\\glimball-w"
+  31      69676974 
+  31      616C2065 
+  31      6C656374 
+  31      726F6E69 
+  32 00f4 6F726B73 		.ascii	"orkspace\\Glimball.cydsn\000"
+  32      70616365 
+  32      5C476C69 
+  32      6D62616C 
+  32      6C2E6379 
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccGCDuEd.s 			page 2
+
+
+  33              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
