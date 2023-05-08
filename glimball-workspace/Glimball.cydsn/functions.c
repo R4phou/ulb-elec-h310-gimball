@@ -7,8 +7,11 @@
 #define MAX_SERVO 2500
 #define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/180
 #define pi 3.1415
-#define MIN_ACC 19000
-#define MAX_ACC 27000
+#define MIN_ACC 18800
+#define MAX_ACC 27400
+#define N_MAX 2000
+#define STEP_MIN 10
+#define STEP_MAX 100
 
 
 int mode = 0;  // 1 = glimball | 0 = test
@@ -17,14 +20,28 @@ int test_mode = 0; // potentiomètre = 1 | keypad = 0
 
 int iterator = 0;
 float sin_value;
-float sin_wave[100];
+float sin_wave[N_MAX];
+int step = 0;
 
 
 
 CY_ISR(isr_sound_handler){
-    iterator++;
+    /* uint32_t x=0;//y,z = 0;
+    uint32_t step = 0;
+    
+    Mux_Select(1); //Selection du premier channel
+    ADC_StartConvert();
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  x = ADC_GetResult32();
+    
+    step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC); // transférer le max du potentiomètre en min et max du CMP du servo
+    
+    char step_char[12];
+    sprintf(step_char, "step : %.3u \n",(unsigned int) step);
+    UART_PutString(step_char); */
+    
+    iterator += step;
     VDAC_SetValue((uint8)(sin_wave[iterator]));
-    if (iterator>=100)iterator=0;
+    if (iterator>=N_MAX)iterator=0;
     Timer_ReadStatusRegister();
 }
 
@@ -76,7 +93,7 @@ void initialize(){
     UART_Start();
     isr_uart_StartEx(isr_uart_handler);
     
-    fill_sine(100);
+    fill_sine(N_MAX);
 }
 
 void fill_sine(int len){
@@ -240,6 +257,8 @@ void glimball_mode(){
     servoX = MIN_SERVO + (x-MIN_ACC)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ACC-MIN_ACC); // transférer le max du potentiomètre en min et max du CMP du servo
     PWM_WriteCompare(servoX);
     CyDelay(40);
+    
+    step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
     
     LCD_PrintNumber(x);
     LCD_PrintString(" mV");

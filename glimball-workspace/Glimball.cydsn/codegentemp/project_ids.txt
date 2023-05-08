@@ -1,6 +1,6 @@
-C:\Users\alexa\Downloads\Glimball\elec-h310-glimball\glimball-workspace\Glimball.cydsn\Glimball.cyprj|3f41801c-63f8-4b4f-9de3-cae92336c7c0
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|3bf861e1-a513-4de5-bc00-1516824e6d55
-C:\Users\alexa\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|a7da9540-6b91-493f-882e-60c3e50b7e75
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|b880495e-f125-4a00-85bf-7b9ee2bd3a44
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|29e2615b-cbd7-46c7-9321-6daf987651e9
-C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|62945001-508e-406f-abf8-dda4e0fb750c
+C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\Glimball.cyprj|f1492b3c-9101-422d-bf50-762db415e150
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|792fe129-df94-4980-89c0-3dedb0045b1c
+C:\Users\dimit\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|afafd158-ed80-4f17-8291-5ebfc2c694ef
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|368ce458-f7bf-49d1-a5bc-79eb13da8322
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|76e92803-c83c-4873-b34b-629b1aa4569a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|749737eb-2c98-46ec-9fec-5f3a37504741
