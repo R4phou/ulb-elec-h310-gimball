@@ -1,7 +1,7 @@
 /**
 * Header file: list all the name and type of the functions that will be written
 */
-#include "./Generated_Source/PSoC5/project.h"
+#include "project.h"
 #include "keypad.h"
 #include "math.h"
 #include "stdio.h"

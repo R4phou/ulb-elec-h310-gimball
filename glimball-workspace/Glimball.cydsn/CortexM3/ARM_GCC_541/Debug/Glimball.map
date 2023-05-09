@@ -1027,9 +1027,9 @@ END GROUP
  .text.print_screen
                 0x000002cc       0x1c .\CortexM3\ARM_GCC_541\Debug\functions.o
                 0x000002cc                print_screen
- .text.switch_to_glimball_mode
+ .text.switch_to_gimball_mode
                 0x000002e8       0x1c .\CortexM3\ARM_GCC_541\Debug\functions.o
-                0x000002e8                switch_to_glimball_mode
+                0x000002e8                switch_to_gimball_mode
  .text.switch_to_test_mode
                 0x00000304       0x1c .\CortexM3\ARM_GCC_541\Debug\functions.o
                 0x00000304                switch_to_test_mode
