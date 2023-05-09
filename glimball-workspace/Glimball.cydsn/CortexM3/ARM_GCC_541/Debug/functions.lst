@@ -456,7 +456,7 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccyhTsWs.s 			page 1
  301              	.LFB76:
  117:functions.c   **** }
  118:functions.c   **** 
- 119:functions.c   **** void switch_to_glimball_mode(){
+ 119:functions.c   **** void switch_to_gimball_mode(){
  120:functions.c   ****     mode = 1;
  121:functions.c   ****     light_LEDS();
  122:functions.c   ****     const char8* var = "Glim";
@@ -502,7 +502,7 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccyhTsWs.s 			page 1
  159:functions.c   ****         switch_to_test_mode();
  160:functions.c   ****     }
  161:functions.c   ****     else if (!mode){
- 162:functions.c   ****         switch_to_glimball_mode();
+ 162:functions.c   ****         switch_to_gimball_mode();
  163:functions.c   ****     }
  164:functions.c   ****     else{
  165:functions.c   ****         error();
@@ -936,13 +936,13 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccyhTsWs.s 			page 1
  630              		.cfi_endproc
  631              	.LFE81:
  632              		.size	print_screen, .-print_screen
- 633 001a 00BF     		.section	.text.switch_to_glimball_mode,"ax",%progbits
+ 633 001a 00BF     		.section	.text.switch_to_gimball_mode,"ax",%progbits
  634              		.align	2
- 635              		.global	switch_to_glimball_mode
+ 635              		.global	switch_to_gimball_mode
  636              		.thumb
  637              		.thumb_func
- 638              		.type	switch_to_glimball_mode, %function
- 639              	switch_to_glimball_mode:
+ 638              		.type	switch_to_gimball_mode, %function
+ 639              	switch_to_gimball_mode:
  640              	.LFB71:
  119:functions.c   ****     mode = 1;
  641              		.loc 1 119 0
@@ -978,7 +978,7 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccyhTsWs.s 			page 1
  665 0018 1C000000 		.word	.LC4
  666              		.cfi_endproc
  667              	.LFE71:
- 668              		.size	switch_to_glimball_mode, .-switch_to_glimball_mode
+ 668              		.size	switch_to_gimball_mode, .-switch_to_gimball_mode
  669              		.section	.text.switch_to_test_mode,"ax",%progbits
  670              		.align	2
  671              		.global	switch_to_test_mode
@@ -1050,12 +1050,12 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccyhTsWs.s 			page 1
  727              	.LVL81:
  728 000c 08BD     		pop	{r3, pc}
  729              	.L61:
- 161:functions.c   ****         switch_to_glimball_mode();
+ 161:functions.c   ****         switch_to_gimball_mode();
  730              		.loc 1 161 0
  731 000e 13B9     		cbnz	r3, .L63
  162:functions.c   ****     }
  732              		.loc 1 162 0
- 733 0010 FFF7FEFF 		bl	switch_to_glimball_mode
+ 733 0010 FFF7FEFF 		bl	switch_to_gimball_mode
  734              	.LVL82:
  735 0014 08BD     		pop	{r3, pc}
  736              	.L63:
@@ -4407,7 +4407,7 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccyhTsWs.s 			page 1
  3646      4E756D62 
  3646      657200
  3647              	.LASF39:
- 3648 0397 73776974 		.ascii	"switch_to_glimball_mode\000"
+ 3648 0397 73776974 		.ascii	"switch_to_gimball_mode\000"
  3648      63685F74 
  3648      6F5F676C 
  3648      696D6261 

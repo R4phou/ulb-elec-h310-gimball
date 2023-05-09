@@ -19,26 +19,12 @@ int test_mode = 0; // potentiomètre = 1 | keypad = 0
 
 
 int iterator = 0;
-float sin_value;
 float sin_wave[N_MAX];
 int step = 0;
 
 
 
 CY_ISR(isr_sound_handler){
-    /* uint32_t x=0;//y,z = 0;
-    uint32_t step = 0;
-    
-    Mux_Select(1); //Selection du premier channel
-    ADC_StartConvert();
-    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  x = ADC_GetResult32();
-    
-    step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC); // transférer le max du potentiomètre en min et max du CMP du servo
-    
-    char step_char[12];
-    sprintf(step_char, "step : %.3u \n",(unsigned int) step);
-    UART_PutString(step_char); */
-    
     iterator += step;
     VDAC_SetValue((uint8)(sin_wave[iterator]));
     if (iterator>=N_MAX)iterator=0;
@@ -47,35 +33,28 @@ CY_ISR(isr_sound_handler){
 
 CY_ISR(isr_uart_handler){ // Receive instructions from Computer
     uint8 rxData; // Value readed from computer
-    uint8_t status = 0;
+    uint8_t status;
     do {
-    status = UART_ReadRxStatus();
-    if ((status & UART_RX_STS_PAR_ERROR ) |
-        ( status & UART_RX_STS_STOP_ERROR ) |
-        ( status & UART_RX_STS_BREAK ) |
-        ( status & UART_RX_STS_OVERRUN ) ) {
+        status = UART_ReadRxStatus();
+    if ((status & UART_RX_STS_PAR_ERROR) |
+        (status & UART_RX_STS_STOP_ERROR) |
+        (status & UART_RX_STS_BREAK) |
+        (status & UART_RX_STS_OVERRUN)) {
     // Parity , framing , break or overrun error
-        LCD_Position(1 ,0) ;
-        LCD_PrintString(" UART err ") ;
+        print_screen("UART err", 1, 0);
     }
     if ((status & UART_RX_STS_FIFO_NOTEMPTY)!=0){
         rxData = UART_GetChar();
         UART_PutChar(rxData);
         read_computer(&rxData);
-        
-        //ICI appeller fonction qui fait tourner du rxData
     }
     }while ((status & UART_RX_STS_FIFO_NOTEMPTY) != 0);
 }
 
 void read_computer(uint8* data){
     if (!test_mode && !mode){
-        if (strcmp((const char *) data, "l") == 0) {
-            rotate_left();
-        }
-        else if(strcmp((const char *) data, "r") == 0){
-           rotate_right();
-        }
+        if (strcmp((const char *) data, "l") == 0) rotate_left();
+        else if(strcmp((const char *) data, "r") == 0) rotate_right();
     }
 }
 
@@ -116,18 +95,16 @@ void turn_off_LEDS(){
     LED4_Write(0);
 }
 
-void switch_to_glimball_mode(){
+void switch_to_gimball_mode(){
     mode = 1;
     light_LEDS();
-    const char8* var = "Glim";
-    print_screen(var);
+    print_screen("Glim", 0, 0);
 }
 
 void switch_to_test_mode(){
     mode = 0;
     turn_off_LEDS();
-    const char8* var = "Test";
-    print_screen(var);
+    print_screen("Test", 0, 0);
 }
 
 
@@ -143,32 +120,21 @@ void read_SW2(){
         CyDelay(200);
         if (test_mode) {
             test_mode = 0;
-            const char8* var = "keypad";
-            print_screen(var);
+            print_screen("keypad", 0, 0);
         }
         else if (!test_mode){
             test_mode = 1;
-            const char8* var = "pot";
-            print_screen(var);
+            print_screen("pot", 0, 0);
         } 
     }
 }
 
 void switch_mode(){
-    if (mode){
-        switch_to_test_mode();
-    }
-    else if (!mode){
-        switch_to_glimball_mode();
-    }
-    else{
-        error();
-    }
+    mode ? switch_to_test_mode():switch_to_gimball_mode();
 }
 
 void error(){
-    LCD_Position(0,0);
-    LCD_PrintString("ERROR");
+    print_screen("ERROR", 0, 0);
     CyDelay(100000);
 }
 
@@ -177,21 +143,14 @@ void activate_sound(){
 }
 
 void rotate_left(){
-    uint16 pos = PWM_ReadCompare();
-    LCD_ClearDisplay();
-    LCD_PrintDecUint16(pos);
-    pos -= 10*SERVO_ANGLE;
+    uint16 pos = PWM_ReadCompare() - 10*SERVO_ANGLE;
     if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
     CyDelay(50);
 }
 
 void rotate_right(){
-    uint16 pos = 0;
-    pos = PWM_ReadCompare();
-    LCD_ClearDisplay();
-    LCD_PrintDecUint16(pos);
-    pos += 10*SERVO_ANGLE;
+    uint16 pos = PWM_ReadCompare() + 10*SERVO_ANGLE;
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     PWM_WriteCompare(pos);
     CyDelay(50);
@@ -218,53 +177,39 @@ void react_to_keypad(){
     }
 }
 
-void print_screen(const char8 * string){
+void print_screen(const char8 * string, int row, int column){
     LCD_ClearDisplay();
-    LCD_Position(0,0);
+    LCD_Position(row,column);
     LCD_PrintString(string);
 }
 
 void testing_mode(){
     if (!test_mode) return;
-    
     uint32_t potval = 0;
-    uint32_t servo = 0; // Envoyé au servomoteur (mV)
-    
     Mux_Select(0);
     CyDelay(10);
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
-    
-    servo = MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF); // transférer le max du potentiomètre en min et max du CMP du servo
-    
-    PWM_WriteCompare(servo);
+    PWM_WriteCompare((uint32_t) MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
     CyDelay(50);
 }
 
-void glimball_mode(){
+void gimball_mode(){
     uint32_t x=0;//y,z = 0;
-    uint32_t servoX = 0; // Envoyé au servomoteur (mV)
-    
-    Mux_Select(1); //Selection du premier channel
+    Mux_Select(1); //Selection of the first channel
     CyDelay(10);
     ADC_StartConvert();
-    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  x = ADC_GetResult32();
-    
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)) x = ADC_GetResult32();
     LCD_ClearDisplay();
     LCD_Position(0,0);
-    //Conversion des resultats
-    
-    servoX = MIN_SERVO + (x-MIN_ACC)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ACC-MIN_ACC); // transférer le max du potentiomètre en min et max du CMP du servo
-    PWM_WriteCompare(servoX);
+    //Conversion des résultats
+    PWM_WriteCompare((uint32_t) MIN_SERVO + (x-MIN_ACC)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ACC-MIN_ACC));
     CyDelay(40);
-    
     step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
-    
     LCD_PrintNumber(x);
     LCD_PrintString(" mV");
-    
     char x_char[12];
-    sprintf(x_char, "pot : %.3u \n",(unsigned int) x);
+    sprintf(x_char, "pot : %.3u \n",(unsigned int) x); // format the potential value
     UART_PutString(x_char);
 }
 
@@ -274,11 +219,6 @@ void react(){
     if (!mode) read_SW2();
 }
 
-void modes(){   
-   if (!mode){
-        testing_mode();
-    }
-    else{
-        glimball_mode();
-    }
+void modes(){
+    mode ? gimball_mode():testing_mode();
 }

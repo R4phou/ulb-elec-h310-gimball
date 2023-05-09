@@ -1,7 +1,7 @@
 /**
 * Header file: list all the name and type of the functions that will be written
 */
-#include "project.h"
+#include "./Generated_Source/PSoC5/project.h"
 #include "keypad.h"
 #include "math.h"
 #include "stdio.h"
@@ -41,7 +41,7 @@ void activate_sound();
  * Function that switch modes
  * Take also care of switching the LEDS if the mode is switched
 */
-void switch_to_glimball_mode();
+void switch_to_gimball_mode();
 
 
 /**
@@ -107,7 +107,7 @@ void testing_mode();
 /**
  * What is done in the glimball mode
 */
-void glimball_mode();
+void gimball_mode();
 
 
 /**
@@ -117,9 +117,9 @@ void modes();
 
 
 /**
- * Print the string on the LCD
+ * Print the string on the LCD at the wanted position
 */
-void print_screen(const char8 * string);
+void print_screen(const char8 * string, int row, int column);
 
 /*
     Initialisation de tous les composants de bases
