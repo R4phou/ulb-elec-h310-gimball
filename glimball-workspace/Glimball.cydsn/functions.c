@@ -5,6 +5,8 @@
 #include "functions.h"
 #define MIN_SERVO 500
 #define MAX_SERVO 2500
+#define MIN_ANGLE 0
+#define MAX_ANGLE 180
 #define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/180
 #define pi 3.1415
 #define MIN_ACC 18800
@@ -161,19 +163,9 @@ void rotate_right(){
 void react_to_keypad(){
     uint8_t value = keypadScan();
     if (value != 'z'){
-        if ( value == '1'){
-            CyDelay(200);
-            switch_mode();
-        } 
-        else if (!mode && !test_mode){
-            if (value == '2'){
-                CyDelay(100);
-                rotate_left();
-            }
-            else if(value == '3'){
-                CyDelay(100);
-                rotate_right();
-            }
+        if (value == '1'){
+        CyDelay(200);
+        switch_mode();
         }
     }
 }
@@ -185,8 +177,7 @@ void print_screen(const char8 * string, int row, int column){
     UART_PutString(string);
 }
 
-void testing_mode(){
-    if (!test_mode) return;
+void test_pot(){
     uint32_t potval = 0;
     Mux_Select(0);
     CyDelay(10);
@@ -196,31 +187,70 @@ void testing_mode(){
     CyDelay(50);
 }
 
-void gimball_mode(){
-    uint32_t x=0;//y,z = 0;
+void test_keyboard(){
+    uint8_t value = keypadScan();
+    if (value != 'z'){
+        if (value == '2'){
+            CyDelay(100);
+            rotate_left();
+        }
+        else if(value == '3'){
+            CyDelay(100);
+            rotate_right();
+        }
+    }
+}
+
+void testing_mode(){
+    read_SW2();
+    if (test_mode) test_pot();
+    else test_keyboard();
+}
+
+void get_angle(uint8* angle){
+    // Read the accelerometer
+    uint32_t x=0;
     Mux_Select(1); //Selection of the first channel
     CyDelay(10);
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)) x = ADC_GetResult32();
-    LCD_ClearDisplay();
-    LCD_Position(0,0);
-    //Conversion des résultats
-    PWM_WriteCompare((uint32_t) MIN_SERVO + (x-MIN_ACC)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ACC-MIN_ACC));
-    CyDelay(40);
+    
+    // Modfify the step (for the sound)
     step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
-    LCD_PrintNumber(x);
-    LCD_PrintString(" mV");
+    
+    // Change the value of the accelerometer into an angle
+    *angle = MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
+    
+    // Print the angle on the LCD + UART
+    print_angle(angle);
+}
+
+void print_angle(uint8* angle){
+    LCD_Position(1,0);
     char x_char[12];
-    sprintf(x_char, "pot : %.3u \n",(unsigned int) x); // format the potential value
+    sprintf(x_char, "%.3u", (unsigned int) *angle);
+    LCD_PrintString(x_char);
+    strcat(x_char, "\n");
     UART_PutString(x_char);
+}
+
+void turn_servo(uint8* angle){
+    uint32_t servo_value = MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE); // à changer
+    PWM_WriteCompare(servo_value);
+    CyDelay(40);
+}
+
+void gimball_mode(uint8* angle){
+    turn_servo(angle);   
 }
 
 void react(){
     react_to_keypad();
     read_SW1();
-    if (!mode) read_SW2();
 }
 
 void modes(){
-    mode ? gimball_mode():testing_mode();
+    uint8 angle = 0;
+    get_angle(&angle);
+    mode ? gimball_mode(&angle):testing_mode();
 }
