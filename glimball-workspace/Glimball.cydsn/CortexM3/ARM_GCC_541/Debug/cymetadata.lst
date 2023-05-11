@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
   55 001a 01       		.byte	1
   56 001b 40       		.byte	64
   57 001c 2B       		.byte	43
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 2
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 2
 
 
   58 001d 07       		.byte	7
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  112 0053 40       		.byte	64
  113 0054 03       		.byte	3
  114 0055 45       		.byte	69
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 3
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 3
 
 
  115 0056 01       		.byte	1
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  169 008c 00       		.byte	0
  170 008d 04       		.byte	4
  171 008e 01       		.byte	1
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 4
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 4
 
 
  172 008f 1F       		.byte	31
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  226 00c5 0F       		.byte	15
  227 00c6 37       		.byte	55
  228 00c7 1C       		.byte	28
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 5
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 5
 
 
  229 00c8 3B       		.byte	59
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  283 00fe B3       		.byte	-77
  284 00ff 03       		.byte	3
  285 0100 B6       		.byte	-74
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 6
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 6
 
 
  286 0101 18       		.byte	24
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  340 0137 14       		.byte	20
  341 0138 06       		.byte	6
  342 0139 80       		.byte	-128
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 7
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 7
 
 
  343 013a 09       		.byte	9
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  397 0170 3E       		.byte	62
  398 0171 86       		.byte	-122
  399 0172 41       		.byte	65
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 8
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 8
 
 
  400 0173 04       		.byte	4
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  454 01a9 04       		.byte	4
  455 01aa 5A       		.byte	90
  456 01ab 04       		.byte	4
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 9
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 9
 
 
  457 01ac 5F       		.byte	95
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  511 01e2 C8       		.byte	-56
  512 01e3 13       		.byte	19
  513 01e4 C9       		.byte	-55
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 10
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 10
 
 
  514 01e5 FF       		.byte	-1
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  568 021b 04       		.byte	4
  569 021c 19       		.byte	25
  570 021d 62       		.byte	98
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 11
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 11
 
 
  571 021e 1A       		.byte	26
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  625 0254 D8       		.byte	-40
  626 0255 01       		.byte	1
  627 0256 0B       		.byte	11
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 12
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 12
 
 
  628 0257 02       		.byte	2
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  682 028d FF       		.byte	-1
  683 028e 4A       		.byte	74
  684 028f FF       		.byte	-1
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 13
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 13
 
 
  685 0290 4B       		.byte	75
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  739 02c6 A8       		.byte	-88
  740 02c7 30       		.byte	48
  741 02c8 AC       		.byte	-84
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 14
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 14
 
 
  742 02c9 0D       		.byte	13
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  796 02ff 10       		.byte	16
  797 0300 15       		.byte	21
  798 0301 02       		.byte	2
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 15
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 15
 
 
  799 0302 17       		.byte	23
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  853 0338 80       		.byte	-128
  854 0339 48       		.byte	72
  855 033a 82       		.byte	-126
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 16
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 16
 
 
  856 033b 01       		.byte	1
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  910 0371 20       		.byte	32
  911 0372 01       		.byte	1
  912 0373 10       		.byte	16
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 17
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 17
 
 
  913 0374 02       		.byte	2
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  967 03aa 3E       		.byte	62
  968 03ab 40       		.byte	64
  969 03ac 3F       		.byte	63
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 18
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 18
 
 
  970 03ad 04       		.byte	4
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1024 03e3 10       		.byte	16
  1025 03e4 6A       		.byte	106
  1026 03e5 30       		.byte	48
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 19
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 19
 
 
  1027 03e6 6B       		.byte	107
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1081 041c 06       		.byte	6
  1082 041d 80       		.byte	-128
  1083 041e 07       		.byte	7
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 20
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 20
 
 
  1084 041f 10       		.byte	16
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1138 0455 2A       		.byte	42
  1139 0456 44       		.byte	68
  1140 0457 14       		.byte	20
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 21
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 21
 
 
  1141 0458 45       		.byte	69
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1195 048e C4       		.byte	-60
  1196 048f 82       		.byte	-126
  1197 0490 CA       		.byte	-54
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 22
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 22
 
 
  1198 0491 F0       		.byte	-16
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1252 04c7 01       		.byte	1
  1253 04c8 B4       		.byte	-76
  1254 04c9 20       		.byte	32
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 23
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 23
 
 
  1255 04ca D0       		.byte	-48
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1309 0500 00       		.byte	0
  1310 0501 0F       		.byte	15
  1311 0502 00       		.byte	0
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 24
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 24
 
 
  1312 0503 00       		.byte	0
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1366 0539 00       		.byte	0
  1367 053a 00       		.byte	0
  1368 053b 00       		.byte	0
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 25
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 25
 
 
  1369 053c 25       		.byte	37
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1419              		.section	.debug_info,"",%progbits
  1420              	.Ldebug_info0:
  1421 0000 32010000 		.4byte	0x132
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 26
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 26
 
 
  1422 0004 0400     		.2byte	0x4
@@ -1507,13 +1507,13 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1425 000b 01       		.uleb128 0x1
  1426 000c 24000000 		.4byte	.LASF17
  1427 0010 0C       		.byte	0xc
- 1428 0011 D2010000 		.4byte	.LASF18
- 1429 0015 69010000 		.4byte	.LASF19
+ 1428 0011 06020000 		.4byte	.LASF18
+ 1429 0015 D7000000 		.4byte	.LASF19
  1430 0019 00000000 		.4byte	.Ldebug_line0
  1431 001d 02       		.uleb128 0x2
  1432 001e 01       		.byte	0x1
  1433 001f 06       		.byte	0x6
- 1434 0020 C6010000 		.4byte	.LASF0
+ 1434 0020 FA010000 		.4byte	.LASF0
  1435 0024 03       		.uleb128 0x3
  1436 0025 00000000 		.4byte	.LASF9
  1437 0029 01       		.byte	0x1
@@ -1526,7 +1526,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1444 0036 02       		.uleb128 0x2
  1445 0037 02       		.byte	0x2
  1446 0038 05       		.byte	0x5
- 1447 0039 5F010000 		.4byte	.LASF2
+ 1447 0039 E7010000 		.4byte	.LASF2
  1448 003d 02       		.uleb128 0x2
  1449 003e 02       		.byte	0x2
  1450 003f 07       		.byte	0x7
@@ -1534,7 +1534,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1452 0044 02       		.uleb128 0x2
  1453 0045 04       		.byte	0x4
  1454 0046 05       		.byte	0x5
- 1455 0047 BD010000 		.4byte	.LASF4
+ 1455 0047 F1010000 		.4byte	.LASF4
  1456 004b 02       		.uleb128 0x2
  1457 004c 04       		.byte	0x4
  1458 004d 07       		.byte	0x7
@@ -1542,11 +1542,11 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1460 0052 02       		.uleb128 0x2
  1461 0053 08       		.byte	0x8
  1462 0054 05       		.byte	0x5
- 1463 0055 51010000 		.4byte	.LASF6
+ 1463 0055 D9010000 		.4byte	.LASF6
  1464 0059 02       		.uleb128 0x2
  1465 005a 08       		.byte	0x8
  1466 005b 07       		.byte	0x7
- 1467 005c 06010000 		.4byte	.LASF7
+ 1467 005c 8E010000 		.4byte	.LASF7
  1468 0060 04       		.uleb128 0x4
  1469 0061 04       		.byte	0x4
  1470 0062 05       		.byte	0x5
@@ -1554,11 +1554,11 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1472 0067 02       		.uleb128 0x2
  1473 0068 04       		.byte	0x4
  1474 0069 07       		.byte	0x7
- 1475 006a F9000000 		.4byte	.LASF8
+ 1475 006a 81010000 		.4byte	.LASF8
  1476 006e 03       		.uleb128 0x3
- 1477 006f 1D010000 		.4byte	.LASF10
+ 1477 006f A5010000 		.4byte	.LASF10
  1478 0073 02       		.byte	0x2
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 27
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 27
 
 
  1479 0074 18       		.byte	0x18
@@ -1573,11 +1573,11 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1488 008a 02       		.uleb128 0x2
  1489 008b 04       		.byte	0x4
  1490 008c 07       		.byte	0x7
- 1491 008d 48010000 		.4byte	.LASF11
+ 1491 008d D0010000 		.4byte	.LASF11
  1492 0091 07       		.uleb128 0x7
  1493 0092 6E000000 		.4byte	0x6e
  1494 0096 08       		.uleb128 0x8
- 1495 0097 E7000000 		.4byte	.LASF12
+ 1495 0097 6F010000 		.4byte	.LASF12
  1496 009b 03       		.byte	0x3
  1497 009c 1F       		.byte	0x1f
  1498 009d A7000000 		.4byte	0xa7
@@ -1594,7 +1594,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1509 00ba 03       		.byte	0x3
  1510 00bb 00       		.byte	0
  1511 00bc 08       		.uleb128 0x8
- 1512 00bd D7000000 		.4byte	.LASF13
+ 1512 00bd 5F010000 		.4byte	.LASF13
  1513 00c1 03       		.byte	0x3
  1514 00c2 D4       		.byte	0xd4
  1515 00c3 CD000000 		.4byte	0xcd
@@ -1604,7 +1604,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1519 00cd 07       		.uleb128 0x7
  1520 00ce AC000000 		.4byte	0xac
  1521 00d2 08       		.uleb128 0x8
- 1522 00d3 3A010000 		.4byte	.LASF14
+ 1522 00d3 C2010000 		.4byte	.LASF14
  1523 00d7 03       		.byte	0x3
  1524 00d8 E2       		.byte	0xe2
  1525 00d9 E3000000 		.4byte	0xe3
@@ -1618,13 +1618,13 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1533 00ed F8000000 		.4byte	0xf8
  1534 00f1 09       		.uleb128 0x9
  1535 00f2 8A000000 		.4byte	0x8a
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 28
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 28
 
 
  1536 00f6 FF       		.byte	0xff
  1537 00f7 00       		.byte	0
  1538 00f8 08       		.uleb128 0x8
- 1539 00f9 25010000 		.4byte	.LASF15
+ 1539 00f9 AD010000 		.4byte	.LASF15
  1540 00fd 03       		.byte	0x3
  1541 00fe F0       		.byte	0xf0
  1542 00ff 09010000 		.4byte	0x109
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1590 0016 03       		.uleb128 0x3
  1591 0017 0E       		.uleb128 0xe
  1592 0018 00       		.byte	0
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 29
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 29
 
 
  1593 0019 00       		.byte	0
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1647 004f 0E       		.uleb128 0xe
  1648 0050 3A       		.uleb128 0x3a
  1649 0051 0B       		.uleb128 0xb
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 30
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 30
 
 
  1650 0052 3B       		.uleb128 0x3b
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1700              	.LASF9:
  1701 0000 5F5F7569 		.ascii	"__uint8_t\000"
  1701      6E74385F 
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 31
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 31
 
 
  1701      7400
@@ -1839,81 +1839,89 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 1
  1713      7369676E 
  1713      65642069 
  1713      6E7400
- 1714              	.LASF13:
- 1715 00d7 63795F6D 		.ascii	"cy_meta_custnvl\000"
- 1715      6574615F 
- 1715      63757374 
- 1715      6E766C00 
- 1716              	.LASF12:
- 1717 00e7 63795F6D 		.ascii	"cy_meta_configecc\000"
- 1717      6574615F 
- 1717      636F6E66 
- 1717      69676563 
- 1717      6300
- 1718              	.LASF8:
- 1719 00f9 756E7369 		.ascii	"unsigned int\000"
- 1719      676E6564 
- 1719      20696E74 
- 1719      00
- 1720              	.LASF7:
- 1721 0106 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1721      206C6F6E 
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\cc7H8cPT.s 			page 32
+ 1714              	.LASF19:
+ 1715 00d7 433A5C55 		.ascii	"C:\\Users\\dimit\\Desktop\\Polytech\\BA3\\ELEC-H310"
+ 1715      73657273 
+ 1715      5C64696D 
+ 1715      69745C44 
+ 1715      65736B74 
+ 1716 0104 202D2044 		.ascii	" - Digital electronics\\Project Gimbal\\elec-h310-g"
+ 1716      69676974 
+ 1716      616C2065 
+ 1716      6C656374 
+ 1716      726F6E69 
+ 1717 0135 6C696D62 		.ascii	"limball\\glimball-workspace\\Glimball.cydsn\000"
+ 1717      616C6C5C 
+ 1717      676C696D 
+ 1717      62616C6C 
+ 1717      2D776F72 
+ 1718              	.LASF13:
+ 1719 015f 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 1719      6574615F 
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 32
 
 
- 1721      6720756E 
- 1721      7369676E 
- 1721      65642069 
- 1722              	.LASF10:
- 1723 011d 75696E74 		.ascii	"uint8_t\000"
- 1723      385F7400 
- 1724              	.LASF15:
- 1725 0125 63795F6D 		.ascii	"cy_meta_flashprotect\000"
- 1725      6574615F 
- 1725      666C6173 
- 1725      6870726F 
- 1725      74656374 
- 1726              	.LASF14:
- 1727 013a 63795F6D 		.ascii	"cy_meta_wonvl\000"
- 1727      6574615F 
- 1727      776F6E76 
- 1727      6C00
- 1728              	.LASF11:
- 1729 0148 73697A65 		.ascii	"sizetype\000"
- 1729      74797065 
- 1729      00
- 1730              	.LASF6:
- 1731 0151 6C6F6E67 		.ascii	"long long int\000"
- 1731      206C6F6E 
- 1731      6720696E 
- 1731      7400
- 1732              	.LASF2:
- 1733 015f 73686F72 		.ascii	"short int\000"
- 1733      7420696E 
- 1733      7400
- 1734              	.LASF19:
- 1735 0169 433A5C44 		.ascii	"C:\\Documents\\ULB\\BA3\\ELEC-H310\\elec-h310-glimb"
- 1735      6F63756D 
- 1735      656E7473 
- 1735      5C554C42 
- 1735      5C424133 
- 1736 0197 616C6C5C 		.ascii	"all\\glimball-workspace\\Glimball.cydsn\000"
- 1736      676C696D 
- 1736      62616C6C 
- 1736      2D776F72 
- 1736      6B737061 
- 1737              	.LASF4:
- 1738 01bd 6C6F6E67 		.ascii	"long int\000"
- 1738      20696E74 
- 1738      00
- 1739              	.LASF0:
- 1740 01c6 7369676E 		.ascii	"signed char\000"
- 1740      65642063 
- 1740      68617200 
- 1741              	.LASF18:
- 1742 01d2 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
- 1742      72617465 
- 1742      645F536F 
- 1742      75726365 
- 1742      5C50536F 
- 1743              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1719      63757374 
+ 1719      6E766C00 
+ 1720              	.LASF12:
+ 1721 016f 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 1721      6574615F 
+ 1721      636F6E66 
+ 1721      69676563 
+ 1721      6300
+ 1722              	.LASF8:
+ 1723 0181 756E7369 		.ascii	"unsigned int\000"
+ 1723      676E6564 
+ 1723      20696E74 
+ 1723      00
+ 1724              	.LASF7:
+ 1725 018e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1725      206C6F6E 
+ 1725      6720756E 
+ 1725      7369676E 
+ 1725      65642069 
+ 1726              	.LASF10:
+ 1727 01a5 75696E74 		.ascii	"uint8_t\000"
+ 1727      385F7400 
+ 1728              	.LASF15:
+ 1729 01ad 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 1729      6574615F 
+ 1729      666C6173 
+ 1729      6870726F 
+ 1729      74656374 
+ 1730              	.LASF14:
+ 1731 01c2 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 1731      6574615F 
+ 1731      776F6E76 
+ 1731      6C00
+ 1732              	.LASF11:
+ 1733 01d0 73697A65 		.ascii	"sizetype\000"
+ 1733      74797065 
+ 1733      00
+ 1734              	.LASF6:
+ 1735 01d9 6C6F6E67 		.ascii	"long long int\000"
+ 1735      206C6F6E 
+ 1735      6720696E 
+ 1735      7400
+ 1736              	.LASF2:
+ 1737 01e7 73686F72 		.ascii	"short int\000"
+ 1737      7420696E 
+ 1737      7400
+ 1738              	.LASF4:
+ 1739 01f1 6C6F6E67 		.ascii	"long int\000"
+ 1739      20696E74 
+ 1739      00
+ 1740              	.LASF0:
+ 1741 01fa 7369676E 		.ascii	"signed char\000"
+ 1741      65642063 
+ 1741      68617200 
+ 1742              	.LASF18:
+ 1743 0206 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 1743      72617465 
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccwzIxDV.s 			page 33
+
+
+ 1743      645F536F 
+ 1743      75726365 
+ 1743      5C50536F 
+ 1744              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

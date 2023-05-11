@@ -83,14 +83,14 @@ void react_to_keypad();
 
 
 /**
- * Function that rotates the servo to the right
+ * Function that rotates the servo to the right of the given angle
 */
-void rotate_right();
+void rotate_right(int angle);
 
 /**
- * Function that rotates the servo to the left
+ * Function that rotates the servo to the left of the given angle
 */
-void rotate_left();
+void rotate_left(int angle);
 
 /**
  * Test the reaction on the buttons and keyboard
@@ -106,6 +106,11 @@ void test_pot();
  * Control the servo with the keyboard
 */
 void test_keyboard();
+
+/*
+* Control the servo with joystick
+*/
+void test_joystick();
 
 /**
  * What is done in the testing mode

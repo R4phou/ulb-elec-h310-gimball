@@ -17,7 +17,7 @@
 
 
 int mode = 0;  // 1 = glimball | 0 = test
-int test_mode = 0; // potentiomètre = 1 | keypad = 0
+int test_mode = 0; // Utilisation du potentiomètre = 1 | Utilisation du keypad = 0 | Utilisation joystick = 2
 
 
 int iterator = 0;
@@ -55,8 +55,8 @@ CY_ISR(isr_uart_handler){ // Receive instructions from Computer
 
 void read_computer(uint8* data){
     if (!test_mode && !mode){
-        if (strcmp((const char *) data, "2") == 0) rotate_left();
-        else if(strcmp((const char *) data, "3") == 0) rotate_right();
+        if (strcmp((const char *) data, "2") == 0) rotate_left(10);
+        else if(strcmp((const char *) data, "3") == 0) rotate_right(10);
         else if (strcmp((const char*) data, "1") == 0) switch_mode();
     }
 }
@@ -121,14 +121,18 @@ void read_SW1(){
 void read_SW2(){
     if (!mode && SW2_Read()){
         CyDelay(200);
-        if (test_mode) {
+        if (test_mode == 2) {
             test_mode = 0;
             print_screen("keypad", 0, 0);
         }
-        else if (!test_mode){
+        else if (test_mode == 0){
             test_mode = 1;
             print_screen("pot", 0, 0);
-        } 
+        }
+        else if (test_mode==1){
+            test_mode = 2;
+            print_screen("joystick", 0, 0);
+        }
     }
 }
 
@@ -145,15 +149,15 @@ void activate_sound(){
     ISR_SOUND_StartEx(isr_sound_handler);
 }
 
-void rotate_left(){
-    uint16 pos = PWM_ReadCompare() - 10*SERVO_ANGLE;
+void rotate_left(int angle){
+    uint16 pos = PWM_ReadCompare() - angle*SERVO_ANGLE;
     if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
     CyDelay(50);
 }
 
-void rotate_right(){
-    uint16 pos = PWM_ReadCompare() + 10*SERVO_ANGLE;
+void rotate_right(int angle){
+    uint16 pos = PWM_ReadCompare() + angle*SERVO_ANGLE;
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     PWM_WriteCompare(pos);
     CyDelay(50);
@@ -192,19 +196,35 @@ void test_keyboard(){
     if (value != 'z'){
         if (value == '2'){
             CyDelay(100);
-            rotate_left();
+            rotate_left(10);
         }
         else if(value == '3'){
             CyDelay(100);
-            rotate_right();
+            rotate_right(10);
         }
     }
 }
 
+void test_joystick(){
+    int32 joyval = 0;
+    Mux_Select(2);
+    CyDelay(10);
+    ADC_StartConvert();
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)){
+        if ( ADC_GetResult32()>joyval) rotate_right(1);
+        else if (ADC_GetResult32()<joyval)rotate_left(1);
+        joyval = ADC_GetResult32();
+    }
+    PWM_WriteCompare((uint32_t) MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
+    CyDelay(50);
+}
+
 void testing_mode(){
     read_SW2();
-    if (test_mode) test_pot();
-    else test_keyboard();
+    if (test_mode == 1){ test_pot();}
+    else if (test_mode == 0) test_keyboard();
+    else if (test_mode == 2) test_joystick();
+    
 }
 
 void get_angle(uint8* angle){
