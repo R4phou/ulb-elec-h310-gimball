@@ -49,7 +49,7 @@ void Mux_FastSelect(uint8 channel) ;
 *         Parameter Constants
 ***************************************/
 
-#define Mux_CHANNELS  4u
+#define Mux_CHANNELS  3u
 #define Mux_MUXTYPE   1
 #define Mux_ATMOSTONE 0
 

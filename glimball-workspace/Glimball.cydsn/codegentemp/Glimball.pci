@@ -1,5 +1,5 @@
 # Glimball
-# 2023-05-11 06:34:11Z
+# 2023-05-11 08:55:52Z
 
 # IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
 dont_use_io iocell 1 0
@@ -24,8 +24,7 @@ set_io "COL2(0)" iocell 3 3
 set_io "COL3(0)" iocell 3 4
 set_io "SERVO(0)" iocell 2 7
 set_io "PIN_ADC(0)" iocell 0 7
-set_io "Z_ADC(0)" iocell 1 5
-set_io "Y_ADC(0)" iocell 1 4
+set_io "JOY_ADC(0)" iocell 1 4
 set_io "X_ADC(0)" iocell 1 2
 set_io "PIN_DAC(0)" iocell 15 5
 set_io "Rx(0)" iocell 15 2

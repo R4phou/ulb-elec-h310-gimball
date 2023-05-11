@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: Z_ADC.c  
+* File Name: JOY_ADC.c  
 * Version 2.20
 *
 * Description:
@@ -15,15 +15,15 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "Z_ADC.h"
+#include "JOY_ADC.h"
 
 /* APIs are not generated for P15[7:6] on PSoC 5 */
 #if !(CY_PSOC5A &&\
-	 Z_ADC__PORT == 15 && ((Z_ADC__MASK & 0xC0) != 0))
+	 JOY_ADC__PORT == 15 && ((JOY_ADC__MASK & 0xC0) != 0))
 
 
 /*******************************************************************************
-* Function Name: Z_ADC_Write
+* Function Name: JOY_ADC_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -52,17 +52,17 @@
 *  this function.
 *
 * \funcusage
-*  \snippet Z_ADC_SUT.c usage_Z_ADC_Write
+*  \snippet JOY_ADC_SUT.c usage_JOY_ADC_Write
 *******************************************************************************/
-void Z_ADC_Write(uint8 value)
+void JOY_ADC_Write(uint8 value)
 {
-    uint8 staticBits = (Z_ADC_DR & (uint8)(~Z_ADC_MASK));
-    Z_ADC_DR = staticBits | ((uint8)(value << Z_ADC_SHIFT) & Z_ADC_MASK);
+    uint8 staticBits = (JOY_ADC_DR & (uint8)(~JOY_ADC_MASK));
+    JOY_ADC_DR = staticBits | ((uint8)(value << JOY_ADC_SHIFT) & JOY_ADC_MASK);
 }
 
 
 /*******************************************************************************
-* Function Name: Z_ADC_SetDriveMode
+* Function Name: JOY_ADC_SetDriveMode
 ****************************************************************************//**
 *
 * \brief Sets the drive mode for each of the Pins component's pins.
@@ -85,16 +85,16 @@ void Z_ADC_Write(uint8 value)
 *  APIs (primary method) or disable interrupts around this function.
 *
 * \funcusage
-*  \snippet Z_ADC_SUT.c usage_Z_ADC_SetDriveMode
+*  \snippet JOY_ADC_SUT.c usage_JOY_ADC_SetDriveMode
 *******************************************************************************/
-void Z_ADC_SetDriveMode(uint8 mode)
+void JOY_ADC_SetDriveMode(uint8 mode)
 {
-	CyPins_SetPinDriveMode(Z_ADC_0, mode);
+	CyPins_SetPinDriveMode(JOY_ADC_0, mode);
 }
 
 
 /*******************************************************************************
-* Function Name: Z_ADC_Read
+* Function Name: JOY_ADC_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -108,16 +108,16 @@ void Z_ADC_SetDriveMode(uint8 mode)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet Z_ADC_SUT.c usage_Z_ADC_Read  
+*  \snippet JOY_ADC_SUT.c usage_JOY_ADC_Read  
 *******************************************************************************/
-uint8 Z_ADC_Read(void)
+uint8 JOY_ADC_Read(void)
 {
-    return (Z_ADC_PS & Z_ADC_MASK) >> Z_ADC_SHIFT;
+    return (JOY_ADC_PS & JOY_ADC_MASK) >> JOY_ADC_SHIFT;
 }
 
 
 /*******************************************************************************
-* Function Name: Z_ADC_ReadDataReg
+* Function Name: JOY_ADC_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -126,8 +126,8 @@ uint8 Z_ADC_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred Z_ADC_Read() API because the 
-* Z_ADC_ReadDataReg() reads the data register instead of the status 
+* preferred JOY_ADC_Read() API because the 
+* JOY_ADC_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -136,19 +136,19 @@ uint8 Z_ADC_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet Z_ADC_SUT.c usage_Z_ADC_ReadDataReg 
+*  \snippet JOY_ADC_SUT.c usage_JOY_ADC_ReadDataReg 
 *******************************************************************************/
-uint8 Z_ADC_ReadDataReg(void)
+uint8 JOY_ADC_ReadDataReg(void)
 {
-    return (Z_ADC_DR & Z_ADC_MASK) >> Z_ADC_SHIFT;
+    return (JOY_ADC_DR & JOY_ADC_MASK) >> JOY_ADC_SHIFT;
 }
 
 
 /* If interrupt is connected for this Pins component */ 
-#if defined(Z_ADC_INTSTAT) 
+#if defined(JOY_ADC_INTSTAT) 
 
     /*******************************************************************************
-    * Function Name: Z_ADC_SetInterruptMode
+    * Function Name: JOY_ADC_SetInterruptMode
     ****************************************************************************//**
     *
     * \brief Configures the interrupt mode for each of the Pins component's
@@ -161,12 +161,12 @@ uint8 Z_ADC_ReadDataReg(void)
     * \param position
     *  The pin position as listed in the Pins component. You may OR these to be 
     *  able to configure the interrupt mode of multiple pins within a Pins 
-    *  component. Or you may use Z_ADC_INTR_ALL to configure the
+    *  component. Or you may use JOY_ADC_INTR_ALL to configure the
     *  interrupt mode of all the pins in the Pins component.       
-    *  - Z_ADC_0_INTR       (First pin in the list)
-    *  - Z_ADC_1_INTR       (Second pin in the list)
+    *  - JOY_ADC_0_INTR       (First pin in the list)
+    *  - JOY_ADC_1_INTR       (Second pin in the list)
     *  - ...
-    *  - Z_ADC_INTR_ALL     (All pins in Pins component)
+    *  - JOY_ADC_INTR_ALL     (All pins in Pins component)
     *
     * \param mode
     *  Interrupt mode for the selected pins. Valid options are documented in
@@ -182,19 +182,19 @@ uint8 Z_ADC_ReadDataReg(void)
     *  port.
     *
     * \funcusage
-    *  \snippet Z_ADC_SUT.c usage_Z_ADC_SetInterruptMode
+    *  \snippet JOY_ADC_SUT.c usage_JOY_ADC_SetInterruptMode
     *******************************************************************************/
-    void Z_ADC_SetInterruptMode(uint16 position, uint16 mode)
+    void JOY_ADC_SetInterruptMode(uint16 position, uint16 mode)
     {
-		if((position & Z_ADC_0_INTR) != 0u) 
+		if((position & JOY_ADC_0_INTR) != 0u) 
 		{ 
-			 Z_ADC_0_INTTYPE_REG = (uint8)mode; 
+			 JOY_ADC_0_INTTYPE_REG = (uint8)mode; 
 		}
     }
     
     
     /*******************************************************************************
-    * Function Name: Z_ADC_ClearInterrupt
+    * Function Name: JOY_ADC_ClearInterrupt
     ****************************************************************************//**
     *
     * \brief Clears any active interrupts attached with the component and returns 
@@ -211,11 +211,11 @@ uint8 Z_ADC_ReadDataReg(void)
     *  those associated with the Pins component.
     *
     * \funcusage
-    *  \snippet Z_ADC_SUT.c usage_Z_ADC_ClearInterrupt
+    *  \snippet JOY_ADC_SUT.c usage_JOY_ADC_ClearInterrupt
     *******************************************************************************/
-    uint8 Z_ADC_ClearInterrupt(void)
+    uint8 JOY_ADC_ClearInterrupt(void)
     {
-        return (Z_ADC_INTSTAT & Z_ADC_MASK) >> Z_ADC_SHIFT;
+        return (JOY_ADC_INTSTAT & JOY_ADC_MASK) >> JOY_ADC_SHIFT;
     }
 
 #endif /* If Interrupts Are Enabled for this Pins component */ 

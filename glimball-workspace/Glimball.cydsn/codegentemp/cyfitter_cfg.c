@@ -148,7 +148,7 @@ static void CyClockStartupError(uint8 errorCode)
 }
 #endif
 
-#define CY_CFG_BASE_ADDR_COUNT 31u
+#define CY_CFG_BASE_ADDR_COUNT 30u
 CYPACKED typedef struct
 {
 	uint8 offset;
@@ -156,28 +156,28 @@ CYPACKED typedef struct
 } CYPACKED_ATTR cy_cfg_addrvalue_t;
 
 #define cy_cfg_addr_table ((const uint32 CYFAR *)0x48000000u)
-#define cy_cfg_data_table ((const cy_cfg_addrvalue_t CYFAR *)0x4800007Cu)
+#define cy_cfg_data_table ((const cy_cfg_addrvalue_t CYFAR *)0x48000078u)
 
 /* IOPINS0_0 Address: CYREG_PRT0_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_0_VAL ((const uint8 CYFAR *)0x480004FCu)
+#define BS_IOPINS0_0_VAL ((const uint8 CYFAR *)0x48000504u)
 
 /* IOPINS0_7 Address: CYREG_PRT12_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_7_VAL ((const uint8 CYFAR *)0x48000504u)
+#define BS_IOPINS0_7_VAL ((const uint8 CYFAR *)0x4800050Cu)
 
 /* IOPINS0_8 Address: CYREG_PRT15_DR Size (bytes): 10 */
-#define BS_IOPINS0_8_VAL ((const uint8 CYFAR *)0x4800050Cu)
+#define BS_IOPINS0_8_VAL ((const uint8 CYFAR *)0x48000514u)
 
 /* IOPINS0_1 Address: CYREG_PRT1_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x48000518u)
+#define BS_IOPINS0_1_VAL ((const uint8 CYFAR *)0x48000520u)
 
 /* IOPINS0_2 Address: CYREG_PRT2_DM0 Size (bytes): 8 */
-#define BS_IOPINS0_2_VAL ((const uint8 CYFAR *)0x48000520u)
+#define BS_IOPINS0_2_VAL ((const uint8 CYFAR *)0x48000528u)
 
 /* IOPINS0_3 Address: CYREG_PRT3_DR Size (bytes): 10 */
-#define BS_IOPINS0_3_VAL ((const uint8 CYFAR *)0x48000528u)
+#define BS_IOPINS0_3_VAL ((const uint8 CYFAR *)0x48000530u)
 
 /* CYDEV_CLKDIST_ACFG0_CFG0 Address: CYREG_CLKDIST_ACFG0_CFG0 Size (bytes): 4 */
-#define BS_CYDEV_CLKDIST_ACFG0_CFG0_VAL ((const uint8 CYFAR *)0x48000534u)
+#define BS_CYDEV_CLKDIST_ACFG0_CFG0_VAL ((const uint8 CYFAR *)0x4800053Cu)
 
 
 /*******************************************************************************
@@ -310,9 +310,9 @@ static void AnalogSetDefault(void)
 	uint8 bg_xover_inl_trim = CY_GET_XTND_REG8((void CYFAR *)(CYREG_FLSHID_MFG_CFG_BG_XOVER_INL_TRIM + 1u));
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_BG_DFT0), (bg_xover_inl_trim & 0x07u));
 	CY_SET_XTND_REG8((void CYFAR *)(CYREG_BG_DFT1), ((bg_xover_inl_trim >> 4) & 0x0Fu));
-	CY_SET_XTND_REG8((void CYFAR *)CYREG_PRT15_AMUX, 0x20u);
-	CY_SET_XTND_REG8((void CYFAR *)CYREG_DAC0_SW3, 0x01u);
-	CY_SET_XTND_REG8((void CYFAR *)CYREG_BUS_SW0, 0x07u);
+	CY_SET_XTND_REG8((void CYFAR *)CYREG_PRT15_AG, 0x20u);
+	CY_SET_XTND_REG8((void CYFAR *)CYREG_DAC0_SW0, 0x02u);
+	CY_SET_XTND_REG8((void CYFAR *)CYREG_BUS_SW0, 0x05u);
 	CY_SET_XTND_REG8((void CYFAR *)CYREG_PUMP_CR0, 0x44u);
 }
 
@@ -352,20 +352,18 @@ void SetAnalogRoutingPumps(uint8 enabled)
 #define CY_AMUX_UNUSED CYREG_BOOST_SR
 /* This is an implementation detail of the AMux. Code that depends on it may be
    incompatible with other versions of PSoC Creator. */
-uint8 CYXDATA * const CYCODE Mux__addrTable[8] = {
+uint8 CYXDATA * const CYCODE Mux__addrTable[6] = {
 	(uint8 CYXDATA *)CYREG_PRT0_AG, (uint8 CYXDATA *)CYREG_DSM0_SW0, 
-	(uint8 CYXDATA *)CYREG_PRT1_AG, (uint8 CYXDATA *)CYREG_DSM0_SW0, 
 	(uint8 CYXDATA *)CYREG_PRT1_AG, (uint8 CYXDATA *)CYREG_DSM0_SW0, 
 	(uint8 CYXDATA *)CYREG_PRT1_AG, (uint8 CYXDATA *)CYREG_DSM0_SW0, 
 };
 
 /* This is an implementation detail of the AMux. Code that depends on it may be
    incompatible with other versions of PSoC Creator. */
-const uint8 CYCODE Mux__maskTable[8] = {
+const uint8 CYCODE Mux__maskTable[6] = {
 	0x80u, 0x80u, 
 	0x04u, 0x04u, 
 	0x10u, 0x01u, 
-	0x20u, 0x02u, 
 };
 
 /*******************************************************************************
@@ -383,7 +381,7 @@ const uint8 CYCODE Mux__maskTable[8] = {
 *******************************************************************************/
 void Mux_Set(uint8 channel)
 {
-	if (channel < 4)
+	if (channel < 3)
 	{
 		channel += channel;
 		*Mux__addrTable[channel] |= Mux__maskTable[channel];
@@ -408,7 +406,7 @@ void Mux_Set(uint8 channel)
 *******************************************************************************/
 void Mux_Unset(uint8 channel)
 {
-	if (channel < 4)
+	if (channel < 3)
 	{
 		channel += channel;
 		*Mux__addrTable[channel] &= (uint8)~Mux__maskTable[channel];

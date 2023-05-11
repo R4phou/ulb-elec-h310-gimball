@@ -171,12 +171,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PIN_ADC.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_AMux.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_AMux.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Z_ADC_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Z_ADC.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Z_ADC.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Y_ADC_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Y_ADC.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Y_ADC.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Mux.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Mux.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\X_ADC_aliases.h</File>
@@ -202,6 +196,11 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\UART_IntClock.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_uart.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\isr_uart.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\JOY_ADC_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\JOY_ADC.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\JOY_ADC.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ISR_SERVO.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ISR_SERVO.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\Export\ARM_GCC_Generic">
