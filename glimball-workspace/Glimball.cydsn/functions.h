@@ -14,7 +14,6 @@
 void light_LEDS();
 
 
-
 /**
  * Function that turn off all the LEDS
 */

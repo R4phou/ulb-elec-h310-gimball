@@ -53,8 +53,9 @@ CY_ISR(isr_uart_handler){ // Receive instructions from Computer
 
 void read_computer(uint8* data){
     if (!test_mode && !mode){
-        if (strcmp((const char *) data, "l") == 0) rotate_left();
-        else if(strcmp((const char *) data, "r") == 0) rotate_right();
+        if (strcmp((const char *) data, "2") == 0) rotate_left();
+        else if(strcmp((const char *) data, "3") == 0) rotate_right();
+        else if (strcmp((const char*) data, "1") == 0) switch_mode();
     }
 }
 
@@ -181,6 +182,7 @@ void print_screen(const char8 * string, int row, int column){
     LCD_ClearDisplay();
     LCD_Position(row,column);
     LCD_PrintString(string);
+    UART_PutString(string);
 }
 
 void testing_mode(){
