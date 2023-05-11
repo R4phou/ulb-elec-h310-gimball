@@ -54,10 +54,10 @@ CY_ISR(isr_uart_handler){ // Receive instructions from Computer
 }
 
 void read_computer(uint8* data){
-    if (!test_mode && !mode){
-        if (strcmp((const char *) data, "2") == 0) rotate_left(10);
-        else if(strcmp((const char *) data, "3") == 0) rotate_right(10);
-        else if (strcmp((const char*) data, "1") == 0) switch_mode();
+    if (strcmp((const char*) data, "t") == 0) switch_mode();
+    if (!mode && !test_mode){
+        if (strcmp((const char *) data, "l") == 0) error();// rotate_left(10);
+        else if(strcmp((const char *) data, "r") == 0) rotate_right(10);
     }
 }
 
@@ -74,8 +74,8 @@ void initialize(){
     VDAC_Start();
     UART_Start();
     isr_uart_StartEx(isr_uart_handler);
-    
     fill_sine(N_MAX);
+    print_screen("Keypad : ", 0, 0);
 }
 
 void fill_sine(int len){
@@ -101,13 +101,13 @@ void turn_off_LEDS(){
 void switch_to_gimball_mode(){
     mode = 1;
     light_LEDS();
-    print_screen("Glim", 0, 0);
+    print_screen("Glim : ", 0, 0);
 }
 
 void switch_to_test_mode(){
     mode = 0;
     turn_off_LEDS();
-    print_screen("Test", 0, 0);
+    print_screen("Test : ", 0, 0);
 }
 
 
@@ -123,15 +123,15 @@ void read_SW2(){
         CyDelay(200);
         if (test_mode == 2) {
             test_mode = 0;
-            print_screen("keypad", 0, 0);
+            print_screen("keypad ", 0, 0);
         }
         else if (test_mode == 0){
             test_mode = 1;
-            print_screen("pot", 0, 0);
+            print_screen("pot ", 0, 0);
         }
         else if (test_mode==1){
             test_mode = 2;
-            print_screen("joystick", 0, 0);
+            print_screen("joystick ", 0, 0);
         }
     }
 }
@@ -242,7 +242,7 @@ void get_angle(uint8* angle){
     *angle = MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     
     // Print the angle on the LCD + UART
-    print_angle(angle);
+    //print_angle(angle);
 }
 
 void print_angle(uint8* angle){
