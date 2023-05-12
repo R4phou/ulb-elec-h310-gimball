@@ -7,6 +7,10 @@
 #include "stdio.h"
 #include "string.h"
 
+/**
+ * Function that make a moving average on angles values
+*/
+float moving_average();
 
 /**
  * Function that lights all the LEDS

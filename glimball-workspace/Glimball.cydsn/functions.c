@@ -15,6 +15,7 @@
 #define STEP_MIN 10
 #define STEP_MAX 100
 #define DELAY 40
+#define WINDOW 10
 
 
 int mode = 0;  // 1 = glimball | 0 = test
@@ -24,6 +25,9 @@ int test_mode = 0; // Utilisation du potentiomètre = 1 | Utilisation du keypad 
 int iterator = 0;
 float sin_wave[N_MAX];
 int step = 0;
+
+uint8 angle_buffer[10] = {0};
+int buffer_index = 0;
 
 
 
@@ -242,6 +246,11 @@ void get_angle(uint8* angle){
     // Change the value of the accelerometer into an angle
     *angle = MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     
+    angle_buffer[buffer_index] = *angle;
+    float average_angle = moving_average();
+    buffer_index = (buffer_index + 1) % WINDOW;
+    *angle = (uint8)average_angle;
+    
     // Print the angle on the LCD + UART
     print_angle(angle);
 }
@@ -268,6 +277,14 @@ void gimball_mode(uint8* angle){
 void react(){
     react_to_keypad();
     read_SW1();
+}
+
+float moving_average() {
+    float sum = 0;
+    for (int i = 0; i < WINDOW; i++) {
+        sum += angle_buffer[i];
+    }
+    return sum / WINDOW;
 }
 
 void modes(){
