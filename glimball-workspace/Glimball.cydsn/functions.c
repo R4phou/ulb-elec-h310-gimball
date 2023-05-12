@@ -9,13 +9,13 @@
 #define MAX_ANGLE 180
 #define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/180
 #define pi 3.1415
-#define MIN_ACC 18800
-#define MAX_ACC 27400
+#define MIN_ACC 18000
+#define MAX_ACC 28000
 #define N_MAX 2000
 #define STEP_MIN 10
 #define STEP_MAX 100
 #define DELAY 40
-#define WINDOW 10
+#define WINDOW 3
 
 
 int mode = 0;  // 1 = glimball | 0 = test
@@ -240,6 +240,12 @@ void get_angle(uint8* angle){
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)) x = ADC_GetResult32();
     
+    if (x > MAX_ACC) {
+        x = MAX_ACC;
+    } else if (x < MIN_ACC) {
+        x = MIN_ACC;
+    }
+    
     // Modfify the step (for the sound)
     step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
     
@@ -251,6 +257,9 @@ void get_angle(uint8* angle){
     buffer_index = (buffer_index + 1) % WINDOW;
     *angle = (uint8)average_angle;
     
+    char x_char[20];
+    sprintf(x_char, "acc %.3u\n", x);
+    UART_PutString(x_char);
     // Print the angle on the LCD + UART
     print_angle(angle);
 }
