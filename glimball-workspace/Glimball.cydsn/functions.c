@@ -14,6 +14,7 @@
 #define N_MAX 2000
 #define STEP_MIN 10
 #define STEP_MAX 100
+#define DELAY 40
 
 
 int mode = 0;  // 1 = glimball | 0 = test
@@ -54,10 +55,10 @@ CY_ISR(isr_uart_handler){ // Receive instructions from Computer
 }
 
 void read_computer(uint8* data){
-    if (strcmp((const char*) data, "t") == 0) switch_mode();
+    if (*data == 't') switch_mode();
     if (!mode && !test_mode){
-        if (strcmp((const char *) data, "l") == 0) error();// rotate_left(10);
-        else if(strcmp((const char *) data, "r") == 0) rotate_right(10);
+        if (*data == 'l') rotate_left(10);
+        else if(*data == 'r') rotate_right(10);
     }
 }
 
@@ -153,14 +154,14 @@ void rotate_left(int angle){
     uint16 pos = PWM_ReadCompare() - angle*SERVO_ANGLE;
     if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
-    CyDelay(50);
+    CyDelay(DELAY);
 }
 
 void rotate_right(int angle){
     uint16 pos = PWM_ReadCompare() + angle*SERVO_ANGLE;
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     PWM_WriteCompare(pos);
-    CyDelay(50);
+    CyDelay(DELAY);
     
 }
 
@@ -188,7 +189,7 @@ void test_pot(){
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
     PWM_WriteCompare((uint32_t) MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
-    CyDelay(50);
+    CyDelay(DELAY);
 }
 
 void test_keyboard(){
@@ -216,7 +217,7 @@ void test_joystick(){
         joyval = ADC_GetResult32();
     }
     PWM_WriteCompare((uint32_t) MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
-    CyDelay(50);
+    CyDelay(DELAY);
 }
 
 void testing_mode(){
@@ -242,7 +243,7 @@ void get_angle(uint8* angle){
     *angle = MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     
     // Print the angle on the LCD + UART
-    //print_angle(angle);
+    print_angle(angle);
 }
 
 void print_angle(uint8* angle){
@@ -257,7 +258,7 @@ void print_angle(uint8* angle){
 void turn_servo(uint8* angle){
     uint32_t servo_value = MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE); // à changer
     PWM_WriteCompare(servo_value);
-    CyDelay(40);
+    CyDelay(DELAY);
 }
 
 void gimball_mode(uint8* angle){
