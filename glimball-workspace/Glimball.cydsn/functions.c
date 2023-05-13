@@ -10,11 +10,11 @@
 #define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/180
 #define pi 3.1415
 #define MIN_ACC 18000
-#define MAX_ACC 28000
-#define N_MAX 2000
-#define STEP_MIN 10
-#define STEP_MAX 100
-#define DELAY 40
+#define MAX_ACC 29000
+#define N_MAX 10000
+#define STEP_MIN 40
+#define STEP_MAX 400
+#define DELAY 50
 #define WINDOW 3
 
 

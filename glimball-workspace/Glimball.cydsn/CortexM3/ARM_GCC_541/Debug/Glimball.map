@@ -144,7 +144,7 @@ Common symbol       size              file
 
 errno               0x4               c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-reent.o)
 ADC_CountsPerVolt   0x4               .\CortexM3\ARM_GCC_541\Debug\Glimball.a(ADC.o)
-sin_wave            0x1f40            .\CortexM3\ARM_GCC_541\Debug\functions.o
+sin_wave            0x9c40            .\CortexM3\ARM_GCC_541\Debug\functions.o
 dieTemperature      0x2               .\CortexM3\ARM_GCC_541\Debug\Glimball.a(CyFlash.o)
 
 Discarded input sections
@@ -1648,7 +1648,7 @@ END GROUP
                 0x00004b9c        0x4 LONG 0x4bb0 __cy_region_init_ram
                 0x00004ba0        0x4 LONG 0x1fff80c8 __cy_region_start_data
                 0x00004ba4        0x4 LONG 0x80 __cy_region_init_size_ram
-                0x00004ba8        0x4 LONG 0x1fb0 __cy_region_zero_size_ram
+                0x00004ba8        0x4 LONG 0x9cb0 __cy_region_zero_size_ram
                 0x00004bac                __cy_regions_end = .
                 0x00004bb0                . = ALIGN (0x8)
  *fill*         0x00004bac        0x4 
@@ -1701,7 +1701,7 @@ END GROUP
 .igot.plt       0x1fff8148        0x0 load address 0x00004c30
  .igot.plt      0x1fff8148        0x0 c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
-.bss            0x1fff8148     0x1fb0 load address 0x00004c30
+.bss            0x1fff8148     0x9cb0 load address 0x00004c30
                 0x1fff8148                PROVIDE (__bss_start__, .)
  *(.shbss)
  *(.bss .bss.* .gnu.linkonce.b.*)
@@ -1739,27 +1739,27 @@ END GROUP
                 0x1fff81ac        0x4 c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-nano-mallocr.o)
                 0x1fff81ac                __malloc_free_list
  *(COMMON)
- COMMON         0x1fff81b0     0x1f40 .\CortexM3\ARM_GCC_541\Debug\functions.o
+ COMMON         0x1fff81b0     0x9c40 .\CortexM3\ARM_GCC_541\Debug\functions.o
                 0x1fff81b0                sin_wave
- COMMON         0x1fffa0f0        0x4 .\CortexM3\ARM_GCC_541\Debug\Glimball.a(ADC.o)
-                0x1fffa0f0                ADC_CountsPerVolt
- COMMON         0x1fffa0f4        0x4 c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-reent.o)
-                0x1fffa0f4                errno
-                0x1fffa0f8                . = ALIGN (0x8)
+ COMMON         0x20001df0        0x4 .\CortexM3\ARM_GCC_541\Debug\Glimball.a(ADC.o)
+                0x20001df0                ADC_CountsPerVolt
+ COMMON         0x20001df4        0x4 c:/program files (x86)/cypress/psoc creator/4.4/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-reent.o)
+                0x20001df4                errno
+                0x20001df8                . = ALIGN (0x8)
  *(.ram.b)
-                0x1fffa0f8                _end = .
-                0x1fffa0f8                __end = .
-                0x1fffa0f8                PROVIDE (end, .)
-                0x1fffa0f8                PROVIDE (__bss_end__, .)
+                0x20001df8                _end = .
+                0x20001df8                __end = .
+                0x20001df8                PROVIDE (end, .)
+                0x20001df8                PROVIDE (__bss_end__, .)
                 0x00004bb0                __cy_region_init_ram = LOADADDR (.data)
                 0x00000080                __cy_region_init_size_ram = (_edata - ADDR (.data))
-                0x00001fb0                __cy_region_zero_size_ram = (_end - _edata)
+                0x00009cb0                __cy_region_zero_size_ram = (_end - _edata)
 
-.heap           0x1fffa0f8       0x80 load address 0x00004c30
-                0x1fffa0f8                . = _end
-                0x1fffa178                . = (. + 0x80)
- *fill*         0x1fffa0f8       0x80 
-                0x1fffa178                __cy_heap_limit = .
+.heap           0x20001df8       0x80 load address 0x00004c30
+                0x20001df8                . = _end
+                0x20001e78                . = (. + 0x80)
+ *fill*         0x20001df8       0x80 
+                0x20001e78                __cy_heap_limit = .
 
 .stack          0x20007800      0x800
                 0x20007800                __cy_stack_limit = .
