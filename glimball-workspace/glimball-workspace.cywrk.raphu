@@ -43,10 +43,8 @@
 <v>glimball-workspace\Glimball\Header Files\keypad.h</v>
 <v>glimball-workspace\Glimball\Source Files</v>
 <v>glimball-workspace\Glimball\Source Files\functions.c</v>
-<v>glimball-workspace\Glimball\Source Files\interruptions.c</v>
 <v>glimball-workspace\Glimball\Source Files\keypad.c</v>
 <v>glimball-workspace\Glimball\Source Files\main.c</v>
-<v>glimball-workspace\Glimball\Source Files\sound.c</v>
 <v>glimball-workspace\Glimball\Generated_Source</v>
 <v>glimball-workspace\Glimball\Generated_Source\PSoC5</v>
 </VisibleNodeIds>
@@ -96,7 +94,6 @@
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\functions.lst</v>
-<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\interruptions.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_SERVO.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_SOUND.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart.lst</v>
@@ -120,7 +117,6 @@
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ROW2.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ROW3.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SERVO.lst</v>
-<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\sound.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW1.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW2.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW3.lst</v>
@@ -172,12 +168,12 @@
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\functions.lst</v>
-<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\interruptions.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_SERVO.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_SOUND.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\JOY_ADC.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\keypad.lst</v>
+<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -238,9 +234,8 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\Glimball.cydsn\main.c" />
-<name v=".\Glimball.cydsn\functions.h" />
 <name v=".\Glimball.cydsn\functions.c" />
+<name v=".\Glimball.cydsn\functions.h" />
 <name v=".\Glimball.cydsn\TopDesign\TopDesign.cysch" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
@@ -249,7 +244,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1098, 520" SelectedTabbedMdiWindow="d46632cf-fd2c-4409-b7ea-5020b8330249"><DocumentWindow Key="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\main.c" Guid="bf57674e-3784-4481-aece-62483bc55dc2" /><DocumentWindow Key="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.h" Guid="c645eb3e-340a-4233-b683-e0afc1651484" /><DocumentWindow Key="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.c" Guid="d46632cf-fd2c-4409-b7ea-5020b8330249" /><DocumentWindow Key="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\TopDesign\TopDesign.cysch" Guid="7199fa1c-f71a-4f46-bf3e-58482d32cdb7" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1098, 691" SelectedTabbedMdiWindow="8bc2ccec-2c24-41bf-bca4-2fadc8babc37"><DocumentWindow Key="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.c" Guid="8bc2ccec-2c24-41bf-bca4-2fadc8babc37" /><DocumentWindow Key="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.h" Guid="0915bea6-77ac-4db6-8275-4e0c3ff00c4a" /><DocumentWindow Key="C:\Documents\ULB\BA3\ELEC-H310\elec-h310-glimball\glimball-workspace\Glimball.cydsn\TopDesign\TopDesign.cysch" Guid="d72af5e3-b374-4899-bd01-97d62af5a0a8" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

@@ -18,8 +18,10 @@
 #define WINDOW 3
 
 
-int mode = 0;  // 1 = glimball | 0 = test
-int test_mode = 0; // Utilisation du potentiomètre = 1 | Utilisation du keypad = 0 | Utilisation joystick = 2
+/* Global variables */
+
+int mode = 0;  // test = 0 | gimball = 1
+int test_mode = 0; // keypad = 0 | Potentiometer = 1 | joystick = 2
 
 
 int iterator = 0;
@@ -30,6 +32,8 @@ uint8 angle_buffer[10] = {0};
 int buffer_index = 0;
 
 
+
+/*                      Interruptions handlers               */
 
 CY_ISR(isr_sound_handler){
     iterator += step;
@@ -58,14 +62,6 @@ CY_ISR(isr_uart_handler){ // Receive instructions from Computer
     }while ((status & UART_RX_STS_FIFO_NOTEMPTY) != 0);
 }
 
-void read_computer(uint8* data){
-    if (*data == 't') switch_mode();
-    if (!mode && !test_mode){
-        if (*data == 'l') rotate_left(10);
-        else if(*data == 'r') rotate_right(10);
-    }
-}
-
 
 void initialize(){
     LCD_Start();
@@ -83,11 +79,10 @@ void initialize(){
     print_screen("Keypad : ", 0, 0);
 }
 
-void fill_sine(int len){
-    for (int i =0; i < len; i++){
-        sin_wave[i] = sin(i*2*pi/len)*8 + 8;
-    }
-}
+
+
+
+/*          Useful functions                                */
 
 void light_LEDS(){
     LED1_Write(1);
@@ -103,51 +98,9 @@ void turn_off_LEDS(){
     LED4_Write(0);
 }
 
-void switch_to_gimball_mode(){
-    mode = 1;
-    light_LEDS();
-    print_screen("Glim : ", 0, 0);
-}
-
-void switch_to_test_mode(){
-    mode = 0;
-    turn_off_LEDS();
-    print_screen("Test : ", 0, 0);
-}
-
-
-void read_SW1(){
-    if (SW1_Read()){
-        CyDelay(200);
-        switch_mode();
-    }
-}
-
-void read_SW2(){
-    if (!mode && SW2_Read()){
-        CyDelay(200);
-        if (test_mode == 2) {
-            test_mode = 0;
-            print_screen("keypad ", 0, 0);
-        }
-        else if (test_mode == 0){
-            test_mode = 1;
-            print_screen("pot ", 0, 0);
-        }
-        else if (test_mode==1){
-            test_mode = 2;
-            print_screen("joystick ", 0, 0);
-        }
-    }
-}
-
-void switch_mode(){
-    mode ? switch_to_test_mode():switch_to_gimball_mode();
-}
-
 void error(){
     print_screen("ERROR", 0, 0);
-    CyDelay(100000);
+    CyDelay(100000); // Error freezes everything
 }
 
 void activate_sound(){
@@ -166,16 +119,11 @@ void rotate_right(int angle){
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     PWM_WriteCompare(pos);
     CyDelay(DELAY);
-    
 }
 
-void react_to_keypad(){
-    uint8_t value = keypadScan();
-    if (value != 'z'){
-        if (value == '1'){
-        CyDelay(200);
-        switch_mode();
-        }
+void fill_sine(int len){
+    for (int i =0; i < len; i++){
+        sin_wave[i] = sin(i*2*pi/len)*8 + 8;
     }
 }
 
@@ -186,82 +134,49 @@ void print_screen(const char8 * string, int row, int column){
     UART_PutString(string);
 }
 
-void test_pot(){
-    uint32_t potval = 0;
-    Mux_Select(0);
-    CyDelay(10);
-    ADC_StartConvert();
-    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
-    PWM_WriteCompare((uint32_t) MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
-    CyDelay(DELAY);
-}
-
-void test_keyboard(){
-    uint8_t value = keypadScan();
-    if (value != 'z'){
-        if (value == '2'){
-            CyDelay(100);
-            rotate_left(10);
-        }
-        else if(value == '3'){
-            CyDelay(100);
-            rotate_right(10);
-        }
+void read_computer(uint8* data){
+    if (*data == 't') switch_mode();
+    if (!mode && !test_mode){
+        if (*data == 'l') rotate_left(10);
+        else if(*data == 'r') rotate_right(10);
     }
 }
 
-void test_joystick(){
-    int32 joyval = 0;
-    Mux_Select(2);
-    CyDelay(10);
-    ADC_StartConvert();
-    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)){
-        if ( ADC_GetResult32()>joyval) rotate_right(1);
-        else if (ADC_GetResult32()<joyval)rotate_left(1);
-        joyval = ADC_GetResult32();
-    }
-    PWM_WriteCompare((uint32_t) MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
-    CyDelay(DELAY);
-}
-
-void testing_mode(){
-    read_SW2();
-    if (test_mode == 1){ test_pot();}
-    else if (test_mode == 0) test_keyboard();
-    else if (test_mode == 2) test_joystick();
-    
-}
-
+/*          Accelerometer information to angle              */
 void get_angle(uint8* angle){
     // Read the accelerometer
     uint32_t x=0;
     Mux_Select(1); //Selection of the first channel
-    CyDelay(10);
+    CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)) x = ADC_GetResult32();
     
-    if (x > MAX_ACC) {
-        x = MAX_ACC;
-    } else if (x < MIN_ACC) {
-        x = MIN_ACC;
-    }
-    
+    x = (x > MAX_ACC) ? MAX_ACC : ((x < MIN_ACC) ? MIN_ACC : x);
+
     // Modfify the step (for the sound)
     step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
     
     // Change the value of the accelerometer into an angle
     *angle = MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     
+    // Use of a mean to soften the movement of the servo
     angle_buffer[buffer_index] = *angle;
-    float average_angle = moving_average();
+    *angle = (uint8) moving_average();
     buffer_index = (buffer_index + 1) % WINDOW;
-    *angle = (uint8)average_angle;
     
     char x_char[20];
     sprintf(x_char, "acc %.3u\n", x);
     UART_PutString(x_char);
     // Print the angle on the LCD + UART
     print_angle(angle);
+}
+
+float moving_average() {
+    float sum = 0;
+    for (int i = 0; i < WINDOW; i++) {
+        sum += angle_buffer[i];
+    }
+    return sum / WINDOW;
 }
 
 void print_angle(uint8* angle){
@@ -273,27 +188,135 @@ void print_angle(uint8* angle){
     UART_PutString(x_char);
 }
 
-void turn_servo(uint8* angle){
-    uint32_t servo_value = MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE); // à changer
-    PWM_WriteCompare(servo_value);
+/*          Test mode               */
+
+void testing_mode(){
+    read_SW2();
+    switch (test_mode) {
+    case 0:
+        test_keyboard();
+        break;
+    case 1:
+        test_pot();
+        break;
+    case 2:
+        test_joystick();
+        break;
+    }
+}
+
+void test_pot(){
+    uint32_t potval = 0;
+    Mux_Select(0);
+    CyDelay(10); // For the time needed to select the good MUX gate
+    ADC_StartConvert();
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
+    PWM_WriteCompare((uint32_t) MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
     CyDelay(DELAY);
 }
+
+void test_keyboard(){
+    uint8_t value = keypadScan();
+    if (value != 'z'){
+        if (value == '2'){
+            CyDelay(100); // For the sensibility of the button
+            rotate_left(10);
+        }
+        else if(value == '3'){
+            CyDelay(100); // For the sensibility of the button
+            rotate_right(10);
+        }
+    }
+}
+
+void test_joystick(){
+    int32 joyval = 0;
+    Mux_Select(2);
+    CyDelay(10); // For the time needed to select the good MUX gate
+    ADC_StartConvert();
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)){
+        int32_t result = ADC_GetResult32();
+        rotate_right(result > joyval);
+        rotate_left(result < joyval);
+        joyval = result;
+    }
+    PWM_WriteCompare((uint32_t) MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
+    CyDelay(DELAY);
+}
+
+
+/*          Gimball mode               */
 
 void gimball_mode(uint8* angle){
     turn_servo(angle);   
 }
+
+
+void turn_servo(uint8* angle){
+    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE));
+    CyDelay(DELAY);
+}
+
+
+/*          Reaction to keypad and buttons                */
 
 void react(){
     react_to_keypad();
     read_SW1();
 }
 
-float moving_average() {
-    float sum = 0;
-    for (int i = 0; i < WINDOW; i++) {
-        sum += angle_buffer[i];
+void react_to_keypad(){
+    uint8_t value = keypadScan();
+    if (value != 'z'){
+        if (value == '1'){
+        CyDelay(200); // For the sensibility of the button
+        switch_mode();
+        }
     }
-    return sum / WINDOW;
+}
+
+void read_SW1(){
+    if (SW1_Read()){
+        CyDelay(200); // For the sensibility of the button
+        switch_mode();
+    }
+}
+
+void read_SW2(){
+    if (!mode && SW2_Read()){
+        CyDelay(200); // For the sensibility of the button
+        if (test_mode == 2) {
+            test_mode = 0;
+            print_screen("keypad ", 0, 0);
+        }
+        else if (test_mode == 0){
+            test_mode = 1;
+            print_screen("pot ", 0, 0);
+        }
+        else if (test_mode==1){
+            test_mode = 2;
+            print_screen("joystick ", 0, 0);
+        }
+    }
+}
+
+
+/*          Determination of the mode                */
+
+void switch_to_gimball_mode(){
+    mode = 1;
+    light_LEDS();
+    print_screen("Glim : ", 0, 0);
+}
+
+void switch_to_test_mode(){
+    mode = 0;
+    turn_off_LEDS();
+    print_screen("Test : ", 0, 0);
+}
+
+void switch_mode(){
+    mode ? switch_to_test_mode():switch_to_gimball_mode();
 }
 
 void modes(){
