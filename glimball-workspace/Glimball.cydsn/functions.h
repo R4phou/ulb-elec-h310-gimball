@@ -85,16 +85,10 @@ void error();
 void react_to_keypad();
 
 
-
-/**
- * Function that rotates the servo to the right of the given angle
+/*
+* Function that rotates the servo of the given angle right=positive, left=negative
 */
-void rotate_right(int angle);
-
-/**
- * Function that rotates the servo to the left of the given angle
-*/
-void rotate_left(int angle);
+void rotate(int angle);
 
 /**
  * Test the reaction on the buttons and keyboard

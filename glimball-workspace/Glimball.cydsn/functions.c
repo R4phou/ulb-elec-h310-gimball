@@ -107,16 +107,10 @@ void activate_sound(){
     ISR_SOUND_StartEx(isr_sound_handler);
 }
 
-void rotate_left(int angle){
-    uint16 pos = PWM_ReadCompare() - angle*SERVO_ANGLE;
-    if (pos < MIN_SERVO) pos = MIN_SERVO;
-    PWM_WriteCompare(pos);
-    CyDelay(DELAY);
-}
-
-void rotate_right(int angle){
-    uint16 pos = PWM_ReadCompare() + angle*SERVO_ANGLE;
+void rotate_servo(int angle){
+    uint16 pos = MIN_SERVO + angle*SERVO_ANGLE;
     if (pos > MAX_SERVO) pos = MAX_SERVO;
+    if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
     CyDelay(DELAY);
 }
@@ -137,8 +131,8 @@ void print_screen(const char8 * string, int row, int column){
 void read_computer(uint8* data){
     if (*data == 't') switch_mode();
     if (!mode && !test_mode){
-        if (*data == 'l') rotate_left(10);
-        else if(*data == 'r') rotate_right(10);
+        if (*data == 'l') rotate_servo(-10);
+        else if(*data == 'r') rotate_servo(10);
     }
 }
 
@@ -220,24 +214,24 @@ void test_keyboard(){
     if (value != 'z'){
         if (value == '2'){
             CyDelay(100); // For the sensibility of the button
-            rotate_left(10);
+            rotate_servo(-10);
         }
         else if(value == '3'){
             CyDelay(100); // For the sensibility of the button
-            rotate_right(10);
+            rotate_servo(10);
         }
     }
 }
 
 void test_joystick(){
-    int32 joyval = 0;
+    int32_t joyval = 0;
     Mux_Select(2);
     CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)){
         int32_t result = ADC_GetResult32();
-        rotate_right(result > joyval);
-        rotate_left(result < joyval);
+        if (result > joyval) rotate_servo(1);
+        else if (result < joyval) rotate_servo(-1);
         joyval = result;
     }
     PWM_WriteCompare((uint32_t) MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
