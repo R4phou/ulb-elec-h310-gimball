@@ -1,6 +1,6 @@
 /**
 * C file: write all the functions that are listed in the header file corresponding
-* All imports and include should be done in header file
+* All imports and includes should be done in matching header file
 */
 #include "functions.h"
 #define MIN_SERVO 500
@@ -75,6 +75,7 @@ void initialize(){
     VDAC_Start();
     UART_Start();
     isr_uart_StartEx(isr_uart_handler);
+    ISR_SOUND_StartEx(isr_sound_handler);
     fill_sine(N_MAX);
     print_screen("Keypad : ", 0, 0);
 }
@@ -101,10 +102,6 @@ void turn_off_LEDS(){
 void error(){
     print_screen("ERROR", 0, 0);
     CyDelay(100000); // Error freezes everything
-}
-
-void activate_sound(){
-    ISR_SOUND_StartEx(isr_sound_handler);
 }
 
 void rotate_servo(int angle){
@@ -151,10 +148,7 @@ void get_angle(uint8* angle){
     step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
     
     // Change the value of the accelerometer into an angle
-    *angle = MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
-    
-    // Use of a mean to soften the movement of the servo
-    angle_buffer[buffer_index] = *angle;
+    angle_buffer[buffer_index] =  MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     *angle = (uint8) moving_average();
     buffer_index = (buffer_index + 1) % WINDOW;
     
@@ -249,25 +243,26 @@ void gimball_mode(uint8* angle){
 /*          Reaction to keypad and buttons                */
 
 void react(){
-    react_to_keypad();
-    read_SW1();
+    if(read_SW1() || react_to_keypad()) switch_mode();
 }
 
-void react_to_keypad(){
+int react_to_keypad(){
     uint8_t value = keypadScan();
     if (value != 'z'){
         if (value == '1'){
         CyDelay(200); // For the sensibility of the button
-        switch_mode();
+        return 1;
         }
     }
+    return 0;
 }
 
-void read_SW1(){
+int read_SW1(){
     if (SW1_Read()){
         CyDelay(200); // For the sensibility of the button
-        switch_mode();
+        return 1;
     }
+    return 0;
 }
 
 void read_SW2(){

@@ -34,11 +34,6 @@ void fill_sine(int len);
 */
 void read_computer(uint8* rxData);
 
-/**
- * Function that activates the interruption
-*/
-void activate_sound();
-
 
 /**
  * Function that switch modes
@@ -55,9 +50,10 @@ void switch_to_test_mode();
 
 
 /**
- * function that changes the mode when a button is pressed
+ * Function that reads the button SW1
+ * @return 1 if the button is pressed
 */
-void read_SW1();
+int read_SW1();
 
 
 
@@ -80,15 +76,16 @@ void error();
 
 
 /**
- * Function that concerns the reading of the keypad and calls the function that needs to be called
+ * Function that concerns the reading of the keypad to switch the mode
+ * @return 1 if needs to switcht the mode
 */
-void react_to_keypad();
+int react_to_keypad();
 
 
 /*
 * Function that rotates the servo of the given angle right=positive, left=negative
 */
-void rotate(int angle);
+void rotate_servo(int angle);
 
 /**
  * Test the reaction on the buttons and keyboard

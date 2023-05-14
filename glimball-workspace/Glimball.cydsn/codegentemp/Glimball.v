@@ -1,6 +1,6 @@
 // ======================================================================
 // Glimball.v generated from TopDesign.cysch
-// 05/11/2023 at 11:56
+// 05/14/2023 at 15:55
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -848,6 +848,18 @@ endmodule
 // top
 module top ;
 
+    electrical  Net_151;
+    electrical  Net_150;
+    electrical  Net_147;
+    electrical  Net_146;
+    electrical  Net_143;
+    electrical  Net_142;
+    electrical  Net_140;
+    electrical  Net_133;
+    electrical  Net_134;
+    electrical  Net_135;
+    electrical  Net_138;
+    electrical  Net_136;
           wire  Net_104;
           wire  Net_103;
           wire  Net_102;
@@ -895,6 +907,18 @@ module top ;
           wire  Net_14;
           wire  Net_11;
           wire  Net_12;
+    electrical  Net_149;
+    electrical  Net_145;
+    electrical  Net_141;
+    electrical  Net_137;
+    electrical  Net_114;
+    electrical  Net_113;
+    electrical  Net_122;
+    electrical  Net_121;
+    electrical  Net_126;
+    electrical  Net_125;
+    electrical  Net_130;
+    electrical  Net_129;
           wire  Net_59;
     electrical  Net_80;
           wire  Net_61;
@@ -951,7 +975,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b0),
+		  .use_annotation(1'b1),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -965,6 +989,7 @@ module top ;
 		  .io({tmpIO_0__LED1_net[0:0]}),
 		  .siovref(tmpSIOVREF__LED1_net),
 		  .interrupt({tmpINTERRUPT_0__LED1_net[0:0]}),
+		  .annotation({Net_137}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1026,7 +1051,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b0),
+		  .use_annotation(1'b1),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1040,6 +1065,7 @@ module top ;
 		  .io({tmpIO_0__LED2_net[0:0]}),
 		  .siovref(tmpSIOVREF__LED2_net),
 		  .interrupt({tmpINTERRUPT_0__LED2_net[0:0]}),
+		  .annotation({Net_141}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1101,7 +1127,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b0),
+		  .use_annotation(1'b1),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1115,6 +1141,7 @@ module top ;
 		  .io({tmpIO_0__LED3_net[0:0]}),
 		  .siovref(tmpSIOVREF__LED3_net),
 		  .interrupt({tmpINTERRUPT_0__LED3_net[0:0]}),
+		  .annotation({Net_145}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1176,7 +1203,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b0),
+		  .use_annotation(1'b1),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1190,6 +1217,7 @@ module top ;
 		  .io({tmpIO_0__LED4_net[0:0]}),
 		  .siovref(tmpSIOVREF__LED4_net),
 		  .interrupt({tmpINTERRUPT_0__LED4_net[0:0]}),
+		  .annotation({Net_149}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1251,7 +1279,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b0),
+		  .use_annotation(1'b1),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1265,6 +1293,7 @@ module top ;
 		  .io({tmpIO_0__SW1_net[0:0]}),
 		  .siovref(tmpSIOVREF__SW1_net),
 		  .interrupt({tmpINTERRUPT_0__SW1_net[0:0]}),
+		  .annotation({Net_113}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1326,7 +1355,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b0),
+		  .use_annotation(1'b1),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1340,6 +1369,7 @@ module top ;
 		  .io({tmpIO_0__SW2_net[0:0]}),
 		  .siovref(tmpSIOVREF__SW2_net),
 		  .interrupt({tmpINTERRUPT_0__SW2_net[0:0]}),
+		  .annotation({Net_121}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1401,7 +1431,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b0),
+		  .use_annotation(1'b1),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1415,6 +1445,7 @@ module top ;
 		  .io({tmpIO_0__SW3_net[0:0]}),
 		  .siovref(tmpSIOVREF__SW3_net),
 		  .interrupt({tmpINTERRUPT_0__SW3_net[0:0]}),
+		  .annotation({Net_125}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -1476,7 +1507,7 @@ module top ;
 		  .sio_vohsel(""),
 		  .slew_rate(1'b0),
 		  .spanning(0),
-		  .use_annotation(1'b0),
+		  .use_annotation(1'b1),
 		  .vtrip(2'b10),
 		  .width(1),
 		  .ovt_hyst_trim(1'b0),
@@ -1490,6 +1521,7 @@ module top ;
 		  .io({tmpIO_0__SW4_net[0:0]}),
 		  .siovref(tmpSIOVREF__SW4_net),
 		  .interrupt({tmpINTERRUPT_0__SW4_net[0:0]}),
+		  .annotation({Net_129}),
 		  .in_clock({1'b0}),
 		  .in_clock_en({1'b1}),
 		  .in_reset({1'b0}),
@@ -2698,6 +2730,274 @@ module top ;
 		ISR_SERVO
 		 (.int_signal(Net_33));
 
+
+    cy_annotation_universal_v1_0 PWR_1 (
+        .connect({
+            Net_114
+        })
+    );
+    defparam PWR_1.comp_name = "Power_v1_0";
+    defparam PWR_1.port_names = "T1";
+    defparam PWR_1.width = 1;
+
+    cy_annotation_universal_v1_0 SW_1 (
+        .connect({
+            Net_114,
+            Net_113
+        })
+    );
+    defparam SW_1.comp_name = "SwitchSPST_v1_0";
+    defparam SW_1.port_names = "T1, T2";
+    defparam SW_1.width = 2;
+
+    cy_annotation_universal_v1_0 GND_1 (
+        .connect({
+            Net_136
+        })
+    );
+    defparam GND_1.comp_name = "Gnd_v1_0";
+    defparam GND_1.port_names = "T1";
+    defparam GND_1.width = 1;
+
+    cy_annotation_universal_v1_0 R_1 (
+        .connect({
+            Net_136,
+            Net_113
+        })
+    );
+    defparam R_1.comp_name = "Resistor_v1_0";
+    defparam R_1.port_names = "T1, T2";
+    defparam R_1.width = 2;
+
+    cy_annotation_universal_v1_0 R_5 (
+        .connect({
+            Net_137,
+            Net_138
+        })
+    );
+    defparam R_5.comp_name = "Resistor_v1_0";
+    defparam R_5.port_names = "T1, T2";
+    defparam R_5.width = 2;
+
+    cy_annotation_universal_v1_0 PWR_2 (
+        .connect({
+            Net_122
+        })
+    );
+    defparam PWR_2.comp_name = "Power_v1_0";
+    defparam PWR_2.port_names = "T1";
+    defparam PWR_2.width = 1;
+
+    cy_annotation_universal_v1_0 SW_2 (
+        .connect({
+            Net_122,
+            Net_121
+        })
+    );
+    defparam SW_2.comp_name = "SwitchSPST_v1_0";
+    defparam SW_2.port_names = "T1, T2";
+    defparam SW_2.width = 2;
+
+    cy_annotation_universal_v1_0 GND_2 (
+        .connect({
+            Net_135
+        })
+    );
+    defparam GND_2.comp_name = "Gnd_v1_0";
+    defparam GND_2.port_names = "T1";
+    defparam GND_2.width = 1;
+
+    cy_annotation_universal_v1_0 R_2 (
+        .connect({
+            Net_135,
+            Net_121
+        })
+    );
+    defparam R_2.comp_name = "Resistor_v1_0";
+    defparam R_2.port_names = "T1, T2";
+    defparam R_2.width = 2;
+
+    cy_annotation_universal_v1_0 PWR_3 (
+        .connect({
+            Net_126
+        })
+    );
+    defparam PWR_3.comp_name = "Power_v1_0";
+    defparam PWR_3.port_names = "T1";
+    defparam PWR_3.width = 1;
+
+    cy_annotation_universal_v1_0 SW_3 (
+        .connect({
+            Net_126,
+            Net_125
+        })
+    );
+    defparam SW_3.comp_name = "SwitchSPST_v1_0";
+    defparam SW_3.port_names = "T1, T2";
+    defparam SW_3.width = 2;
+
+    cy_annotation_universal_v1_0 GND_3 (
+        .connect({
+            Net_134
+        })
+    );
+    defparam GND_3.comp_name = "Gnd_v1_0";
+    defparam GND_3.port_names = "T1";
+    defparam GND_3.width = 1;
+
+    cy_annotation_universal_v1_0 R_3 (
+        .connect({
+            Net_134,
+            Net_125
+        })
+    );
+    defparam R_3.comp_name = "Resistor_v1_0";
+    defparam R_3.port_names = "T1, T2";
+    defparam R_3.width = 2;
+
+    cy_annotation_universal_v1_0 PWR_4 (
+        .connect({
+            Net_130
+        })
+    );
+    defparam PWR_4.comp_name = "Power_v1_0";
+    defparam PWR_4.port_names = "T1";
+    defparam PWR_4.width = 1;
+
+    cy_annotation_universal_v1_0 SW_4 (
+        .connect({
+            Net_130,
+            Net_129
+        })
+    );
+    defparam SW_4.comp_name = "SwitchSPST_v1_0";
+    defparam SW_4.port_names = "T1, T2";
+    defparam SW_4.width = 2;
+
+    cy_annotation_universal_v1_0 GND_4 (
+        .connect({
+            Net_133
+        })
+    );
+    defparam GND_4.comp_name = "Gnd_v1_0";
+    defparam GND_4.port_names = "T1";
+    defparam GND_4.width = 1;
+
+    cy_annotation_universal_v1_0 R_4 (
+        .connect({
+            Net_133,
+            Net_129
+        })
+    );
+    defparam R_4.comp_name = "Resistor_v1_0";
+    defparam R_4.port_names = "T1, T2";
+    defparam R_4.width = 2;
+
+    cy_annotation_universal_v1_0 D_1 (
+        .connect({
+            Net_138,
+            Net_140
+        })
+    );
+    defparam D_1.comp_name = "LED_v1_0";
+    defparam D_1.port_names = "A, K";
+    defparam D_1.width = 2;
+
+    cy_annotation_universal_v1_0 GND_5 (
+        .connect({
+            Net_140
+        })
+    );
+    defparam GND_5.comp_name = "Gnd_v1_0";
+    defparam GND_5.port_names = "T1";
+    defparam GND_5.width = 1;
+
+    cy_annotation_universal_v1_0 R_6 (
+        .connect({
+            Net_141,
+            Net_142
+        })
+    );
+    defparam R_6.comp_name = "Resistor_v1_0";
+    defparam R_6.port_names = "T1, T2";
+    defparam R_6.width = 2;
+
+    cy_annotation_universal_v1_0 D_2 (
+        .connect({
+            Net_142,
+            Net_143
+        })
+    );
+    defparam D_2.comp_name = "LED_v1_0";
+    defparam D_2.port_names = "A, K";
+    defparam D_2.width = 2;
+
+    cy_annotation_universal_v1_0 GND_6 (
+        .connect({
+            Net_143
+        })
+    );
+    defparam GND_6.comp_name = "Gnd_v1_0";
+    defparam GND_6.port_names = "T1";
+    defparam GND_6.width = 1;
+
+    cy_annotation_universal_v1_0 R_7 (
+        .connect({
+            Net_145,
+            Net_146
+        })
+    );
+    defparam R_7.comp_name = "Resistor_v1_0";
+    defparam R_7.port_names = "T1, T2";
+    defparam R_7.width = 2;
+
+    cy_annotation_universal_v1_0 D_3 (
+        .connect({
+            Net_146,
+            Net_147
+        })
+    );
+    defparam D_3.comp_name = "LED_v1_0";
+    defparam D_3.port_names = "A, K";
+    defparam D_3.width = 2;
+
+    cy_annotation_universal_v1_0 GND_7 (
+        .connect({
+            Net_147
+        })
+    );
+    defparam GND_7.comp_name = "Gnd_v1_0";
+    defparam GND_7.port_names = "T1";
+    defparam GND_7.width = 1;
+
+    cy_annotation_universal_v1_0 R_8 (
+        .connect({
+            Net_149,
+            Net_150
+        })
+    );
+    defparam R_8.comp_name = "Resistor_v1_0";
+    defparam R_8.port_names = "T1, T2";
+    defparam R_8.width = 2;
+
+    cy_annotation_universal_v1_0 D_4 (
+        .connect({
+            Net_150,
+            Net_151
+        })
+    );
+    defparam D_4.comp_name = "LED_v1_0";
+    defparam D_4.port_names = "A, K";
+    defparam D_4.width = 2;
+
+    cy_annotation_universal_v1_0 GND_8 (
+        .connect({
+            Net_151
+        })
+    );
+    defparam GND_8.comp_name = "Gnd_v1_0";
+    defparam GND_8.port_names = "T1";
+    defparam GND_8.width = 1;
 
 
 
