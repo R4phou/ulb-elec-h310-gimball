@@ -7,7 +7,7 @@
 #define MAX_SERVO 2500
 #define MIN_ANGLE 0
 #define MAX_ANGLE 180
-#define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/180
+#define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/(MAX_ANGLE - MIN_ANGLE)
 #define pi 3.1415
 #define MIN_ACC 18000
 #define MAX_ACC 29000
@@ -242,13 +242,7 @@ void test_joystick(){
 /*          Gimball mode               */
 
 void gimball_mode(uint8* angle){
-    turn_servo(angle);   
-}
-
-
-void turn_servo(uint8* angle){
-    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE));
-    CyDelay(DELAY);
+    rotate_servo(*angle-MIN_ANGLE);   
 }
 
 

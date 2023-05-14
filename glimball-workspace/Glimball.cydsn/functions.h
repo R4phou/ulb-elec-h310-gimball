@@ -135,12 +135,6 @@ void get_angle(uint8* angle);
 
 
 /**
- * Function that turns the servo to the angle received
-*/
-void turn_servo(uint8* angle);
-
-
-/**
  * Print the angle on the LCD and communicate it with UART
 */
 void print_angle(uint8* angle);
