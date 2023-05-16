@@ -105,7 +105,7 @@ void error(){
 }
 
 void rotate_servo(int angle){
-    uint16 pos = MIN_SERVO + angle*SERVO_ANGLE;
+    uint16 pos = PWM_ReadCompare() + angle*SERVO_ANGLE;
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
@@ -134,7 +134,7 @@ void read_computer(uint8* data){
 }
 
 /*          Accelerometer information to angle              */
-void get_angle(uint8* angle){
+void get_angle(int8* angle){
     // Read the accelerometer
     uint32_t x=0;
     Mux_Select(1); //Selection of the first channel
@@ -147,10 +147,13 @@ void get_angle(uint8* angle){
     // Modfify the step (for the sound)
     step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
     
+    /*
     // Change the value of the accelerometer into an angle
     angle_buffer[buffer_index] =  MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     *angle = (uint8) moving_average();
-    buffer_index = (buffer_index + 1) % WINDOW;
+    buffer_index = (buffer_index + 1) % WINDOW; */
+    
+    *angle = (x-23000)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     
     char x_char[20];
     sprintf(x_char, "acc %.3u\n", x);
@@ -167,7 +170,7 @@ float moving_average() {
     return sum / WINDOW;
 }
 
-void print_angle(uint8* angle){
+void print_angle(int8* angle){
     LCD_Position(1,0);
     char x_char[12];
     sprintf(x_char, "%.3u", (unsigned int) *angle);
@@ -235,8 +238,8 @@ void test_joystick(){
 
 /*          Gimball mode               */
 
-void gimball_mode(uint8* angle){
-    rotate_servo(*angle-MIN_ANGLE);   
+void gimball_mode(int8* angle){
+    rotate_servo(*angle);   
 }
 
 
@@ -303,7 +306,7 @@ void switch_mode(){
 }
 
 void modes(){
-    uint8 angle = 0;
+    int8 angle = 0;
     get_angle(&angle);
     mode ? gimball_mode(&angle):testing_mode();
 }
