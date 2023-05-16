@@ -198,8 +198,8 @@ void test_pot(){
     Mux_Select(0);
     CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
-    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
-    pos =  MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF);
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult16();
+    pos = (uint16) (MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
 }
 
 void test_keyboard(){
@@ -222,12 +222,12 @@ void test_joystick(){
     CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)){
-        int32_t result = ADC_GetResult32();
+        int32_t result = ADC_GetResult16();
         if (result > joyval) rotate_servo(1);
         else if (result < joyval) rotate_servo(-1);
         joyval = result;
     }
-    pos = MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF);
+    pos = (uint16) (MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
 }
 
 
