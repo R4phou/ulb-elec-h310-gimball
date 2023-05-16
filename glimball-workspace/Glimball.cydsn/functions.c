@@ -241,7 +241,7 @@ void gimball_mode(uint16* accX){
     }else{
         k = 1.25;
     }
-    pos = pos + k*(*accX - ZERO_ACC)*90/(MAX_ACC-MIN_ACC); // pos = last_pos + k*error
+    pos = pos + k*(*accX - ZERO_ACC)*(MAX_SERVO-MIN_SERVO)/(MAX_ACC-MIN_ACC); // pos = last_pos + k*error
 }
 
 
@@ -308,7 +308,7 @@ void switch_mode(){
 }
 
 void modes(){
-    uint16 pos = 0;
-    get_angle(&pos);
-    mode ? gimball_mode(&pos):testing_mode();
+    uint16 accX = 0;
+    get_angle(&accX);
+    mode ? gimball_mode(&accX):testing_mode();
 }
