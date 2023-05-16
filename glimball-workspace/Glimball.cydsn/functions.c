@@ -11,6 +11,7 @@
 #define pi 3.1415
 #define MIN_ACC 18000
 #define MAX_ACC 29000
+#define REF_ACC 23000
 #define N_MAX 10000
 #define STEP_MIN 40
 #define STEP_MAX 400
@@ -104,11 +105,16 @@ void error(){
     CyDelay(100000); // Error freezes everything
 }
 
-void rotate_servo(int angle){
-    uint16 pos = PWM_ReadCompare() + angle*SERVO_ANGLE;
+void rotate_servo(int8 step_angle){
+    uint16 pos = PWM_ReadCompare() + step_angle*SERVO_ANGLE;
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
+    CyDelay(DELAY);
+}
+
+void turn_servo(uint8* angle) {
+    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE));
     CyDelay(DELAY);
 }
 
@@ -134,7 +140,8 @@ void read_computer(uint8* data){
 }
 
 /*          Accelerometer information to angle              */
-void get_angle(int8* angle){
+void get_angle(uint8* angle){
+    
     // Read the accelerometer
     uint32_t x=0;
     Mux_Select(1); //Selection of the first channel
@@ -153,10 +160,10 @@ void get_angle(int8* angle){
     *angle = (uint8) moving_average();
     buffer_index = (buffer_index + 1) % WINDOW; */
     
-    *angle = (x-23000)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
+    *angle = *angle + (x-REF_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     
     char x_char[20];
-    sprintf(x_char, "acc %.3u\n", x);
+    sprintf(x_char, "acc %.3u\n", (unsigned int) x);
     UART_PutString(x_char);
     // Print the angle on the LCD + UART
     print_angle(angle);
@@ -170,10 +177,10 @@ float moving_average() {
     return sum / WINDOW;
 }
 
-void print_angle(int8* angle){
+void print_angle(uint8* angle){
     LCD_Position(1,0);
     char x_char[12];
-    sprintf(x_char, "%.3u", (unsigned int) *angle);
+    sprintf(x_char, "%.3d", *angle);
     LCD_PrintString(x_char);
     strcat(x_char, "\n");
     UART_PutString(x_char);
@@ -238,8 +245,8 @@ void test_joystick(){
 
 /*          Gimball mode               */
 
-void gimball_mode(int8* angle){
-    rotate_servo(*angle);   
+void gimball_mode(uint8* angle){
+    turn_servo(angle);   
 }
 
 
@@ -306,7 +313,7 @@ void switch_mode(){
 }
 
 void modes(){
-    int8 angle = 0;
+    uint8 angle = 0;
     get_angle(&angle);
     mode ? gimball_mode(&angle):testing_mode();
 }

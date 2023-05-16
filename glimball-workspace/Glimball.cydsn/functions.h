@@ -85,7 +85,9 @@ int react_to_keypad();
 /*
 * Function that rotates the servo of the given angle right=positive, left=negative
 */
-void rotate_servo(int angle);
+void rotate_servo(int8 step_angle);
+
+void turn_servo(uint8* angle);
 
 /**
  * Test the reaction on the buttons and keyboard
@@ -128,13 +130,13 @@ void modes();
  * Function that reads the accelerometer and modify the angle
  * @param the angle of the platform
 */
-void get_angle(int8* angle);
+void get_angle(uint8* angle);
 
 
 /**
  * Print the angle on the LCD and communicate it with UART
 */
-void print_angle(int8* angle);
+void print_angle(uint8* angle);
 
 /**
  * Print the string on the LCD at the wanted position
