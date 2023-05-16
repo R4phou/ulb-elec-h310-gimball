@@ -11,6 +11,7 @@
 #define pi 3.1415
 #define MIN_ACC 18000
 #define MAX_ACC 29000
+#define ZERO_ACC (MAX_ACC-MIN_ACC)/2
 #define N_MAX 10000
 #define STEP_MIN 40
 #define STEP_MAX 400
@@ -24,21 +25,24 @@ int mode = 0;  // test = 0 | gimball = 1
 int test_mode = 0; // keypad = 0 | Potentiometer = 1 | joystick = 2
 
 
-int iterator = 0;
+int iterator = 0; // variables needed for the sound
 float sin_wave[N_MAX];
 int step = 0;
 
-uint8 angle_buffer[10] = {0};
+uint8 angle_buffer[10] = {0}; // Variables needed for the moving_average
 int buffer_index = 0;
+
+uint16 pos = (MAX_SERVO-MIN_SERVO)/2; // position of the servo
 
 
 
 /*                      Interruptions handlers               */
 
-CY_ISR(isr_sound_handler){
+CY_ISR(isr_sound_handler){ // Interruption for the sound (and the modification of the position of the servo)
     iterator += step;
     VDAC_SetValue((uint8)(sin_wave[iterator]));
     if (iterator>=N_MAX)iterator=0;
+    PWM_WriteCompare(pos); // rotates the servo
     Timer_ReadStatusRegister();
 }
 
@@ -59,7 +63,7 @@ CY_ISR(isr_uart_handler){ // Receive instructions from Computer
         UART_PutChar(rxData);
         read_computer(&rxData);
     }
-    }while ((status & UART_RX_STS_FIFO_NOTEMPTY) != 0);
+    }while((status & UART_RX_STS_FIFO_NOTEMPTY) != 0);
 }
 
 
@@ -105,11 +109,10 @@ void error(){
 }
 
 void rotate_servo(int angle){
-    uint16 pos = MIN_SERVO + angle*SERVO_ANGLE;
-    if (pos > MAX_SERVO) pos = MAX_SERVO;
-    if (pos < MIN_SERVO) pos = MIN_SERVO;
-    PWM_WriteCompare(pos);
-    CyDelay(DELAY);
+    uint16 temp_pos = MIN_SERVO + angle*SERVO_ANGLE;
+    if (temp_pos > MAX_SERVO) temp_pos = MAX_SERVO;
+    if (temp_pos < MIN_SERVO) temp_pos = MIN_SERVO;
+    pos = temp_pos;
 }
 
 void fill_sine(int len){
@@ -134,29 +137,26 @@ void read_computer(uint8* data){
 }
 
 /*          Accelerometer information to angle              */
-void get_angle(uint8* angle){
+void get_angle(uint16* accX){
     // Read the accelerometer
-    uint32_t x=0;
     Mux_Select(1); //Selection of the first channel
     CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
-    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)) x = ADC_GetResult32();
+    if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)) *accX = ADC_GetResult16();
     
-    x = (x > MAX_ACC) ? MAX_ACC : ((x < MIN_ACC) ? MIN_ACC : x);
-
+    // Verify that the value of the accelerometer does not go in overflow (avoid ghost moves)
+    *accX = (*accX > MAX_ACC) ? MAX_ACC : ((*accX < MIN_ACC) ? MIN_ACC : *accX);
+    
     // Modfify the step (for the sound)
-    step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
+    step = STEP_MIN + (*accX-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
     
     // Change the value of the accelerometer into an angle
-    angle_buffer[buffer_index] =  MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
-    *angle = (uint8) moving_average();
+    angle_buffer[buffer_index] =  MIN_ANGLE + (*accX-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
+    uint8 angle = (uint8) moving_average();
     buffer_index = (buffer_index + 1) % WINDOW;
     
-    char x_char[20];
-    sprintf(x_char, "acc %.3u\n", x);
-    UART_PutString(x_char);
     // Print the angle on the LCD + UART
-    print_angle(angle);
+    print_angle(&angle);
 }
 
 float moving_average() {
@@ -194,13 +194,12 @@ void testing_mode(){
 }
 
 void test_pot(){
-    uint32_t potval = 0;
+    uint16 potval = 0;
     Mux_Select(0);
     CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
-    PWM_WriteCompare((uint32_t) MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
-    CyDelay(DELAY);
+    pos =  MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF);
 }
 
 void test_keyboard(){
@@ -218,7 +217,7 @@ void test_keyboard(){
 }
 
 void test_joystick(){
-    int32_t joyval = 0;
+    int16 joyval = 0;
     Mux_Select(2);
     CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
@@ -228,15 +227,21 @@ void test_joystick(){
         else if (result < joyval) rotate_servo(-1);
         joyval = result;
     }
-    PWM_WriteCompare((uint32_t) MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
-    CyDelay(DELAY);
+    pos = MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF);
 }
 
 
 /*          Gimball mode               */
 
-void gimball_mode(uint8* angle){
-    rotate_servo(*angle-MIN_ANGLE);   
+void gimball_mode(uint16* accX){
+    // Regulation
+    float k; // Proportionality constant to be determined
+    if (*accX < ZERO_ACC) {
+        k = 2.5;
+    }else{
+        k = 1.25;
+    }
+    pos = pos + k*(*accX - ZERO_ACC)*90/(MAX_ACC-MIN_ACC); // pos = last_pos + k*error
 }
 
 
@@ -303,7 +308,7 @@ void switch_mode(){
 }
 
 void modes(){
-    uint8 angle = 0;
-    get_angle(&angle);
-    mode ? gimball_mode(&angle):testing_mode();
+    uint16 pos = 0;
+    get_angle(&pos);
+    mode ? gimball_mode(&pos):testing_mode();
 }

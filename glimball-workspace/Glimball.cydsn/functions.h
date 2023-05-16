@@ -83,7 +83,8 @@ int react_to_keypad();
 
 
 /*
-* Function that rotates the servo of the given angle right=positive, left=negative
+ * Function that modify the position of the servo of the given angle
+ * right=positive, left=negative
 */
 void rotate_servo(int angle);
 
@@ -114,9 +115,11 @@ void testing_mode();
 
 
 /**
- * What is done in the glimball mode
+ * Regulates using a P regulation
+ * Modify the position of the servo accuratly depending on the value received by the accelerometer
+ * @param uint16* accX value received by the accelerometer
 */
-void gimball_mode();
+void gimball_mode(uint16* accX);
 
 
 /**
@@ -125,14 +128,16 @@ void gimball_mode();
 void modes();
 
 /**
- * Function that reads the accelerometer and modify the angle
- * @param the angle of the platform
+ * Function that reads the accelerometer, prints the angle on the UART and on the LCD
+ * Modify the value of the accelerometer by using an moving_average
+ * @param uint16* the pointer of the value of the accelerometer that will be modified 
 */
-void get_angle(uint8* angle);
+void get_angle(uint16* accX);
 
 
 /**
  * Print the angle on the LCD and communicate it with UART
+ * @param *angle = pointer to an uint8 angle (between 0 and 180°)
 */
 void print_angle(uint8* angle);
 
