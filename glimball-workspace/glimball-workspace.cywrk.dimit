@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="glimball-workspace\Glimball\Header Files\functions.h">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>glimball-workspace</v>
 <v>glimball-workspace\Glimball</v>
@@ -34,10 +34,8 @@
 <v>glimball-workspace\Glimball\Header Files\keypad.h</v>
 <v>glimball-workspace\Glimball\Source Files</v>
 <v>glimball-workspace\Glimball\Source Files\functions.c</v>
-<v>glimball-workspace\Glimball\Source Files\interruptions.c</v>
 <v>glimball-workspace\Glimball\Source Files\keypad.c</v>
 <v>glimball-workspace\Glimball\Source Files\main.c</v>
-<v>glimball-workspace\Glimball\Source Files\sound.c</v>
 <v>glimball-workspace\Glimball\Generated_Source</v>
 <v>glimball-workspace\Glimball\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
@@ -61,10 +59,8 @@
 <v>glimball-workspace\Glimball\Header Files\keypad.h</v>
 <v>glimball-workspace\Glimball\Source Files</v>
 <v>glimball-workspace\Glimball\Source Files\functions.c</v>
-<v>glimball-workspace\Glimball\Source Files\interruptions.c</v>
 <v>glimball-workspace\Glimball\Source Files\keypad.c</v>
 <v>glimball-workspace\Glimball\Source Files\main.c</v>
-<v>glimball-workspace\Glimball\Source Files\sound.c</v>
 <v>glimball-workspace\Glimball\Generated_Source</v>
 <v>glimball-workspace\Glimball\Generated_Source\PSoC5</v>
 <v>glimball-workspace\Glimball\Generated_Source\PSoC5\ADC</v>
@@ -77,6 +73,8 @@
 <v>glimball-workspace\Glimball\Generated_Source\PSoC5\COL2</v>
 <v>glimball-workspace\Glimball\Generated_Source\PSoC5\COL3</v>
 <v>glimball-workspace\Glimball\Generated_Source\PSoC5\cy_boot</v>
+<v>glimball-workspace\Glimball\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>glimball-workspace\Glimball\Generated_Source\PSoC5\ISR_SERVO</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -124,7 +122,6 @@
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\functions.lst</v>
-<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\interruptions.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_SERVO.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ISR_SOUND.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_uart.lst</v>
@@ -148,7 +145,6 @@
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ROW2.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\ROW3.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SERVO.lst</v>
-<v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\sound.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW1.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW2.lst</v>
 <v>glimball-workspace\Glimball\CortexM3\ARM_GCC_541\Debug\Listing Files\SW3.lst</v>
@@ -197,7 +193,17 @@
 <v>glimball-workspace\Glimball\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
 <v>glimball-workspace\Glimball\cy_pins_v2_20</v>
 <v>glimball-workspace\Glimball\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>glimball-workspace\Glimball\Gnd_v1_0</v>
+<v>glimball-workspace\Glimball\Gnd_v1_0\Gnd_v1_0.pdf</v>
+<v>glimball-workspace\Glimball\LED_v1_0</v>
+<v>glimball-workspace\Glimball\LED_v1_0\LED_v1_0.pdf</v>
+<v>glimball-workspace\Glimball\Power_v1_0</v>
+<v>glimball-workspace\Glimball\Power_v1_0\Power_v1_0.pdf</v>
 <v>glimball-workspace\Glimball\PWM_v3_30.pdf</v>
+<v>glimball-workspace\Glimball\Resistor_v1_0</v>
+<v>glimball-workspace\Glimball\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>glimball-workspace\Glimball\SwitchSPST_v1_0</v>
+<v>glimball-workspace\Glimball\SwitchSPST_v1_0\SwitchSPST_v1_0.pdf</v>
 <v>glimball-workspace\Glimball\Timer_v2_80.pdf</v>
 <v>glimball-workspace\Glimball\UART_v2_50.pdf</v>
 <v>glimball-workspace\Glimball\VDAC8_v1_90.pdf</v>
@@ -219,7 +225,17 @@
 <v>glimball-workspace\Glimball\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
 <v>glimball-workspace\Glimball\cy_pins_v2_20</v>
 <v>glimball-workspace\Glimball\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>glimball-workspace\Glimball\Gnd_v1_0</v>
+<v>glimball-workspace\Glimball\Gnd_v1_0\Gnd_v1_0.pdf</v>
+<v>glimball-workspace\Glimball\LED_v1_0</v>
+<v>glimball-workspace\Glimball\LED_v1_0\LED_v1_0.pdf</v>
+<v>glimball-workspace\Glimball\Power_v1_0</v>
+<v>glimball-workspace\Glimball\Power_v1_0\Power_v1_0.pdf</v>
 <v>glimball-workspace\Glimball\PWM_v3_30.pdf</v>
+<v>glimball-workspace\Glimball\Resistor_v1_0</v>
+<v>glimball-workspace\Glimball\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>glimball-workspace\Glimball\SwitchSPST_v1_0</v>
+<v>glimball-workspace\Glimball\SwitchSPST_v1_0\SwitchSPST_v1_0.pdf</v>
 <v>glimball-workspace\Glimball\Timer_v2_80.pdf</v>
 <v>glimball-workspace\Glimball\UART_v2_50.pdf</v>
 <v>glimball-workspace\Glimball\VDAC8_v1_90.pdf</v>
@@ -245,7 +261,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1215, 636" SelectedTabbedMdiWindow="7a075fcf-83c2-437d-b5e5-adc1120cb089"><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\TopDesign\TopDesign.cysch" Guid="43f0aa14-3e7b-4dde-bdf8-4ed918b35749" /><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\main.c" Guid="13a6fa9f-f243-401f-85a4-3e4dec6df879" /><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\sound.c" Guid="0ace9570-7012-4c66-aba1-116d3195b541" /><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.c" Guid="7a075fcf-83c2-437d-b5e5-adc1120cb089" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="791deb16-b8d0-4984-b3f8-d2100cafcfaa" /><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.h" Guid="d0df7eac-5094-4d85-9bbe-52942fe6f7da" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1215, 507" SelectedTabbedMdiWindow="7a075fcf-83c2-437d-b5e5-adc1120cb089"><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\TopDesign\TopDesign.cysch" Guid="43f0aa14-3e7b-4dde-bdf8-4ed918b35749" /><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\main.c" Guid="13a6fa9f-f243-401f-85a4-3e4dec6df879" /><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\sound.c" Guid="0ace9570-7012-4c66-aba1-116d3195b541" /><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.c" Guid="7a075fcf-83c2-437d-b5e5-adc1120cb089" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="791deb16-b8d0-4984-b3f8-d2100cafcfaa" /><DocumentWindow Key="C:\Users\dimit\Desktop\Polytech\BA3\ELEC-H310 - Digital electronics\Project Gimbal\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.h" Guid="d0df7eac-5094-4d85-9bbe-52942fe6f7da" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

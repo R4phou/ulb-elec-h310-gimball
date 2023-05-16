@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
   47              	.L2:
    9:main.c        ****     for(;;)
   10:main.c        ****     {   
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 2
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 2
 
 
   11:main.c        ****         react();
@@ -89,36 +89,36 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
   71 000c 40000000 		.4byte	.LASF19
   72 0010 0C       		.byte	0xc
   73 0011 2E000000 		.4byte	.LASF20
-  74 0015 F7000000 		.4byte	.LASF21
+  74 0015 3E010000 		.4byte	.LASF21
   75 0019 00000000 		.4byte	.Ldebug_ranges0+0
   76 001d 00000000 		.4byte	0
   77 0021 00000000 		.4byte	.Ldebug_line0
   78 0025 02       		.uleb128 0x2
   79 0026 01       		.byte	0x1
   80 0027 06       		.byte	0x6
-  81 0028 86010000 		.4byte	.LASF0
+  81 0028 F7000000 		.4byte	.LASF0
   82 002c 02       		.uleb128 0x2
   83 002d 01       		.byte	0x1
   84 002e 08       		.byte	0x8
-  85 002f 4B010000 		.4byte	.LASF1
+  85 002f 03010000 		.4byte	.LASF1
   86 0033 02       		.uleb128 0x2
   87 0034 02       		.byte	0x2
   88 0035 05       		.byte	0x5
-  89 0036 AE010000 		.4byte	.LASF2
+  89 0036 E2010000 		.4byte	.LASF2
   90 003a 02       		.uleb128 0x2
   91 003b 02       		.byte	0x2
   92 003c 07       		.byte	0x7
   93 003d 0E000000 		.4byte	.LASF3
   94 0041 03       		.uleb128 0x3
-  95 0042 9E010000 		.4byte	.LASF9
+  95 0042 D2010000 		.4byte	.LASF9
   96 0046 02       		.byte	0x2
   97 0047 3F       		.byte	0x3f
   98 0048 4C000000 		.4byte	0x4c
   99 004c 02       		.uleb128 0x2
  100 004d 04       		.byte	0x4
  101 004e 05       		.byte	0x5
- 102 004f 69010000 		.4byte	.LASF4
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 3
+ 102 004f 21010000 		.4byte	.LASF4
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 3
 
 
  103 0053 02       		.uleb128 0x2
@@ -142,30 +142,30 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
  121 0071 07       		.byte	0x7
  122 0072 21000000 		.4byte	.LASF8
  123 0076 03       		.uleb128 0x3
- 124 0077 B8010000 		.4byte	.LASF10
+ 124 0077 EC010000 		.4byte	.LASF10
  125 007b 03       		.byte	0x3
  126 007c 2C       		.byte	0x2c
  127 007d 41000000 		.4byte	0x41
  128 0081 02       		.uleb128 0x2
  129 0082 04       		.byte	0x4
  130 0083 04       		.byte	0x4
- 131 0084 A8010000 		.4byte	.LASF11
+ 131 0084 DC010000 		.4byte	.LASF11
  132 0088 02       		.uleb128 0x2
  133 0089 08       		.byte	0x8
  134 008a 04       		.byte	0x4
- 135 008b 72010000 		.4byte	.LASF12
+ 135 008b 2A010000 		.4byte	.LASF12
  136 008f 02       		.uleb128 0x2
  137 0090 01       		.byte	0x1
  138 0091 08       		.byte	0x8
- 139 0092 59010000 		.4byte	.LASF13
+ 139 0092 11010000 		.4byte	.LASF13
  140 0096 02       		.uleb128 0x2
  141 0097 08       		.byte	0x8
  142 0098 04       		.byte	0x4
- 143 0099 92010000 		.4byte	.LASF14
+ 143 0099 C6010000 		.4byte	.LASF14
  144 009d 02       		.uleb128 0x2
  145 009e 04       		.byte	0x4
  146 009f 07       		.byte	0x7
- 147 00a0 C0010000 		.4byte	.LASF15
+ 147 00a0 F4010000 		.4byte	.LASF15
  148 00a4 05       		.uleb128 0x5
  149 00a5 35000000 		.4byte	.LASF22
  150 00a9 01       		.byte	0x1
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
  157 00b9 D9000000 		.4byte	0xd9
  158 00bd 06       		.uleb128 0x6
  159 00be 08000000 		.4byte	.LVL0
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 4
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 4
 
 
  160 00c2 EA000000 		.4byte	0xea
@@ -190,27 +190,27 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
  166 00d4 00010000 		.4byte	0x100
  167 00d8 00       		.byte	0
  168 00d9 07       		.uleb128 0x7
- 169 00da 79010000 		.4byte	.LASF23
+ 169 00da 31010000 		.4byte	.LASF23
  170 00de 05       		.byte	0x5
  171 00df 1207     		.2byte	0x712
  172 00e1 E5000000 		.4byte	0xe5
  173 00e5 08       		.uleb128 0x8
  174 00e6 76000000 		.4byte	0x76
  175 00ea 09       		.uleb128 0x9
- 176 00eb 5E010000 		.4byte	.LASF16
- 177 00ef 5E010000 		.4byte	.LASF16
+ 176 00eb 16010000 		.4byte	.LASF16
+ 177 00ef 16010000 		.4byte	.LASF16
  178 00f3 04       		.byte	0x4
- 179 00f4 98       		.byte	0x98
+ 179 00f4 93       		.byte	0x93
  180 00f5 09       		.uleb128 0x9
- 181 00f6 C9010000 		.4byte	.LASF17
- 182 00fa C9010000 		.4byte	.LASF17
+ 181 00f6 FD010000 		.4byte	.LASF17
+ 182 00fa FD010000 		.4byte	.LASF17
  183 00fe 04       		.byte	0x4
- 184 00ff 5E       		.byte	0x5e
+ 184 00ff 5D       		.byte	0x5d
  185 0100 09       		.uleb128 0x9
  186 0101 3A000000 		.4byte	.LASF18
  187 0105 3A000000 		.4byte	.LASF18
  188 0109 04       		.byte	0x4
- 189 010a 80       		.byte	0x80
+ 189 010a 7D       		.byte	0x7d
  190 010b 00       		.byte	0
  191              		.section	.debug_abbrev,"",%progbits
  192              	.Ldebug_abbrev0:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
  214 0015 00       		.byte	0
  215 0016 0B       		.uleb128 0xb
  216 0017 0B       		.uleb128 0xb
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 5
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 5
 
 
  217 0018 3E       		.uleb128 0x3e
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
  271 0050 19       		.uleb128 0x19
  272 0051 01       		.uleb128 0x1
  273 0052 13       		.uleb128 0x13
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 6
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 6
 
 
  274 0053 00       		.byte	0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
  328 0000 1C000000 		.4byte	0x1c
  329 0004 0200     		.2byte	0x2
  330 0006 00000000 		.4byte	.Ldebug_info0
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 7
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 7
 
 
  331 000a 04       		.byte	0x4
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
  362      6973696F 
  362      6E203233 
  362      37373135 
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 8
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 8
 
 
  363 00a6 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
@@ -438,71 +438,76 @@ ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 1
  367      6720756E 
  367      7369676E 
  367      65642069 
- 368              	.LASF21:
- 369 00f7 433A5C44 		.ascii	"C:\\Documents\\ULB\\BA3\\ELEC-H310\\elec-h310-glimb"
- 369      6F63756D 
- 369      656E7473 
- 369      5C554C42 
- 369      5C424133 
- 370 0125 616C6C5C 		.ascii	"all\\glimball-workspace\\Glimball.cydsn\000"
- 370      676C696D 
- 370      62616C6C 
- 370      2D776F72 
- 370      6B737061 
- 371              	.LASF1:
- 372 014b 756E7369 		.ascii	"unsigned char\000"
- 372      676E6564 
- 372      20636861 
- 372      7200
- 373              	.LASF13:
- 374 0159 63686172 		.ascii	"char\000"
- 374      00
- 375              	.LASF16:
- 376 015e 696E6974 		.ascii	"initialize\000"
- 376      69616C69 
- 376      7A6500
- 377              	.LASF4:
- 378 0169 6C6F6E67 		.ascii	"long int\000"
- 378      20696E74 
- 378      00
- 379              	.LASF12:
- 380 0172 646F7562 		.ascii	"double\000"
- 380      6C6500
- 381              	.LASF23:
- 382 0179 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 382      52784275 
- 382      66666572 
- 382      00
- 383              	.LASF0:
- 384 0186 7369676E 		.ascii	"signed char\000"
- 384      65642063 
- 384      68617200 
- 385              	.LASF14:
-ARM GAS  C:\Users\raphu\AppData\Local\Temp\ccoN63R6.s 			page 9
+ 368              	.LASF0:
+ 369 00f7 7369676E 		.ascii	"signed char\000"
+ 369      65642063 
+ 369      68617200 
+ 370              	.LASF1:
+ 371 0103 756E7369 		.ascii	"unsigned char\000"
+ 371      676E6564 
+ 371      20636861 
+ 371      7200
+ 372              	.LASF13:
+ 373 0111 63686172 		.ascii	"char\000"
+ 373      00
+ 374              	.LASF16:
+ 375 0116 696E6974 		.ascii	"initialize\000"
+ 375      69616C69 
+ 375      7A6500
+ 376              	.LASF4:
+ 377 0121 6C6F6E67 		.ascii	"long int\000"
+ 377      20696E74 
+ 377      00
+ 378              	.LASF12:
+ 379 012a 646F7562 		.ascii	"double\000"
+ 379      6C6500
+ 380              	.LASF23:
+ 381 0131 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 381      52784275 
+ 381      66666572 
+ 381      00
+ 382              	.LASF21:
+ 383 013e 433A5C55 		.ascii	"C:\\Users\\dimit\\Desktop\\Polytech\\BA3\\ELEC-H310"
+ 383      73657273 
+ 383      5C64696D 
+ 383      69745C44 
+ 383      65736B74 
+ 384 016b 202D2044 		.ascii	" - Digital electronics\\Project Gimbal\\elec-h310-g"
+ 384      69676974 
+ 384      616C2065 
+ 384      6C656374 
+ 384      726F6E69 
+ 385 019c 6C696D62 		.ascii	"limball\\glimball-workspace\\Glimball.cydsn\000"
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccJWrEPM.s 			page 9
 
 
- 386 0192 6C6F6E67 		.ascii	"long double\000"
- 386      20646F75 
- 386      626C6500 
- 387              	.LASF9:
- 388 019e 5F5F696E 		.ascii	"__int32_t\000"
- 388      7433325F 
- 388      7400
- 389              	.LASF11:
- 390 01a8 666C6F61 		.ascii	"float\000"
- 390      7400
- 391              	.LASF2:
- 392 01ae 73686F72 		.ascii	"short int\000"
- 392      7420696E 
- 392      7400
- 393              	.LASF10:
- 394 01b8 696E7433 		.ascii	"int32_t\000"
- 394      325F7400 
- 395              	.LASF15:
- 396 01c0 73697A65 		.ascii	"sizetype\000"
- 396      74797065 
- 396      00
- 397              	.LASF17:
- 398 01c9 72656163 		.ascii	"react\000"
- 398      7400
- 399              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 385      616C6C5C 
+ 385      676C696D 
+ 385      62616C6C 
+ 385      2D776F72 
+ 386              	.LASF14:
+ 387 01c6 6C6F6E67 		.ascii	"long double\000"
+ 387      20646F75 
+ 387      626C6500 
+ 388              	.LASF9:
+ 389 01d2 5F5F696E 		.ascii	"__int32_t\000"
+ 389      7433325F 
+ 389      7400
+ 390              	.LASF11:
+ 391 01dc 666C6F61 		.ascii	"float\000"
+ 391      7400
+ 392              	.LASF2:
+ 393 01e2 73686F72 		.ascii	"short int\000"
+ 393      7420696E 
+ 393      7400
+ 394              	.LASF10:
+ 395 01ec 696E7433 		.ascii	"int32_t\000"
+ 395      325F7400 
+ 396              	.LASF15:
+ 397 01f4 73697A65 		.ascii	"sizetype\000"
+ 397      74797065 
+ 397      00
+ 398              	.LASF17:
+ 399 01fd 72656163 		.ascii	"react\000"
+ 399      7400
+ 400              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
