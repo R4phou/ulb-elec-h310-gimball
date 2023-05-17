@@ -12,9 +12,7 @@
 #define MIN_ACC 18500
 #define MAX_ACC 28000
 #define REF_ACC (MAX_ACC-MIN_ACC)/2
-#define N_MAX 100
-#define STEP_MIN 40
-#define STEP_MAX 400
+#define N 100
 #define DELAY 0
 #define WINDOW 8
 
@@ -26,8 +24,7 @@ int test_mode = 0; // keypad = 0 | Potentiometer = 1 | joystick = 2
 
 
 int iterator = 0;
-float sin_wave[N_MAX];
-int step = 0;
+float sin_wave[N];
 
 uint8 angle_buffer[10] = {0};
 int buffer_index = 0;
@@ -39,7 +36,7 @@ int buffer_index = 0;
 CY_ISR(isr_sound_handler){
     iterator++;
     VDAC_SetValue((uint8)(sin_wave[iterator]));
-    if (iterator>=N_MAX)iterator=0;
+    if (iterator>=N)iterator=0;
     Timer_ReadStatusRegister();
 }
 
@@ -77,8 +74,8 @@ void initialize(){
     UART_Start();
     isr_uart_StartEx(isr_uart_handler);
     ISR_SOUND_StartEx(isr_sound_handler);
-    fill_sine(N_MAX);
-    print_screen("Keypad : ", 0, 0);
+    fill_sine(N);
+    print_screen("Gimball: ", 0, 0);
 }
 
 
@@ -120,7 +117,7 @@ void turn_servo(uint8* angle) {
 
 void fill_sine(int len){
     for (int i =0; i < len; i++){
-        sin_wave[i] = sin(i*2*pi/len)*8 + 8;
+        sin_wave[i] = sin(i*2*pi/len)*64 + 64;
     }
 }
 
@@ -152,9 +149,8 @@ void get_angle(uint8* angle){
     
     x = (x > MAX_ACC) ? MAX_ACC : ((x < MIN_ACC) ? MIN_ACC : x);
 
-    // Modfify the step (for the sound)
-    step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
-    Timer_WritePeriod(450+(x-MIN_ACC)*(2500)/(float)10000);
+    // Modfify the period of the timer (for the sound)
+    Timer_WritePeriod(450+(x-MIN_ACC)*(2000)/(float)10000);
     
     
     // Change the value of the accelerometer into an angle
@@ -162,7 +158,6 @@ void get_angle(uint8* angle){
     *angle = (uint8) moving_average();
     buffer_index = (buffer_index + 1) % WINDOW;
     
-    // *angle = MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     
     char x_char[20];
     sprintf(x_char, "acc %.3u\n", (unsigned int) x);
@@ -303,13 +298,13 @@ void read_SW2(){
 void switch_to_gimball_mode(){
     mode = 1;
     light_LEDS();
-    print_screen("Glim : ", 0, 0);
+    print_screen("Gimball: ", 0, 0);
 }
 
 void switch_to_test_mode(){
     mode = 0;
     turn_off_LEDS();
-    print_screen("Test : ", 0, 0);
+    print_screen("Test: ", 0, 0);
 }
 
 void switch_mode(){
