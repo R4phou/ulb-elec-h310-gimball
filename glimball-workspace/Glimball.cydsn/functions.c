@@ -9,14 +9,14 @@
 #define MAX_ANGLE 180
 #define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/(MAX_ANGLE - MIN_ANGLE)
 #define pi 3.1415
-#define MIN_ACC 18000
-#define MAX_ACC 29000
-#define REF_ACC 23000
-#define N_MAX 10000
+#define MIN_ACC 18500
+#define MAX_ACC 28000
+#define REF_ACC (MAX_ACC-MIN_ACC)/2
+#define N_MAX 100
 #define STEP_MIN 40
 #define STEP_MAX 400
 #define DELAY 0
-#define WINDOW 5
+#define WINDOW 8
 
 
 /* Global variables */
@@ -37,7 +37,7 @@ int buffer_index = 0;
 /*                      Interruptions handlers               */
 
 CY_ISR(isr_sound_handler){
-    iterator += step;
+    iterator++;
     VDAC_SetValue((uint8)(sin_wave[iterator]));
     if (iterator>=N_MAX)iterator=0;
     Timer_ReadStatusRegister();
@@ -148,11 +148,13 @@ void get_angle(uint8* angle){
     CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)) x = ADC_GetResult32();
+    ADC_StopConvert();
     
     x = (x > MAX_ACC) ? MAX_ACC : ((x < MIN_ACC) ? MIN_ACC : x);
 
     // Modfify the step (for the sound)
     step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
+    Timer_WritePeriod(450+(x-MIN_ACC)*(2500)/(float)10000);
     
     
     // Change the value of the accelerometer into an angle
@@ -209,6 +211,7 @@ void test_pot(){
     CyDelay(10); // For the time needed to select the good MUX gate
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
+    ADC_StopConvert();
     PWM_WriteCompare((uint32_t) MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
     CyDelay(DELAY);
 }
@@ -238,6 +241,7 @@ void test_joystick(){
         else if (result < joyval) rotate_servo(-1);
         joyval = result;
     }
+    ADC_StopConvert();
     PWM_WriteCompare((uint32_t) MIN_SERVO + (joyval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
     CyDelay(DELAY);
 }

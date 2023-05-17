@@ -2,7 +2,7 @@
 --	Conversion of Glimball.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue May 16 19:43:21 2023
+--	Wed May 17 15:21:35 2023
 --
 
 USE cypress.cypress.all;
@@ -2381,7 +2381,7 @@ COL3:cy_psoc3_pins_v1_10
 		id=>"c94758d6-fb68-4040-802f-719a2efcef02/edd15f43-b66b-457b-be3a-5342345270c8",
 		source_clock_id=>"61737EF6-3B74-48f9-8B91-F7473A442AE7",
 		divisor=>0,
-		period=>"1562500000",
+		period=>"386100386.100386",
 		is_direct=>'0',
 		is_digital=>'0')
 	PORT MAP(clock_out=>\ADC:Net_488\,
