@@ -15,8 +15,8 @@
 #define N_MAX 10000
 #define STEP_MIN 40
 #define STEP_MAX 400
-#define DELAY 50
-#define WINDOW 3
+#define DELAY 0
+#define WINDOW 5
 
 
 /* Global variables */
@@ -154,13 +154,13 @@ void get_angle(uint8* angle){
     // Modfify the step (for the sound)
     step = STEP_MIN + (x-MIN_ACC)*(STEP_MAX-STEP_MIN)/(float)(MAX_ACC-MIN_ACC);
     
-    /*
+    
     // Change the value of the accelerometer into an angle
     angle_buffer[buffer_index] =  MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     *angle = (uint8) moving_average();
-    buffer_index = (buffer_index + 1) % WINDOW; */
+    buffer_index = (buffer_index + 1) % WINDOW;
     
-    *angle = *angle + (x-REF_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
+    // *angle = MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     
     char x_char[20];
     sprintf(x_char, "acc %.3u\n", (unsigned int) x);
