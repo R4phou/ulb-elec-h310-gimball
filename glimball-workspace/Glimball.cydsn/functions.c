@@ -10,8 +10,8 @@
 #define SERVO_ANGLE (MAX_SERVO - MIN_SERVO)/(MAX_ANGLE - MIN_ANGLE)
 #define pi 3.1415
 #define MIN_ACC 18500
-#define MAX_ACC 28000
-#define REF_ACC (MAX_ACC-MIN_ACC)/2
+#define MAX_ACC 27500
+#define REF_ACC (MAX_ACC+MIN_ACC)/2
 #define N 100
 #define DELAY 0
 #define WINDOW 8
@@ -19,7 +19,7 @@
 
 /* Global variables */
 
-int mode = 0;  // test = 0 | gimball = 1
+int mode = 1;  // test = 0 | gimball = 1
 int test_mode = 0; // keypad = 0 | Potentiometer = 1 | joystick = 2
 
 
