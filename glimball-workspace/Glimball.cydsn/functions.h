@@ -7,10 +7,12 @@
 #include "stdio.h"
 #include "string.h"
 
-/**
- * Function that make a moving average on angles values
+
+/*
+    Initialisation de tous les composants de bases
 */
-float moving_average();
+void initialize();
+
 
 /**
  * Function that lights all the LEDS
@@ -23,16 +25,85 @@ void light_LEDS();
 */
 void turn_off_LEDS();
 
+
+/*
+ * Function that rotates the servo of the given angle right=positive, left=negative
+ * @param int8 step_angle value of the angle (delta) that the servo will need to rotate
+*/
+void rotate_servo(int8 step_angle);
+
+
+
 /**
  * Function that fills the vector of the sine (len = lenght of the vector)
 */
 void fill_sine(int len);
+
+/**
+ * Print the string on the LCD at the wanted position
+*/
+void print_screen(const char8 * string, int row, int column);
 
 
 /**
  * Function that reads the input of the computer and turn the servo
 */
 void read_computer(uint8* rxData);
+
+
+/**
+ * Function that reads the accelerometer and modify the angle
+ * @param the angle of the platform
+*/
+void get_angle(uint8* angle);
+
+
+/**
+ * Function that make a moving average on angles values
+*/
+float moving_average();
+
+
+/**
+ * Print the angle on the LCD and communicate it with UART
+*/
+void print_angle(uint8* angle);
+
+
+/**
+ * Controller of the testing mode
+ * Decides what type of mode is used and call them
+*/
+void testing_mode();
+
+
+/**
+ * Control the servo with the potentiometer
+*/
+void test_pot();
+
+/**
+ * Control the servo with the keyboard
+*/
+void test_keyboard();
+
+/*
+* Control the servo with joystick
+*/
+void test_joystick();
+
+
+/*
+ * Function that rotates the servo of the given angle
+ * @param uint8 * angle pointer of the value of the position which the servo will need to be at the end
+*/
+void turn_servo(uint8* angle);
+
+
+/**
+ * What is done in the glimball mode
+*/
+void gimball_mode();
 
 
 /**
@@ -50,29 +121,9 @@ void switch_to_test_mode();
 
 
 /**
- * Function that reads the button SW1
- * @return 1 if the button is pressed
+ * Test the reaction on the buttons and keyboard
 */
-int read_SW1();
-
-
-
-/**
- * Function that reads the button 2 and change the testing mode 
-*/
-void read_SW2();
-    
-    
-/**
- * Switch the mode
-*/
-void switch_mode();
-
-
-/**
- * Prints ERROR on the LCD screen and delays for 10 seconds
-*/
-void error();
+void react();
 
 
 /**
@@ -82,68 +133,26 @@ void error();
 int react_to_keypad();
 
 
-/*
-* Function that rotates the servo of the given angle right=positive, left=negative
-*/
-void rotate_servo(int8 step_angle);
-
-void turn_servo(uint8* angle);
-
 /**
- * Test the reaction on the buttons and keyboard
+ * Function that reads the button SW1
+ * @return 1 if the button is pressed
 */
-void react();
-
-/**
- * Control the servo with the potentiometer
-*/
-void test_pot();
-
-/**
- * Control the servo with the keyboard
-*/
-void test_keyboard();
-
-/*
-* Control the servo with joystick
-*/
-void test_joystick();
-
-/**
- * What is done in the testing mode
-*/
-void testing_mode();
+int read_SW1();
 
 
 /**
- * What is done in the glimball mode
+ * Function that reads the button 2 and change the testing mode 
 */
-void gimball_mode();
+void read_SW2();
+
+
+/**
+ * Switch the mode
+*/
+void switch_mode();
 
 
 /**
  * Execute the different modes depending on the mode
 */
 void modes();
-
-/**
- * Function that reads the accelerometer and modify the angle
- * @param the angle of the platform
-*/
-void get_angle(uint8* angle);
-
-
-/**
- * Print the angle on the LCD and communicate it with UART
-*/
-void print_angle(uint8* angle);
-
-/**
- * Print the string on the LCD at the wanted position
-*/
-void print_screen(const char8 * string, int row, int column);
-
-/*
-    Initialisation de tous les composants de bases
-*/
-void initialize();

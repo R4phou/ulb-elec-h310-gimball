@@ -6,8 +6,7 @@ int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
     initialize();
-    for(;;)
-    {   
+    for(;;){   
         react();
         modes();
     }

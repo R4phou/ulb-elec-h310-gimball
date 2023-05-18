@@ -45,18 +45,18 @@ CY_ISR(isr_uart_handler){ // Receive instructions from Computer
     uint8_t status;
     do {
         status = UART_ReadRxStatus();
-    if ((status & UART_RX_STS_PAR_ERROR) |
-        (status & UART_RX_STS_STOP_ERROR) |
-        (status & UART_RX_STS_BREAK) |
-        (status & UART_RX_STS_OVERRUN)) {
-    // Parity , framing , break or overrun error
-        print_screen("UART err", 1, 0);
-    }
-    if ((status & UART_RX_STS_FIFO_NOTEMPTY)!=0){
-        rxData = UART_GetChar();
-        UART_PutChar(rxData);
-        read_computer(&rxData);
-    }
+        if ((status & UART_RX_STS_PAR_ERROR) |
+            (status & UART_RX_STS_STOP_ERROR) |
+            (status & UART_RX_STS_BREAK) |
+            (status & UART_RX_STS_OVERRUN)) {
+        // Parity , framing , break or overrun error
+            print_screen("UART err", 1, 0);
+        }
+        if ((status & UART_RX_STS_FIFO_NOTEMPTY)!=0){
+            rxData = UART_GetChar();
+            UART_PutChar(rxData);
+            read_computer(&rxData);
+        }
     }while ((status & UART_RX_STS_FIFO_NOTEMPTY) != 0);
 }
 
@@ -78,9 +78,6 @@ void initialize(){
     print_screen("Gimball: ", 0, 0);
 }
 
-
-
-
 /*          Useful functions                                */
 
 void light_LEDS(){
@@ -97,21 +94,11 @@ void turn_off_LEDS(){
     LED4_Write(0);
 }
 
-void error(){
-    print_screen("ERROR", 0, 0);
-    CyDelay(100000); // Error freezes everything
-}
-
 void rotate_servo(int8 step_angle){
     uint16 pos = PWM_ReadCompare() + step_angle*SERVO_ANGLE;
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
-    CyDelay(DELAY);
-}
-
-void turn_servo(uint8* angle) {
-    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE));
     CyDelay(DELAY);
 }
 
@@ -138,7 +125,6 @@ void read_computer(uint8* data){
 
 /*          Accelerometer information to angle              */
 void get_angle(uint8* angle){
-    
     // Read the accelerometer
     uint32_t x=0;
     Mux_Select(1); //Selection of the first channel
@@ -146,22 +132,21 @@ void get_angle(uint8* angle){
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT)) x = ADC_GetResult32();
     ADC_StopConvert();
-    
     x = (x > MAX_ACC) ? MAX_ACC : ((x < MIN_ACC) ? MIN_ACC : x);
 
     // Modfify the period of the timer (for the sound)
     Timer_WritePeriod(450+(x-MIN_ACC)*(2000)/(float)10000);
     
-    
-    // Change the value of the accelerometer into an angle
+    // Change the value of the accelerometer into an angle using the moving average
     angle_buffer[buffer_index] =  MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
     *angle = (uint8) moving_average();
     buffer_index = (buffer_index + 1) % WINDOW;
     
-    
+    // Send the value of the accelerometer to the UART
     char x_char[20];
     sprintf(x_char, "acc %.3u\n", (unsigned int) x);
     UART_PutString(x_char);
+    
     // Print the angle on the LCD + UART
     print_angle(angle);
 }
@@ -243,6 +228,11 @@ void test_joystick(){
 
 
 /*          Gimball mode               */
+
+void turn_servo(uint8* angle) {
+    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE));
+    CyDelay(DELAY);
+}
 
 void gimball_mode(uint8* angle){
     turn_servo(angle);   
