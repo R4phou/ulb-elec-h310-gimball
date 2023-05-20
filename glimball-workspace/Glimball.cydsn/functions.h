@@ -1,6 +1,7 @@
 /**
 * Header file: list all the name and type of the functions that will be written
 */
+
 #include "project.h"
 #include "keypad.h"
 #include "math.h"
@@ -103,14 +104,14 @@ void turn_servo(uint8* angle);
 /**
  * What is done in the glimball mode
 */
-void gimball_mode();
+void gimbal_mode();
 
 
 /**
  * Function that switch modes
  * Take also care of switching the LEDS if the mode is switched
 */
-void switch_to_gimball_mode();
+void switch_to_gimbal_mode();
 
 
 /**
@@ -128,7 +129,7 @@ void react();
 
 /**
  * Function that concerns the reading of the keypad to switch the mode
- * @return 1 if needs to switcht the mode
+ * @return 1 if needs to switch the mode
 */
 int react_to_keypad();
 

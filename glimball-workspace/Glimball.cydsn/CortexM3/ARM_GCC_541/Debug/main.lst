@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 1
 
 
    1              		.syntax unified
@@ -56,17 +56,16 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
   45 0004 FFF7FEFF 		bl	initialize
   46              	.LVL0:
   47              	.L2:
-   9:main.c        ****     for(;;)
-  10:main.c        ****     {   
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 2
+   9:main.c        ****     for(;;){   
+  10:main.c        ****         react();
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 2
 
 
-  11:main.c        ****         react();
-  48              		.loc 1 11 0 discriminator 1
+  48              		.loc 1 10 0 discriminator 1
   49 0008 FFF7FEFF 		bl	react
   50              	.LVL1:
-  12:main.c        ****         modes();
-  51              		.loc 1 12 0 discriminator 1
+  11:main.c        ****         modes();
+  51              		.loc 1 11 0 discriminator 1
   52 000c FFF7FEFF 		bl	modes
   53              	.LVL2:
   54 0010 FAE7     		b	.L2
@@ -118,10 +117,10 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
  100 004d 04       		.byte	0x4
  101 004e 05       		.byte	0x5
  102 004f 21010000 		.4byte	.LASF4
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 3
-
-
  103 0053 02       		.uleb128 0x2
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 3
+
+
  104 0054 04       		.byte	0x4
  105 0055 07       		.byte	0x7
  106 0056 CE000000 		.4byte	.LASF5
@@ -178,10 +177,10 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
  157 00b9 D9000000 		.4byte	0xd9
  158 00bd 06       		.uleb128 0x6
  159 00be 08000000 		.4byte	.LVL0
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 4
-
-
  160 00c2 EA000000 		.4byte	0xea
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 4
+
+
  161 00c6 06       		.uleb128 0x6
  162 00c7 0C000000 		.4byte	.LVL1
  163 00cb F5000000 		.4byte	0xf5
@@ -200,17 +199,17 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
  176 00eb 16010000 		.4byte	.LASF16
  177 00ef 16010000 		.4byte	.LASF16
  178 00f3 04       		.byte	0x4
- 179 00f4 95       		.byte	0x95
+ 179 00f4 0E       		.byte	0xe
  180 00f5 09       		.uleb128 0x9
  181 00f6 FD010000 		.4byte	.LASF17
  182 00fa FD010000 		.4byte	.LASF17
  183 00fe 04       		.byte	0x4
- 184 00ff 5F       		.byte	0x5f
+ 184 00ff 7E       		.byte	0x7e
  185 0100 09       		.uleb128 0x9
  186 0101 3A000000 		.4byte	.LASF18
  187 0105 3A000000 		.4byte	.LASF18
  188 0109 04       		.byte	0x4
- 189 010a 7F       		.byte	0x7f
+ 189 010a 9E       		.byte	0x9e
  190 010b 00       		.byte	0
  191              		.section	.debug_abbrev,"",%progbits
  192              	.Ldebug_abbrev0:
@@ -238,10 +237,10 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
  214 0015 00       		.byte	0
  215 0016 0B       		.uleb128 0xb
  216 0017 0B       		.uleb128 0xb
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 5
-
-
  217 0018 3E       		.uleb128 0x3e
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 5
+
+
  218 0019 0B       		.uleb128 0xb
  219 001a 03       		.uleb128 0x3
  220 001b 0E       		.uleb128 0xe
@@ -298,10 +297,10 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
  271 0050 19       		.uleb128 0x19
  272 0051 01       		.uleb128 0x1
  273 0052 13       		.uleb128 0x13
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 6
-
-
  274 0053 00       		.byte	0
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 6
+
+
  275 0054 00       		.byte	0
  276 0055 06       		.uleb128 0x6
  277 0056 898201   		.uleb128 0x4109
@@ -358,10 +357,10 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
  328 0000 1C000000 		.4byte	0x1c
  329 0004 0200     		.2byte	0x2
  330 0006 00000000 		.4byte	.Ldebug_info0
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 7
-
-
  331 000a 04       		.byte	0x4
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 7
+
+
  332 000b 00       		.byte	0
  333 000c 0000     		.2byte	0
  334 000e 0000     		.2byte	0
@@ -418,10 +417,10 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
  362      6973696F 
  362      6E203233 
  362      37373135 
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 8
-
-
  363 00a6 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 8
+
+
  363      66756E63 
  363      74696F6E 
  363      2D736563 
@@ -478,10 +477,10 @@ ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 1
  384      6C656374 
  384      726F6E69 
  385 019c 6C696D62 		.ascii	"limball\\glimball-workspace\\Glimball.cydsn\000"
-ARM GAS  C:\Users\dimit\AppData\Local\Temp\ccikNGLr.s 			page 9
-
-
  385      616C6C5C 
+ARM GAS  C:\Users\dimit\AppData\Local\Temp\cchCtj1o.s 			page 9
+
+
  385      676C696D 
  385      62616C6C 
  385      2D776F72 

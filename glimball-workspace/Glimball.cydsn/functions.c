@@ -2,6 +2,7 @@
 * C file: write all the functions that are listed in the header file corresponding
 * All imports and includes should be done in matching header file
 */
+
 #include "functions.h"
 #define MIN_SERVO 500
 #define MAX_SERVO 2500
@@ -13,20 +14,18 @@
 #define MAX_ACC 27500
 #define REF_ACC (MAX_ACC+MIN_ACC)/2
 #define N 100
-#define DELAY 0
+#define DELAY 5
 #define WINDOW 8
-
 
 /* Global variables */
 
-int mode = 1;  // test = 0 | gimball = 1
+int mode = 1;  // test = 0 | gimbal = 1
 int test_mode = 0; // keypad = 0 | Potentiometer = 1 | joystick = 2
-
 
 int iterator = 0;
 float sin_wave[N];
 
-uint8 angle_buffer[10] = {0};
+uint8 angle_buffer[10] = {0}; // Saving data for moving average
 int buffer_index = 0;
 
 
@@ -75,7 +74,7 @@ void initialize(){
     isr_uart_StartEx(isr_uart_handler);
     ISR_SOUND_StartEx(isr_sound_handler);
     fill_sine(N);
-    print_screen("Gimball: ", 0, 0);
+    print_screen("Gimbal: ", 0, 0);
 }
 
 /*          Useful functions                                */
@@ -99,7 +98,7 @@ void rotate_servo(int8 step_angle){
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
-    CyDelay(DELAY);
+    CyDelay(5);
 }
 
 void fill_sine(int len){
@@ -227,14 +226,13 @@ void test_joystick(){
 }
 
 
-/*          Gimball mode               */
+/*          Gimbal mode               */
 
 void turn_servo(uint8* angle) {
-    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE));
-    CyDelay(DELAY);
+    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE)); // Don't need delay here bcs of the moving average
 }
 
-void gimball_mode(uint8* angle){
+void gimbal_mode(uint8* angle){
     turn_servo(angle);   
 }
 
@@ -285,10 +283,10 @@ void read_SW2(){
 
 /*          Determination of the mode                */
 
-void switch_to_gimball_mode(){
+void switch_to_gimbal_mode(){
     mode = 1;
     light_LEDS();
-    print_screen("Gimball: ", 0, 0);
+    print_screen("Gimbal: ", 0, 0);
 }
 
 void switch_to_test_mode(){
@@ -298,11 +296,11 @@ void switch_to_test_mode(){
 }
 
 void switch_mode(){
-    mode ? switch_to_test_mode():switch_to_gimball_mode();
+    mode ? switch_to_test_mode():switch_to_gimbal_mode();
 }
 
 void modes(){
     uint8 angle = 0;
     get_angle(&angle);
-    mode ? gimball_mode(&angle):testing_mode();
+    mode ? gimbal_mode(&angle):testing_mode();
 }
