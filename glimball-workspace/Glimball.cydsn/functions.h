@@ -10,7 +10,7 @@
 
 
 /*
-    Initialisation de tous les composants de bases
+ * Initialisation de tous les composants de bases
 */
 void initialize();
 
@@ -94,17 +94,11 @@ void test_keyboard();
 void test_joystick();
 
 
-/*
- * Function that rotates the servo of the given angle
- * @param uint8 * angle pointer of the value of the position which the servo will need to be at the end
-*/
-void turn_servo(uint8* angle);
-
-
 /**
- * What is done in the glimball mode
+ * Gimball mode, receive the value of the position which the servo need to be at and makes the rotation
+ * @param uint8* angle pointer of the value of the position which the servo will need to be at the end
 */
-void gimbal_mode();
+void gimbal_mode(uint8* angle);
 
 
 /**
@@ -155,5 +149,6 @@ void switch_mode();
 
 /**
  * Execute the different modes depending on the mode
+ * @param uint8* angle, pointer of the value that will be modified by the reading of the accelerometer
 */
-void modes();
+void modes(uint8* angle);

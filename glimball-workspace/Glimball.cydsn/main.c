@@ -17,9 +17,10 @@ int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
     initialize();
+    uint8 angle = 0;
     for(;;){   
         react();
-        modes();
+        modes(&angle);
     }
 }
 

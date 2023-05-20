@@ -32,7 +32,7 @@ int buffer_index = 0;
 
 /*                      Interruptions handlers               */
 
-CY_ISR(isr_sound_handler){
+CY_ISR(isr_sound_handler){ // Handle the sound
     iterator++;
     VDAC_SetValue((uint8)(sin_wave[iterator]));
     if (iterator>=N)iterator=0;
@@ -228,12 +228,9 @@ void test_joystick(){
 
 /*          Gimbal mode               */
 
-void turn_servo(uint8* angle) {
-    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE)); // Don't need delay here bcs of the moving average
-}
-
 void gimbal_mode(uint8* angle){
-    turn_servo(angle);   
+    PWM_WriteCompare(MIN_SERVO + (*angle-MIN_ANGLE)*(MAX_SERVO-MIN_SERVO)/(float)(MAX_ANGLE-MIN_ANGLE)); 
+    // Don't need delay here thanks to the moving average 
 }
 
 
@@ -299,8 +296,7 @@ void switch_mode(){
     mode ? switch_to_test_mode():switch_to_gimbal_mode();
 }
 
-void modes(){
-    uint8 angle = 0;
-    get_angle(&angle);
-    mode ? gimbal_mode(&angle):testing_mode();
+void modes(uint8* angle){
+    get_angle(angle);
+    mode ? gimbal_mode(angle):testing_mode();
 }
