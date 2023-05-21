@@ -98,7 +98,7 @@ void rotate_servo(int8 step_angle){
     if (pos > MAX_SERVO) pos = MAX_SERVO;
     if (pos < MIN_SERVO) pos = MIN_SERVO;
     PWM_WriteCompare(pos);
-    CyDelay(5);
+    CyDelay(DELAY);
 }
 
 void fill_sine(int len){
@@ -133,12 +133,12 @@ void get_angle(uint8* angle){
     ADC_StopConvert();
     x = (x > MAX_ACC) ? MAX_ACC : ((x < MIN_ACC) ? MIN_ACC : x);
 
-    // Modfify the period of the timer (for the sound)
+    // Modify the period of the timer (for the sound)
     Timer_WritePeriod(450+(x-MIN_ACC)*(2000)/(float)10000);
     
     // Change the value of the accelerometer into an angle using the moving average
     angle_buffer[buffer_index] =  MIN_ANGLE + (x-MIN_ACC)*(MAX_ANGLE-MIN_ANGLE)/(float)(MAX_ACC-MIN_ACC);
-    *angle = (uint8) moving_average();
+    *angle = moving_average();
     buffer_index = (buffer_index + 1) % WINDOW;
     
     // Send the value of the accelerometer to the UART
@@ -150,12 +150,12 @@ void get_angle(uint8* angle){
     print_angle(angle);
 }
 
-float moving_average() {
-    float sum = 0;
+uint8 moving_average() {
+    uint8 sum = 0;
     for (int i = 0; i < WINDOW; i++) {
         sum += angle_buffer[i];
     }
-    return sum / WINDOW;
+    return (uint8)(sum / WINDOW);
 }
 
 void print_angle(uint8* angle){
@@ -191,7 +191,7 @@ void test_pot(){
     ADC_StartConvert();
     if (ADC_IsEndConversion(ADC_WAIT_FOR_RESULT))  potval = ADC_GetResult32();
     ADC_StopConvert();
-    PWM_WriteCompare((uint32_t) MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF));
+    PWM_WriteCompare((uint32_t) MIN_SERVO + (potval*(MAX_SERVO-MIN_SERVO))/(float)(0xFFFF)); // Divide range of servo by range of pot
     CyDelay(DELAY);
 }
 
@@ -260,7 +260,7 @@ int read_SW1(){
 }
 
 void read_SW2(){
-    if (!mode && SW2_Read()){
+    if (SW2_Read()){
         CyDelay(200); // For the sensibility of the button
         if (test_mode == 2) {
             test_mode = 0;

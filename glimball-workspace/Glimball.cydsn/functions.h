@@ -61,8 +61,9 @@ void get_angle(uint8* angle);
 
 /**
  * Function that make a moving average on angles values
+ * @return the average of precedent positions
 */
-float moving_average();
+uint8 moving_average();
 
 
 /**

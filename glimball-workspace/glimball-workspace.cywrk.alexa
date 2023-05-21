@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="glimball-workspace\Glimball\Glimball.cydwr">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="glimball-workspace\Glimball\Header Files\functions.h">
 <ExpandedNodeIds>
 <v>glimball-workspace</v>
 <v>glimball-workspace\Glimball</v>
@@ -282,8 +282,8 @@
 <OpenDocs>
 <name v=".\Glimball.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\Glimball.cydsn\main.c" />
-<name v=".\Glimball.cydsn\functions.h" />
 <name v=".\Glimball.cydsn\functions.c" />
+<name v=".\Glimball.cydsn\functions.h" />
 <name v=".\Glimball.cydsn\Glimball.cydwr" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
@@ -292,7 +292,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1063, 478" SelectedTabbedMdiWindow="e15769ae-de8b-47e6-b557-92a2baf6e3e2"><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\TopDesign\TopDesign.cysch" Guid="e15769ae-de8b-47e6-b557-92a2baf6e3e2" /><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\main.c" Guid="944ba325-2853-4ded-9c49-d8699ddd5df6" /><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.h" Guid="04875859-791c-4b58-9ecd-9a0db5c4cf58" /><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.c" Guid="0da9e0e0-01f4-450c-b36e-bbc41513a78d" /><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\Glimball.cydwr" Guid="0a210f8a-7020-49ff-b60d-a9286c527e89" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1106, 571" SelectedTabbedMdiWindow="0da9e0e0-01f4-450c-b36e-bbc41513a78d"><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\TopDesign\TopDesign.cysch" Guid="e15769ae-de8b-47e6-b557-92a2baf6e3e2" /><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\main.c" Guid="944ba325-2853-4ded-9c49-d8699ddd5df6" /><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.c" Guid="0da9e0e0-01f4-450c-b36e-bbc41513a78d" /><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\functions.h" Guid="224a21f1-2dab-46b6-b0fb-816e349dfa2e" /><DocumentWindow Key="C:\Users\alexa\Test\elec-h310-glimball\glimball-workspace\Glimball.cydsn\Glimball.cydwr" Guid="0a210f8a-7020-49ff-b60d-a9286c527e89" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="c8488d9f-95c7-440f-b7e8-0cb5875cea33" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
